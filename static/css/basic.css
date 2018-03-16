@@ -1,0 +1,182 @@
+@charset "utf-8";
+html,body,div,h2,ul,li,span,em,p,dl,dd,i,input, textarea, select, option,button{
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+body{
+    font-family: "宋体","Microsoft Yahei", "Helvetica Neue", "Helvetica", "Hiragino Sans GB", "WenQuanYi Micro Hei", "sans-serif";
+    font-size: 14px;
+    background: #fff;
+    height: 100%;
+    overflow: hidden;
+    color: #666;
+}
+html,body,#app{
+  width: 100%;
+  height: 100%;
+}
+ul,li{
+  list-style: none;
+}
+h2{
+  font-size: 14px;
+  font-weight: normal;
+}
+button{
+  border: none;
+  cursor: pointer;
+}
+textarea{
+  resize: none;
+  border-radius: 5px;
+  color: #5a5e66;
+  border-color: #D8DCE5;
+  width: 100%;
+  padding: 10px;
+  min-height: 70px;
+}
+a{
+  text-decoration: none;
+  cursor: pointer;
+}
+em{
+  font-style: normal;
+}
+.loncom_family_yahei{
+  font-family: "Microsoft Yahei";
+}
+.loncom_color{
+  color: #0064aa;
+}
+.loncom_color1ABC9C{
+  color: #1ABC9C;
+}
+.loncom_color108EE9{
+  color: #108EE9;
+}
+.loncom_color999{
+  color: #999;
+}
+.loncom_font_size12{
+  font-size: 12px;
+}
+.loncom_ml5{
+  margin-left: 5px !important;
+}
+.loncom_ml10{
+  margin-left: 10px !important;
+}
+.loncom_ml15{
+  margin-left: 15px !important;
+}
+.loncom_mr5{
+  margin-right: 5px !important;
+}
+.loncom_mr10{
+  margin-right: 10px !important;
+}
+.loncom_mb10{
+  margin-bottom: 10px !important;
+}
+.loncom_mb15{
+  margin-bottom: 15px !important;
+}
+.loncom_mt10{
+  margin-top: 10px !important;
+}
+.loncom_pr20{
+  padding-right: 20px !important;
+}
+.loncom_mb20{
+  margin-bottom: 20px !important;
+}
+.loncom_mb50{
+  margin-bottom: 50px !important;
+}
+.loncom_fl{
+  float:left;
+}
+.loncom_fr{
+  float: right;
+}
+.loncom_overflow_hidden{
+  overflow: hidden;
+}
+.loncom_public_shadow {
+    -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.35);
+    -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.35);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.35);
+}
+.loncom_public_shadow:hover {
+    -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.45);
+    -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.45);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.45);
+}
+.loncom_dis_inline{
+  display: inline;
+}
+.loncom_dis_inlineblock{
+  display: inline-block;
+}
+.loncom_content{
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.loncom_topnav{
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  background: #0064aa;
+}
+.loncom_topnav li{
+  float: left;
+  margin-left: 20px;
+}
+.loncom_topnav li a{
+  color: #fff;
+}
+.loncom_topnav li a.router-link-exact-active{
+  font-weight: bold;
+}
+
+.loncom_con_left{
+  width: 200px;
+  float: left;
+}
+.loncom_con_left .loncom_active{
+  color: #0064aa;
+}
+.loncom_con_right{
+  width: -webkit-calc(100% - 200px);
+  width: -moz-calc(100% - 200px);
+  width: calc(100% - 200px);
+  float: left;
+}
+.loncom_con_right>div{
+  display: none;
+}
+.loncom_con_right .loncom_active{
+  display: block;
+}
+
+
+@media (min-width: 1000px) {
+  
+
+}
+@media (min-width: 1400px) {
+  
+
+
+}
+
+
+
+
+
+
+ 
