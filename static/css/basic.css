@@ -160,29 +160,81 @@ em{
   display: block;
   padding-top: 10px;
 }
-.loncom_topnav li a.router-link-exact-active{
+.loncom_topnav li a.router-link-active{
   background: url(../images/nav_hover_bg.png) no-repeat center;
   color: #0096BA;
 }
-.loncom_topnav li a.router-link-exact-active em img{
+.loncom_topnav li a.router-link-active em img{
   margin-top: -20px;
 }
-
+.loncom_con{
+  height: -webkit-calc(100% - 66px);
+  height: -moz-calc(100% - 66px);
+  height: calc(100% - 66px);
+  position: relative;
+}
 .loncom_con_left{
-  width: 200px;
+  width: 60px;
+  height: 100%;
+  background: #B2DFE6;
   float: left;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: all .2s linear;
 }
-.loncom_con_left .loncom_active{
-  color: #0064aa;
+.loncom_left_navtop{
+  width: 100%;
+  height: 40px;
+  background: #02657C;
+  text-align: center;
+  cursor: pointer;
+  transition: all .2s linear;
 }
+.loncom_left_navtop i{
+  margin-top: 6px;
+  color: #fff;
+  font-size: 26px;
+  transition: all .2s linear;
+}
+.loncom_left_navcon li a{
+  padding: 12px 0;
+  display: block;
+  color: #4a787a;
+  transition: all .2s linear;
+  font-size: 14px;
+  font-weight: bold;
+}
+.loncom_left_navcon li em{
+  display: inline-block;
+  height: 20px;
+  overflow: hidden;
+  vertical-align: middle;
+  transition: all .2s linear;
+  margin: 0 0 5px 20px;
+}
+.loncom_left_navcon li em img{
+  height: 40px;
+}
+.loncom_left_navcon li span{
+  display: block;
+  vertical-align: text-bottom;
+  transition: all .2s linear;
+  text-align: center;
+}
+.loncom_left_navcon li .router-link-active{
+  color: #1796b8;
+}
+.loncom_left_navcon li .router-link-active em img{
+  margin-top: -20px;
+}
+.loncom_left_navcon li .router-link-active{
+  background: #F3F3F3;
+}
+
 .loncom_con_right{
-  width: -webkit-calc(100% - 200px);
-  width: -moz-calc(100% - 200px);
-  width: calc(100% - 200px);
+  padding-left: 60px;
   float: left;
-}
-.loncom_con_right>div{
-  display: none;
 }
 .loncom_con_right .loncom_active{
   display: block;

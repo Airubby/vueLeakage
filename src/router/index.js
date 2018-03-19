@@ -2,6 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '@/page/index'
 import RealControl from '@/page/realControl'
+import ListView from '@/page/realControl_listView'
+import GIS from '@/page/realControl_gis'
+
 import OpsManage from '@/page/opsManage'
 import AlarmCen from '@/page/alarmCen'
 import ReportCen from '@/page/reportCen'
@@ -23,8 +26,16 @@ export default new Router({
       path: '/',
       component: Index
     },{
+      path: '/home',
+      component: Index
+    },{
       path: '/realControl',  //实时监控
-      component: RealControl
+      component: RealControl,
+      redirect:'/realControl/gis',
+      children:[
+        {path:'/realControl/gis',component:GIS},
+        {path:'/realControl/listView',component:ListView},
+      ]
     },{
       path: '/opsManage',  //运维管理
       component: OpsManage

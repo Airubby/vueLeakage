@@ -7,7 +7,7 @@
         </div>
         <ul>
             <li>
-                <router-link to="/">
+                <router-link to="/" exact>
                     <em><img src="static/images/home.png"></em>
                     <p>网站首页</p>
                 </router-link>
