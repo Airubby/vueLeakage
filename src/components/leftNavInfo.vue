@@ -1,7 +1,9 @@
 <template>
-  <ul>
-      <li v-for="item in info" @click="tabs(item)" :class="{'loncom_active':item.loncom_active}">{{item.select}}</li>
-  </ul>
+  <div class="loncom_con_left">
+        <ul>
+            <li v-for="item in info" @click="tabs(item)" :class="{'loncom_active':item.loncom_active}">{{item.title}}</li>
+        </ul>
+  </div>
 </template>
 
 <script>
@@ -26,7 +28,7 @@ export default {
         },
     },
     
-    props:["info"],  //子组件在props中创建一个属性，用以接收父组件传过来的值,和父组件v-bind:parentToChild相同
+    props:["info"],  
 }
 </script>
 

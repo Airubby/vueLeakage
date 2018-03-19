@@ -1,26 +1,23 @@
 <template>
     <div class="loncom_content">
-        <div class="loncom_topnav">
-            <ul>
-                <li>
-                    <router-link to="/">
-                        网站首页
-                    </router-link>
-                </li>
-                <li>
-                    <router-link to="/test">
-                       test页
-                    </router-link>
-                </li>
-            </ul>
-        </div>
+        <NavInfo></NavInfo>
         <div class="loncom_con">
             <div class="loncom_con_left">
-                <LeftNavInfo v-bind:info="left_nav_info"></LeftNavInfo>
+                <ul>
+                    <li>
+                        <router-link to="/test/test1">
+                            test1
+                        </router-link>
+                    </li>
+                    <li>
+                        <router-link to="/test/test2">
+                            test2
+                        </router-link>
+                    </li>
+                </ul>
             </div>
             <div class="loncom_con_right">
-                <div :class="{'loncom_active':left_nav_info[0].loncom_active}">test111页内容</div>
-                <div :class="{'loncom_active':left_nav_info[1].loncom_active}">test222页内容</div>
+                <router-view></router-view>
             </div>
             
         </div>

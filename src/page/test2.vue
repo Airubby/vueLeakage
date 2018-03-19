@@ -1,17 +1,11 @@
 <template>
     <div class="loncom_content">
-        <NavInfo></NavInfo>
-        <div class="loncom_con">
-            首页
-            
-        </div>
-         
+       test222页
     </div>
 </template>
 
 
 <script>
-
 export default {
     created () {
         
@@ -21,7 +15,7 @@ export default {
     },
     data() {
        return {
-           
+          　
        }
    },
     methods:{

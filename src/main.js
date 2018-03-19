@@ -3,8 +3,12 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import NavInfo from './components/navInfo'
 
 Vue.config.productionTip = false
+//头部导航
+Vue.use(NavInfo)
+
 
 /* eslint-disable no-new */
 new Vue({
