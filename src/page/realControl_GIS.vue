@@ -1,6 +1,17 @@
 <template>
-    <div class="loncom_content" id="container">
-       
+    <div class="loncom_content" style="position:relative;">
+       <div id="container" style="width:100%;height:100%;"></div>
+       <div class="loncom_search_box">
+            <input type="text" id="search_info" placeholder="搜水厂/高水位池/节点"><span><i class="fa fa-search"></i></span>
+       </div>
+       <div class="change_box">
+            <ul>
+                <li class="all active">全部</li>
+                <li class="s"><em class="sli"></em>水厂/水池</li>
+                <li class="j"><em class="jli"></em>节点</li>
+                <li class="b"><em class="bli"></em>水表</li>
+            </ul>
+        </div>
     </div>
 </template>
 
@@ -152,7 +163,7 @@ export default {
 
         //节点
         var jd1=new BMap.Point(106.215136,26.04151);  
-        var icon_jd1=new BMap.Icon("./static/images/jd1_normal.svg", new BMap.Size(20,20));
+        var icon_jd1=new BMap.Icon("./static/images/jd1_normal.svg", new BMap.Size(30,40));
         var marker_jd1=new BMap.Marker(jd1,{icon:icon_jd1}); // 创建标注
         map.addOverlay(marker_jd1); 
         var content_jd1='<div class="loncom_map_samllbox">'+
@@ -165,7 +176,7 @@ export default {
         })
 
         var jd2=new BMap.Point(106.21245,26.037817);  
-        var icon_jd2=new BMap.Icon("./static/images/jd2_normal.svg", new BMap.Size(20,20));
+        var icon_jd2=new BMap.Icon("./static/images/jd2_normal.svg", new BMap.Size(30,40));
         var marker_jd2=new BMap.Marker(jd2,{icon:icon_jd2}); // 创建标注
         map.addOverlay(marker_jd2); 
         var content_jd2='<div class="loncom_map_samllbox">'+
@@ -178,7 +189,7 @@ export default {
         })
 
         var jd3=new BMap.Point(106.211987,26.034453);  
-        var icon_jd3=new BMap.Icon("./static/images/jd3_normal.svg", new BMap.Size(20,20));
+        var icon_jd3=new BMap.Icon("./static/images/jd3_normal.svg", new BMap.Size(30,40));
         var marker_jd3=new BMap.Marker(jd3,{icon:icon_jd3}); // 创建标注
         map.addOverlay(marker_jd3); 
         var content_jd3='<div class="loncom_map_samllbox">'+
@@ -191,7 +202,7 @@ export default {
         })
 
         var jd4=new BMap.Point(106.211817,26.031621);  
-        var icon_jd4=new BMap.Icon("./static/images/jd4_alarm.svg", new BMap.Size(20,20));
+        var icon_jd4=new BMap.Icon("./static/images/jd4_alarm.svg", new BMap.Size(30,40));
         var marker_jd4=new BMap.Marker(jd4,{icon:icon_jd4}); // 创建标注
         map.addOverlay(marker_jd4); 
         var content_jd4='<div class="loncom_map_samllbox loncom_map_samllbox_alarm">'+
@@ -204,7 +215,7 @@ export default {
         })
 
         var jd5=new BMap.Point(106.212302,26.02837);  
-        var icon_jd5=new BMap.Icon("./static/images/jd5_normal.svg", new BMap.Size(20,20));
+        var icon_jd5=new BMap.Icon("./static/images/jd5_normal.svg", new BMap.Size(30,40));
         var marker_jd5=new BMap.Marker(jd5,{icon:icon_jd5}); // 创建标注
         map.addOverlay(marker_jd5); 
         var content_jd5='<div class="loncom_map_samllbox">'+
@@ -217,10 +228,10 @@ export default {
         })
 
         var jd6=new BMap.Point(106.211166,26.025874);  
-        var icon_jd6=new BMap.Icon("./static/images/js6_warning.svg", new BMap.Size(20,20));
+        var icon_jd6=new BMap.Icon("./static/images/jd6_alarm.svg", new BMap.Size(30,40));
         var marker_jd6=new BMap.Marker(jd6,{icon:icon_jd6}); // 创建标注
         map.addOverlay(marker_jd6); 
-        var content_jd6='<div class="loncom_map_samllbox loncom_map_samllbox_warning">'+
+        var content_jd6='<div class="loncom_map_samllbox loncom_map_samllbox_alarm">'+
                             '<p>#6节点高程</p>'+
                             '<p>1197.0m</p>'+
                         '</div>';
@@ -230,7 +241,7 @@ export default {
         })
 
         var jd7=new BMap.Point(106.210865,26.024096);  
-        var icon_jd7=new BMap.Icon("./static/images/jd7_normal.svg", new BMap.Size(20,20));
+        var icon_jd7=new BMap.Icon("./static/images/jd7_normal.svg", new BMap.Size(30,40));
         var marker_jd7=new BMap.Marker(jd7,{icon:icon_jd7}); // 创建标注
         map.addOverlay(marker_jd7); 
         var content_jd7='<div class="loncom_map_samllbox">'+
@@ -280,29 +291,82 @@ export default {
             s1,sz1,sb1,sz2,sz3,jd1,sz4,db1,sz5,jd2,sz6,db2,sz7,jd3,sz8,db3,sz9,jd4,sz10,db4,sz11,jd5,sz12,db5,sz13,jd6,sz14,db6,sb2,sz15,jd7,sz16,
             sb3,db7
         ];
-        var curve = new BMapLib.CurveLine(points, {strokeColor:"#328e3b", strokeWeight:4, strokeOpacity:1}); //创建弧线对象
-        map.addOverlay(curve);
+        // var curve = new BMapLib.CurveLine(points, {strokeColor:"#328e3b", strokeWeight:4, strokeOpacity:1}); //创建弧线对象
+        // map.addOverlay(curve);
+        var polyline =new BMap.Polyline(points, {
+            enableEditing: false,//是否启用线编辑，默认为false
+            enableClicking: true,//是否响应点击事件，默认为true
+            //icons:[icons],
+            strokeWeight:'4',//折线的宽度，以像素为单位
+            strokeOpacity: 1,//折线的透明度，取值范围0 - 1
+            strokeColor:"#328e3b" //折线颜色
+            });
+        map.addOverlay(polyline);          //增加折线
 
         var points_alarm=[jd4,sz10,db4,sz11,jd5];
-        var curve_alarm = new BMapLib.CurveLine(points_alarm, {strokeColor:"#940000", strokeWeight:4, strokeOpacity:1}); //创建弧线对象
-        map.addOverlay(curve_alarm);
+        // var curve_alarm = new BMapLib.CurveLine(points_alarm, {strokeColor:"#940000", strokeWeight:4, strokeOpacity:1}); //创建弧线对象
+        // map.addOverlay(curve_alarm);
+        var polyline_alarm =new BMap.Polyline(points_alarm, {
+            enableEditing: false,//是否启用线编辑，默认为false
+            enableClicking: true,//是否响应点击事件，默认为true
+            //icons:[icons],
+            strokeWeight:'4',//折线的宽度，以像素为单位
+            strokeOpacity: 1,//折线的透明度，取值范围0 - 1
+            strokeColor:"#940000" //折线颜色
+            });
+        map.addOverlay(polyline_alarm);          //增加折线
+
 
         var points_warning=[jd6,sz14,db6,sb2,sz15,jd7];
-        var curve_warning = new BMapLib.CurveLine(points_warning, {strokeColor:"#d95600", strokeWeight:4, strokeOpacity:1}); //创建弧线对象
-        map.addOverlay(curve_warning);
-
+        // var curve_warning = new BMapLib.CurveLine(points_warning, {strokeColor:"#d95600", strokeWeight:4, strokeOpacity:1}); //创建弧线对象
+        // map.addOverlay(curve_warning);
+        var polyline_warning =new BMap.Polyline(points_warning, {
+            enableEditing: false,//是否启用线编辑，默认为false
+            enableClicking: true,//是否响应点击事件，默认为true
+            //icons:[icons],
+            strokeWeight:'4',//折线的宽度，以像素为单位
+            strokeOpacity: 1,//折线的透明度，取值范围0 - 1
+            strokeColor:"#d95600" //折线颜色
+            });
+        map.addOverlay(polyline_warning);          //增加折线
 
         //上面的路径
         var szt1=new BMap.Point(106.221015,26.043801); 
-        var wd1=new BMap.Point(106.217157,26.04283); 
-        var wd2=new BMap.Point(106.215397,26.042171); 
-        var wd3=new BMap.Point(106.209342,26.04138); 
+        var wd1=new BMap.Point(106.217297,26.04263); 
+        var wd2=new BMap.Point(106.216815,26.042315); 
+        var wd3=new BMap.Point(106.215126,26.042124); 
+        var wd4=new BMap.Point(106.214371,26.042405); 
+        var wd5=new BMap.Point(106.212821,26.042345); 
+        var wd6=new BMap.Point(106.211604,26.041763); 
+        var wd7=new BMap.Point(106.210004,26.041763); 
         var marker_szt1=new BMap.Marker(szt1,{icon:icon_sz}); // 创建标注
         map.addOverlay(marker_szt1);
-        var points1=[s1,szt1,wd1,wd2,wd3,s2];
-        var curve1 = new BMapLib.CurveLine(points1, {strokeColor:"#00a0e9", strokeWeight:8, strokeOpacity:1}); //创建弧线对象
-        map.addOverlay(curve1);
+        var points1=[s1,szt1,wd1,wd2,wd3,wd4,wd5,wd6,wd7,s2];
+        // var curve1 = new BMapLib.CurveLine(points1, {strokeColor:"#00a0e9", strokeWeight:8, strokeOpacity:1}); //创建弧线对象
+        // map.addOverlay(curve1);
+        var polyline1 =new BMap.Polyline(points1, {
+            enableEditing: false,//是否启用线编辑，默认为false
+            enableClicking: true,//是否响应点击事件，默认为true
+            //icons:[icons],
+            strokeWeight:'8',//折线的宽度，以像素为单位
+            strokeOpacity: 1,//折线的透明度，取值范围0 - 1
+            strokeColor:"#00a0e9" //折线颜色
+            });
+        map.addOverlay(polyline1);          //增加折线
 
+        //搜索
+        $("#search_btn").on("click",function(){
+            if($("#search_info").val()=="4节点"){
+                console.log(1)
+                map.centerAndZoom(new BMap.Point(106.211817,26.031621),19); 
+                infoBox_jd4.open(marker_jd4)
+            }
+        })
+        //头部切换
+        $(".change_box").find("li").on("click", function () {
+            $(this).siblings("li").removeClass("active");
+            $(this).addClass("active");
+        })
 	
     },
     data() {

@@ -244,6 +244,97 @@ em{
 }
 
 /*地图信息*/
+.loncom_search_box{
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+#search_info{
+    width: 230px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 0;
+    box-shadow: 0 0 4px #ccc;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 0 30px 0 5px;
+}
+.loncom_search_box span{
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  cursor: pointer;
+}
+.loncom_search_box span i{
+  margin-top: 7px;
+}
+.change_box{
+    position:absolute;
+    right:10px;
+    top: 10px;
+}
+.change_box ul{
+    border: 1px solid #D5D4D1;
+    border-radius: 4px;
+    background: #fff;
+    overflow: hidden;
+}
+.change_box li{
+    width: 80px;
+    height:35px;
+    float: left;
+    text-align: center;
+    line-height: 35px;
+    font-size:12px;
+    border-right: 1px solid #D5D4D1;
+    cursor: pointer;
+}
+.change_box li:nth-last-of-type(1){
+    border: none;
+}
+.change_box li em{
+    width: 14px;
+    height: 20px;
+    display: inline-block;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+.change_box li em.bli{
+    width: 16px;
+    height: 14px;
+}
+.change_box li em.sli{
+    background: url(../images/sli.svg) no-repeat;
+}
+.change_box li em.jli{
+    background: url(../images/jli.svg) no-repeat;
+}
+.change_box li em.bli{
+    background: url(../images/bli.svg) no-repeat;
+}
+.change_box li em.dli{
+    background: url(../images/dli.svg) no-repeat;
+}
+.change_box li.active{
+    color: #fff;
+    background:#13AE67;
+}
+.change_box li.active em.sli{
+    background: url(../images/sli_active.svg) no-repeat;
+}
+.change_box li.active em.jli{
+    background: url(../images/jli_active.svg) no-repeat;
+}
+.change_box li.active em.bli{
+    background: url(../images/bli_active.svg) no-repeat;
+}
+.change_box li.active em.dli{
+    background: url(../images/dli_active.svg) no-repeat;
+}
+
 .loncom_map_box{
   min-width: 220px;
   height: auto;
