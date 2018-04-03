@@ -2,14 +2,14 @@
     <div class="loncom_content" style="position:relative;">
        <div id="container" style="width:100%;height:100%;"></div>
        <div class="loncom_search_box">
-            <input type="text" id="search_info" placeholder="搜水厂/高水位池/节点"><span><i class="fa fa-search"></i></span>
+            <input type="text" id="search_info" placeholder="搜水厂/高水位池/节点"><span><i class="fa fa-search" id="search_btn"></i></span>
        </div>
        <div class="change_box">
             <ul>
-                <li class="all active">全部</li>
-                <li class="s"><em class="sli"></em>水厂/水池</li>
-                <li class="j"><em class="jli"></em>节点</li>
-                <li class="b"><em class="bli"></em>水表</li>
+                <li class="all active" data-name="all">全部</li>
+                <li class="s" data-name="scsc"><em class="sli"></em>水厂/水池</li>
+                <li class="j" data-name="jd"><em class="jli"></em>节点</li>
+                <li class="b" data-name="sb"><em class="bli"></em>水表</li>
             </ul>
         </div>
     </div>
@@ -26,6 +26,17 @@ export default {
 		map.centerAndZoom(new BMap.Point(106.215136,26.04151),17); //初始化地图,设置中心点坐标和地图级别3-19
 		//map.centerAndZoom("成都",15); 
 		map.enableScrollWheelZoom();
+        //筛选代码
+        BMap.Icon.prototype.name = "";
+        BMap.Icon.prototype.setName = function(name){
+            this.name = name;
+        }
+        BMap.Icon.prototype.searchName="";
+        BMap.Icon.prototype.setSearchName = function(searchName){
+            this.searchName = searchName;
+        }
+        //最下面设置icon筛选
+
         //高水位池
         var s1=new BMap.Point(106.221995,26.044301);  //高水位池point
         var icon_s1=new BMap.Icon("./static/images/gaoshuiweichi.svg", new BMap.Size(42,36));
@@ -49,6 +60,8 @@ export default {
         marker_s1.addEventListener("click", function(){
             infoBox_s1.open(marker_s1)
         })
+
+        icon_s1.setSearchName("高水位池");  
 
         //雨棚大河水厂
         var s2=new BMap.Point(106.203907,26.042816);  
@@ -94,7 +107,7 @@ export default {
 
 
         //水闸
-        var icon_sz=new BMap.Icon("./static/images/shuizha.svg", new BMap.Size(20,20));
+        var icon_sz=new BMap.Icon("./static/images/shuizha.svg", new BMap.Size(14,12),{anchor: new BMap.Size(7, 6)});
         var sz1=new BMap.Point(106.220831,26.043003); 
         var marker_sz1=new BMap.Marker(sz1,{icon:icon_sz}); // 创建标注
         map.addOverlay(marker_sz1); 
@@ -163,7 +176,11 @@ export default {
 
         //节点
         var jd1=new BMap.Point(106.215136,26.04151);  
-        var icon_jd1=new BMap.Icon("./static/images/jd1_normal.svg", new BMap.Size(30,40));
+        var icon_jd1=new BMap.Icon("./static/images/jd1_normal.svg", new BMap.Size(30,40),{
+            //offset: new BMap.Size(0, -20), // 指定大小
+            anchor: new BMap.Size(15, 40),
+            //imageOffset: new BMap.Size(0, -10) // 设置图片偏移
+        });
         var marker_jd1=new BMap.Marker(jd1,{icon:icon_jd1}); // 创建标注
         map.addOverlay(marker_jd1); 
         var content_jd1='<div class="loncom_map_samllbox">'+
@@ -176,7 +193,7 @@ export default {
         })
 
         var jd2=new BMap.Point(106.21245,26.037817);  
-        var icon_jd2=new BMap.Icon("./static/images/jd2_normal.svg", new BMap.Size(30,40));
+        var icon_jd2=new BMap.Icon("./static/images/jd2_normal.svg", new BMap.Size(30,40),{anchor: new BMap.Size(15, 40)});
         var marker_jd2=new BMap.Marker(jd2,{icon:icon_jd2}); // 创建标注
         map.addOverlay(marker_jd2); 
         var content_jd2='<div class="loncom_map_samllbox">'+
@@ -189,7 +206,9 @@ export default {
         })
 
         var jd3=new BMap.Point(106.211987,26.034453);  
-        var icon_jd3=new BMap.Icon("./static/images/jd3_normal.svg", new BMap.Size(30,40));
+        var icon_jd3=new BMap.Icon("./static/images/jd3_normal.svg", new BMap.Size(30,40),{
+            anchor: new BMap.Size(15, 40) //设置标注点在线上
+        });
         var marker_jd3=new BMap.Marker(jd3,{icon:icon_jd3}); // 创建标注
         map.addOverlay(marker_jd3); 
         var content_jd3='<div class="loncom_map_samllbox">'+
@@ -202,7 +221,9 @@ export default {
         })
 
         var jd4=new BMap.Point(106.211817,26.031621);  
-        var icon_jd4=new BMap.Icon("./static/images/jd4_alarm.svg", new BMap.Size(30,40));
+        var icon_jd4=new BMap.Icon("./static/images/jd4_alarm.svg", new BMap.Size(30,40),{
+            anchor: new BMap.Size(15, 40),
+        });
         var marker_jd4=new BMap.Marker(jd4,{icon:icon_jd4}); // 创建标注
         map.addOverlay(marker_jd4); 
         var content_jd4='<div class="loncom_map_samllbox loncom_map_samllbox_alarm">'+
@@ -214,8 +235,12 @@ export default {
             infoBox_jd4.open(marker_jd4)
         })
 
+        icon_jd4.setSearchName("4节点");  
+
         var jd5=new BMap.Point(106.212302,26.02837);  
-        var icon_jd5=new BMap.Icon("./static/images/jd5_normal.svg", new BMap.Size(30,40));
+        var icon_jd5=new BMap.Icon("./static/images/jd5_normal.svg", new BMap.Size(30,40),{
+            anchor: new BMap.Size(15, 40),
+        });
         var marker_jd5=new BMap.Marker(jd5,{icon:icon_jd5}); // 创建标注
         map.addOverlay(marker_jd5); 
         var content_jd5='<div class="loncom_map_samllbox">'+
@@ -228,7 +253,7 @@ export default {
         })
 
         var jd6=new BMap.Point(106.211166,26.025874);  
-        var icon_jd6=new BMap.Icon("./static/images/jd6_alarm.svg", new BMap.Size(30,40));
+        var icon_jd6=new BMap.Icon("./static/images/jd6_alarm.svg", new BMap.Size(30,40),{anchor: new BMap.Size(15, 40)});
         var marker_jd6=new BMap.Marker(jd6,{icon:icon_jd6}); // 创建标注
         map.addOverlay(marker_jd6); 
         var content_jd6='<div class="loncom_map_samllbox loncom_map_samllbox_alarm">'+
@@ -241,7 +266,7 @@ export default {
         })
 
         var jd7=new BMap.Point(106.210865,26.024096);  
-        var icon_jd7=new BMap.Icon("./static/images/jd7_normal.svg", new BMap.Size(30,40));
+        var icon_jd7=new BMap.Icon("./static/images/jd7_normal.svg", new BMap.Size(30,40),{anchor: new BMap.Size(15, 40)});
         var marker_jd7=new BMap.Marker(jd7,{icon:icon_jd7}); // 创建标注
         map.addOverlay(marker_jd7); 
         var content_jd7='<div class="loncom_map_samllbox">'+
@@ -256,7 +281,7 @@ export default {
 
 
         //地标
-        var icon_db=new BMap.Icon("./static/images/dibiao.svg", new BMap.Size(20,20));
+        var icon_db=new BMap.Icon("./static/images/dibiao.svg", new BMap.Size(12,12),{anchor:new BMap.Size(6,6)});
         var db1=new BMap.Point(106.212679,26.038957); 
         var marker_db1=new BMap.Marker(db1,{icon:icon_db}); // 创建标注
         map.addOverlay(marker_db1); 
@@ -353,20 +378,74 @@ export default {
             strokeColor:"#00a0e9" //折线颜色
             });
         map.addOverlay(polyline1);          //增加折线
+        
+        //设置icon筛选
+        icon_s1.setName("scsc");  //水厂水池
+        icon_s2.setName("scsc");
+        icon_jd1.setName("jd");  //节点
+        icon_jd2.setName("jd");
+        icon_jd3.setName("jd");
+        icon_jd4.setName("jd");
+        icon_jd5.setName("jd");
+        icon_jd6.setName("jd");
+        icon_jd7.setName("jd");
+        icon_sb.setName("sb");  //水表
 
-        //搜索
-        $("#search_btn").on("click",function(){
-            if($("#search_info").val()=="4节点"){
-                console.log(1)
-                map.centerAndZoom(new BMap.Point(106.211817,26.031621),19); 
-                infoBox_jd4.open(marker_jd4)
-            }
-        })
+
+        var allmap = map.getOverlays();
         //头部切换
         $(".change_box").find("li").on("click", function () {
             $(this).siblings("li").removeClass("active");
             $(this).addClass("active");
+            var _name=$(this).data("name");
+            console.log(allmap)
+            if(_name=="all"){
+                for(var i=0;i<allmap.length;i++){
+                    if(allmap[i].toString() == "[object Marker]"){  //要是marker的才可以
+                        allmap[i].show()
+                    }
+                }
+            }else{
+                for(var i=0;i<allmap.length;i++){
+                    if(allmap[i].toString() == "[object Marker]"){  //要是marker的才可以
+                        if(allmap[i].z.uj.name == _name){
+                            allmap[i].show();
+                        }else{
+                            allmap[i].hide();
+                        }
+                    }
+                }
+            }
+            
+
         })
+
+
+        //搜索
+        $("#search_btn").on("click",function(){
+            var _searchName=$("#search_info").val();
+            console.log(_searchName)
+            console.log(allmap)
+            for(var i=0;i<allmap.length;i++){
+                if(allmap[i].toString() == "[object Marker]"){
+                    if(allmap[i].z.uj.searchName==_searchName){
+                        map.centerAndZoom(new BMap.Point(allmap[i].point.lng,allmap[i].point.lat),19); 
+                    }
+                }
+            }
+            // if($("#search_info").val()=="4节点"){
+            //     console.log(1)
+            //     map.centerAndZoom(new BMap.Point(106.211817,26.031621),19); 
+            //     infoBox_jd4.open(marker_jd4)
+            // }
+        })
+        document.onkeyup = function (event) {
+            if (event.keyCode == 13) {
+                
+            }
+        }
+        
+        
 	
     },
     data() {
