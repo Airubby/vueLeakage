@@ -48,8 +48,17 @@
 import { mapGetters } from 'vuex'
 export default {
     created () {
-        this.navList=this.$store.state.navList;
-        this.Init();
+        this.loginInfo=sessionStorage.loginInfo?JSON.parse(sessionStorage.loginInfo):{};
+        if(JSON.stringify(this.loginInfo) == "{}"){
+            this.$message.warning("请登录系统");
+            this.$router.push({path:'/login'});
+            return;
+        }else{
+            this.navList=this.$store.state.navList;
+            this.Init();   
+        }
+         
+        
     },
     mounted() {
         

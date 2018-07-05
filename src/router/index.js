@@ -21,6 +21,9 @@ export default new Router({
         {path:'/index',component:(resolve) => require(['@/page/indexContent'], resolve)},
       ]
     },{
+      path:'/login',
+      component: (resolve) => require(['@/page/login'], resolve),
+    },{
       path: '/control',  //实时监控
       component: (resolve) => require(['@/page/control'], resolve),
       redirect:'/control/gis',

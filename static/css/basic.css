@@ -239,6 +239,79 @@ em{
   display: block;
 }
 
+/*登录*/
+.login_content{
+  background: url(../images/login_bg.jpg) no-repeat center bottom;
+  background-size: cover;
+  position: relative;
+}
+
+.loncom_login_con {
+  width: 400px;
+  min-height: 300px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -200px;
+  margin-top: -150px;
+  background: #fff;
+  padding: 30px 50px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, .6);
+  border-radius: 15px;
+}
+
+.loncom_login_con .loncom_logo_img {
+  text-align: center;
+  font-style: normal;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.loncom_login_input input {
+  width: 100%;
+  border: 1px solid #DBDBDB;
+  border-radius: 3px;
+  padding-left: 40px;
+  color: #999;
+}
+
+.loncom_login_input p {
+  margin-bottom: 20px;
+}
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px white inset;  
+}
+.loncom_login_input .loncom_user,
+.loncom_login_input .loncom_pass{
+  position: relative;
+}
+.loncom_login_input .loncom_user:after{
+    content: "";
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 0;
+    background: url(../images/login_user.png) no-repeat 10px center !important;
+}
+.loncom_login_input .loncom_pass:after{
+  content: "";
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 0;
+  background: url(../images/login_pass.png) no-repeat 10px center !important;
+}
+
+.loncom_login_input {
+  margin-left:0 !important; 
+}
+
+.loncom_login_input button {
+  width: 100%;
+}
+
+
 /*地图信息*/
 .loncom_search_box{
   position: absolute;
