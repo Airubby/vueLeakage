@@ -1,6 +1,6 @@
 <template>
     <div class="loncom_content">
-       test222页
+        <NavInfo></NavInfo>
     </div>
 </template>
 
@@ -15,7 +15,6 @@ export default {
     },
     data() {
        return {
-          　
        }
    },
     methods:{
