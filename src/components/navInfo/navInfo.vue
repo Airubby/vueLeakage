@@ -27,10 +27,21 @@
                 <div class="loncom_left_navcon">
                     <ul>
                         <li v-for="item in leftNavList">
-                            <router-link :to="item.url">
-                                <em><img :src="item.icon"></em>
-                                <span v-if="navbtn=='close'">{{item.name}}</span>
-                                <span v-if="navbtn=='open'">{{item.fullName}}</span>
+                            <router-link :to="item.url" ref="lon_link">
+                                <div class="lon_nav" ref="lon_nav" @click="moreNav($event)">
+                                    <em><img :src="item.icon"></em>
+                                    <span v-if="navbtn=='close'">{{item.name}}</span>
+                                    <span v-if="navbtn=='open'">{{item.fullName}}</span>
+                                    <i v-if="item.item&&item.item.length>0"><img src="static/images/sanjiao.png"></i>
+                                </div>
+                                <dl v-show="navbtn=='open'">
+                                    <dd v-for="inItem in item.item">
+                                        <router-link :to="inItem.url">
+                                            <em><img :src="inItem.icon"></em>
+                                            <span>{{inItem.fullName}}</span>
+                                        </router-link>
+                                    </dd>
+                                </dl>
                             </router-link>
                         </li>
                     </ul>
@@ -48,20 +59,21 @@
 import { mapGetters } from 'vuex'
 export default {
     created () {
-        this.loginInfo=sessionStorage.loginInfo?JSON.parse(sessionStorage.loginInfo):{};
-        if(JSON.stringify(this.loginInfo) == "{}"){
-            this.$message.warning("请登录系统");
-            this.$router.push({path:'/login'});
-            return;
-        }else{
-            this.navList=this.$store.state.navList;
-            this.Init();   
-        }
-         
+        // this.loginInfo=sessionStorage.loginInfo?JSON.parse(sessionStorage.loginInfo):{};
+        // if(JSON.stringify(this.loginInfo) == "{}"){
+        //     this.$message.warning("请登录系统");
+        //     this.$router.push({path:'/login'});
+        //     return;
+        // }else{
+        //     this.navList=this.$store.state.navList;
+        //     this.Init();   
+        // }
+         this.navList=this.$store.state.navList;
         
     },
     mounted() {
         
+        this.Init();   
     },
     computed:{
       ...mapGetters([
@@ -83,7 +95,7 @@ export default {
             var hasPath=false;
             for(var i=0;i<this.navList.length;i++){
                 for(var j=0;j<this.navList[i].item.length;j++){
-                    if(path==this.navList[i].item[j].url){
+                    if(path.indexOf(this.navList[i].item[j].url)!=-1){
                         hasPath=true; //有子菜单
                         this.leftNavList=this.navList[i].item;
                         break;
@@ -102,7 +114,9 @@ export default {
                 }
                 
             }
+            
         },
+        //初始化侧边菜单
         InitLeft:function(){
             if(this.navbtn==='close'){
                 $(this.$refs.loncom_con_left).css("width","60px");
@@ -130,6 +144,7 @@ export default {
                 });
             }
         },
+        //切换宽窄侧边导航
         navClick:function(){
             var navInfo = JSON.parse(sessionStorage.navInfo);
             if(this.navbtn=='open'){
@@ -163,6 +178,14 @@ export default {
             }
             sessionStorage.navInfo = JSON.stringify(navInfo);
        },
+       //点击是否显示三级导航
+       moreNav:function(event){
+           console.log(event.currentTarget)
+           console.log($(event.currentTarget).siblings("dl"))
+       },
+       trans:function(){
+           return false
+       }
     }, 
     watch:{
         getNavInfo: function(val) { 

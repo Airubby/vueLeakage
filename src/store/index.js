@@ -14,6 +14,18 @@ const storeInfo=new Vuex.Store({
                 {url:'/record/pool',name:'池塘',fullName:'池塘管理',icon:'static/images/item.png',item:[]},
                 {url:'/record/finger',name:'物种',fullName:'物种管理',icon:'static/images/item.png'},
             ]},
+            {url:'/system',name:'系统管理',icon:'static/images/home.svg',item:[
+                {url:'/system/limits',name:'权限',fullName:'权限管理',icon:'static/images/item.png',item:[
+                    {url:'/system/limits/depart',name:'部门',fullName:'部门管理',icon:'static/images/xingxing.png'},
+                    {url:'/system/limits/user',name:'用户',fullName:'用户管理',icon:'static/images/xingxing.png'},
+                    {url:'/system/limits/role',name:'角色',fullName:'角色管理',icon:'static/images/xingxing.png'},
+                ]},
+                {url:'/system/sconfig',name:'业务',fullName:'业务配置',icon:'static/images/item.png',item:[
+                    {url:'/system/sconfig/record',name:'档案',fullName:'档案管理',icon:'static/images/xingxing.png'},
+                    {url:'/system/sconfig/scsi',name:'组态',fullName:'组态配置',icon:'static/images/xingxing.png'},
+                ]},
+                {url:'/system/log',name:'日志',fullName:'操作日志',icon:'static/images/item.png'},
+            ]},
         ],
    },
    getters:{

@@ -9,7 +9,7 @@ html,body,div,h2,ul,li,span,em,p,dl,dd,i,input, textarea, select, option,button,
 body{
     font-family: "Microsoft Yahei","宋体", "Helvetica Neue", "Helvetica", "Hiragino Sans GB", "WenQuanYi Micro Hei", "sans-serif";
     font-size: 14px;
-    background: #fff;
+    background: #f7f7f7;
     height: 100%;
     overflow: hidden;
     color: #666;
@@ -37,6 +37,9 @@ textarea{
   width: 100%;
   padding: 10px;
   min-height: 70px;
+}
+input{
+  outline: none;
 }
 a{
   text-decoration: none;
@@ -197,36 +200,65 @@ em{
   font-size: 26px;
   transition: all .2s linear;
 }
-.loncom_left_navcon li a{
+.loncom_left_navcon li .lon_nav{
   padding: 12px 0;
   display: block;
   color: #4a787a;
   transition: all .2s linear;
   font-size: 14px;
+  line-height: 16px;
+}
+.loncom_left_navcon li dl a{
+  padding: 12px 0;
+  display: block;
+  color: #4a787a;
+  transition: all .2s linear;
+  line-height: 16px;
+  font-size: 12px;
+  padding-left: 30px;
 }
 .loncom_left_navcon li em{
   display: inline-block;
-  height: 20px;
+  height: 16px;
   overflow: hidden;
   vertical-align: middle;
   transition: all .2s linear;
   margin: 0 8px 0 20px;
 }
 .loncom_left_navcon li em img{
-  height: 40px;
+  height: 32px;
 }
 .loncom_left_navcon li span{
   vertical-align: middle;
   transition: all 2s linear;
 }
-.loncom_left_navcon li .router-link-active{
+.loncom_left_navcon li .router-link-active .lon_nav{
   color: #1796b8;
+  background: #D0F0F5;
 }
-.loncom_left_navcon li .router-link-active em img{
-  margin-top: -20px;
+.loncom_left_navcon li .router-link-active .lon_nav em img{
+  margin-top: -16px;
 }
-.loncom_left_navcon li .router-link-active{
-  background: #F3F3F3;
+.loncom_left_navcon li dl{
+  background: #D0F0F5;
+  display: none;
+}
+.loncom_left_navcon li .router-link-active dl{
+  display: block;
+}
+.loncom_left_navcon li dl .router-link-active{
+  background: #f3f3f3;
+}
+.loncom_left_navcon li .lon_nav i{
+  width: 12px;
+  height: 12px;
+  float: right;
+  margin: 2px 20px 0 6px;
+  transition: all 0.5s ease-in-out;
+}
+.loncom_left_navcon li .lon_nav i.trans,
+.loncom_left_navcon li .router-link-active .lon_nav i{
+  transform: rotate(45deg);
 }
 
 .loncom_con_right{
@@ -235,275 +267,47 @@ em{
   float: left;
   transition: all .2s linear;
 }
-.loncom_con_right .loncom_active{
-  display: block;
-}
-
-/*登录*/
-.login_content{
-  background: url(../images/login_bg.jpg) no-repeat center bottom;
-  background-size: cover;
-  position: relative;
-}
-
-.loncom_login_con {
-  width: 400px;
-  min-height: 300px;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  margin-left: -200px;
-  margin-top: -150px;
-  background: #fff;
-  padding: 30px 50px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, .6);
-  border-radius: 15px;
-}
-
-.loncom_login_con .loncom_logo_img {
-  text-align: center;
-  font-style: normal;
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-.loncom_login_input input {
+.loncom_public_top {
   width: 100%;
-  border: 1px solid #DBDBDB;
-  border-radius: 3px;
-  padding-left: 40px;
-  color: #999;
-}
-
-.loncom_login_input p {
-  margin-bottom: 20px;
-}
-input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0px 1000px white inset;  
-}
-.loncom_login_input .loncom_user,
-.loncom_login_input .loncom_pass{
-  position: relative;
-}
-.loncom_login_input .loncom_user:after{
-    content: "";
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    top: 0;
-    background: url(../images/login_user.png) no-repeat 10px center !important;
-}
-.loncom_login_input .loncom_pass:after{
-  content: "";
-  position: absolute;
-  width: 40px;
   height: 40px;
-  top: 0;
-  background: url(../images/login_pass.png) no-repeat 10px center !important;
+  background: #f9f9f9;
+  border-bottom: 1px solid #d2d2d2;
+  padding: 5px 15px;
+  color: #333;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  position: relative;
 }
-
-.loncom_login_input {
-  margin-left:0 !important; 
+.loncom_public_right {
+    width: 100%;
+    height: calc(100% - 60px);
 }
-
-.loncom_login_input button {
+.loncom_tpadding{
+  padding: 15px;
   width: 100%;
+  height: 100%;
 }
-
-
-/*地图信息*/
-.loncom_search_box{
-  position: absolute;
-  top: 20px;
-  left: 20px;
-}
-#search_info{
-    width: 230px;
-    height: 30px;
-    line-height: 30px;
-    border-radius: 0;
-    box-shadow: 0 0 4px #ccc;
-    background: #fff;
-    border: 1px solid #ccc;
-    padding: 0 30px 0 5px;
-}
-.loncom_search_box span{
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 30px;
-  height: 30px;
-  text-align: center;
-  cursor: pointer;
-}
-.loncom_search_box span i{
-  margin-top: 7px;
-}
-.change_box{
-    position:absolute;
-    right:10px;
-    top: 10px;
-}
-.change_box ul{
-    border: 1px solid #D5D4D1;
-    border-radius: 4px;
-    background: #fff;
-    overflow: hidden;
-}
-.change_box li{
-    width: 80px;
-    height:35px;
+.loncom_tree {
+    width: 250px;
+    height: 100%;
     float: left;
-    text-align: center;
+}
+.loncom_tree_title {
+    height: 40px;
     line-height: 35px;
-    font-size:12px;
-    border-right: 1px solid #D5D4D1;
-    cursor: pointer;
+    background: #fff;
+    text-align: center;
+    font-size: 16px;
+    color: #33c466;
 }
-.change_box li:nth-last-of-type(1){
-    border: none;
-}
-.change_box li em{
-    width: 14px;
-    height: 20px;
-    display: inline-block;
-    margin-right: 5px;
-    vertical-align: middle;
-}
-.change_box li em.bli{
-    width: 16px;
-    height: 14px;
-}
-.change_box li em.sli{
-    background: url(../images/sli.svg) no-repeat;
-}
-.change_box li em.jli{
-    background: url(../images/jli.svg) no-repeat;
-}
-.change_box li em.bli{
-    background: url(../images/bli.svg) no-repeat;
-}
-.change_box li em.dli{
-    background: url(../images/dli.svg) no-repeat;
-}
-.change_box li.active{
-    color: #fff;
-    background:#13AE67;
-}
-.change_box li.active em.sli{
-    background: url(../images/sli_active.svg) no-repeat;
-}
-.change_box li.active em.jli{
-    background: url(../images/jli_active.svg) no-repeat;
-}
-.change_box li.active em.bli{
-    background: url(../images/bli_active.svg) no-repeat;
-}
-.change_box li.active em.dli{
-    background: url(../images/dli_active.svg) no-repeat;
+.loncom_table {
+    width: calc(100% - 250px);
+    height: 100%;
+    float: left;
 }
 
-.loncom_map_box{
-  min-width: 220px;
-  height: auto;
-  overflow: hidden;
-  box-shadow: 1px 1px 3px #ccc;
-  background: #fff;
-  font-family: "微软雅黑";
-}
-.loncom_map_boxtop{
-  width: 100%;
-  height: 30px;
-  line-height: 30px;
-  background: #12AE67;
-  color: #fff;
-  font-size: 14px;
-  font-weight: bold;
-}
-.loncom_map_boxtop .fa-wifi{
-  margin: 0 8px;
-}
-.loncom_map_boxbg{
-  width: 100%;
-    height: 60px;
-    background: #12AE67 url(../images/mapboxbg.svg) no-repeat right top;
-    background-size: 60px;
-    padding: 5px 10px;
-    color: #fff;
-    font-size: 12px;
-    line-height: 25px;
-    background-position-x: 146px;
-}
-.loncom_map_boxcon{
-  padding: 10px 10px 0 10px;
-  font-size: 12px;
-}
-.loncom_map_boxcon p{
-  line-height: 30px;
-  height: 30px;
-}
-.loncom_map_boxcon p.line,
-.loncom_map_boxcondetail p.line{
-  border-top: 1px solid #efefef;
-}
-.loncom_map_boxcon p span:nth-of-type(1){
-  color: #999;
-  width: 60px;
-  display: inline-block;
-}
-.loncom_map_boxcon p span:nth-of-type(3){
-  float: right;
-  text-align: right;
-}
-.loncom_map_bottom{
-  width: 100%;
-  height: 20px;
-  line-height: 20px;
-  background: #f7f8f8;
-  border-top: 1px solid #efefef;
-  text-align: center;
-  color: #999;
-}
-.loncom_map_gaoshuiwei{
-  margin-bottom: 30px;
-}
-.loncom_map_shuichang{
-  margin-bottom: 30px;
-}
 
-.loncom_map_boxcondetail{
-  padding: 20px 10px 10px 10px;
-}
-.loncom_map_boxcondetail p{
-  height: 22px;
-  line-height: 22px;
-}
-.loncom_map_boxcondetail p.line{
-  line-height: 30px;
-  margin-top: 10px;
-}
 
-.loncom_map_samllbox{
-  width: 100px;
-  height: 50px;
-  padding: 5px 10px;
-  background: #12AE67;
-  font-size: 12px;
-  color: #fff;
-  border-radius: 3px;
-  margin-bottom: 10px;
-}
-.loncom_map_samllbox p{
-  height: 20px;
-  line-height: 20px;
-}
-.loncom_map_samllbox_alarm{
-  background: #c93f24;
-}
-.loncom_map_samllbox_warning{
-  background: #d95600;
-}
+
 
 
 

@@ -1,73 +1,30 @@
-
-//ajax请求没用ajax请求
-function open_ajax(url, parameter, request,type, error, async) {
-    type = type ? type : "Get";
-    $.ajax({
-        type: type,
-        url: url,
-        data: parameter,
-        async: async ? async : true,
-        cache:false,
-        error: function () {
-            if (error != null && error != "") {
-                error();
-            }
-        },
-        success: function (msg) {
-            if (request)
-                request(msg);
-        }
-    });
-}
-//获取url传递的参数
-function getQueryParams(url) {
-    var match,
-    pl = /\+/g,  // Regex for replacing addition symbol with a space
-    search = /([^&=]+)=?([^&]*)/g,
-    decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
-    query = window.location.search.substring(1);
-    if (url) query = url.substr(url.indexOf("?") + 1)
-
-    var urlParams = {};
-    while (match = search.exec(query))
-        urlParams[decode(match[1])] = decode(match[2]);
-    
-    return urlParams;
-} 
-//生成树形JSON
-function getJsonTree(dataJson,parentId){
-    var itemArr=[];
-    for(var i=0;i<dataJson.length;i++){ 
-        var node=dataJson[i];
-        if(node.pid==parentId){ 
-            var newNode=node;
-            newNode.children=getJsonTree(dataJson,node.id);
-            itemArr.push(newNode);              
-        }
-    }
-    return itemArr;
-}
-//树形JSon生成list  自己定义个menuArr全局变量
-// function spread(menus) {
-//     for (var i=0; i < menus.length; i++ ) {
-//         menu = menus[i]
-//         if (menu.children) {
-//             spread(menu.children)
-//             delete menu.children
-//         }
-//         menuArr.push(menu)
-//     }
-// }
-
 //超出滚动
 function scrollCon(){
-	
+	$('.loncom_scroll_con').niceScroll({
+        cursorcolor: "#ccc",//#CC0071 光标颜色
+        cursoropacitymax: 1, //改变不透明度非常光标处于活动状态（scrollabar“可见”状态），范围从1到0
+        touchbehavior: false, //使光标拖动滚动像在台式电脑触摸设备
+        cursorwidth: "5px", //像素光标的宽度
+        cursorborder: "0", // 游标边框css定义
+        cursorborderradius: "2px",//以像素为光标边界半径
+        autohidemode: true //是否隐藏滚动条
+    });
 }
 
 $(window).resize(function () {
 	scrollCon();
 });
-
+function numScroll(num){
+    $('.numScroll'+num).niceScroll(".numScrollCon"+num,{
+        cursorcolor: "#ccc",//#CC0071 光标颜色
+        cursoropacitymax: 1, //改变不透明度非常光标处于活动状态（scrollabar“可见”状态），范围从1到0
+        touchbehavior: false, //使光标拖动滚动像在台式电脑触摸设备
+        cursorwidth: "5px", //像素光标的宽度
+        cursorborder: "0", // 游标边框css定义
+        cursorborderradius: "2px",//以像素为光标边界半径
+        autohidemode: true //是否隐藏滚动条
+    });
+}
 //日期格式化
 Date.prototype.Format = function (fmt) { //author: meizz 
     var o = {
@@ -85,221 +42,149 @@ Date.prototype.Format = function (fmt) { //author: meizz
     return fmt;
 }
 
-//echarts 图
-function echartLine(ID,xData,yData){
-    var myChart = echarts.init(document.getElementById(ID));
-    option = {
-        color:["#DA632A","#33C466"],
-        tooltip : {
-            trigger: 'axis'
-        },
-        xAxis: {
-            type: 'category',
-            axisTick:{
-                    show:false
-                }, 
-            data: xData
-        },
-        yAxis: {
-            axisLabel:{
-                formatter: '{value}'
-            }
-        },
-        series: [{
-            data: yData,
-            type: 'line',
-            smooth: true,
-            symbol:"line", //不要圆圈
-            symbolSize:0, //平滑的时候设置为0
-        }]
-    };
-    myChart.setOption(option, true);
-    return myChart;
-}
 
-// index的
-function barChar(ID,xData,yData){
-    var color=['#2f8fbe','#f00','#f00','#c98','#76f'];
+
+function hbarChar(ID){
+    var xMax = 1600;
+    var dataShadow = [];
+    var yData=['1号池塘','2号池塘','3号池塘','4号池塘','5号池塘','6号池塘','7号池塘'];
+    for (var i = 0; i < yData.length; i++) {
+        dataShadow.push(xMax);
+    }
+
     var myChart = echarts.init(document.getElementById(ID));
-    option = {
-        //color:['#2f8fbe','#f00','#09c','#c98','#76f'],
-        tooltip : {
+
+    var option = {
+        color: ['#C5051B','#FF1A07','#FF7B00','#FFA300'],
+        tooltip: {
             trigger: 'axis',
-            axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-                type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
             },
-            formatter:'{b}：{c}'
+            formatter: '{b}：{c}'
         },
         grid: {
-            top:'40px',
-            bottom: '15px',
-            left:'15px',
-            right:'15px',
+            top: '20px',
+            bottom: '20px',
+            left: '15px',
+            right: '5px',
             containLabel: true
         },
-        xAxis : [
+        legend: {
+            top:'0px',
+            right:'15px',
+            textStyle:{
+                color:"#000",
+            },
+            data: ['一级告警', '二级告警','三级告警','四级告警']
+        },
+        xAxis:  {
+            type: 'category',
+            axisTick: {
+                show: false
+            },
+            axisLabel: {
+                color: "#000"
+            },
+            splitLine: {
+                show: false,
+            },
+            axisLine: {
+                lineStyle: {
+                    color: "#666",
+                    width: 1,
+                }
+            },
+            axisLabel: {
+                interval: 0,
+                rotate: -50,
+                color: "#000"
+            },
+            data: yData,
+        },
+        yAxis: {
+            
+            type: 'value',
+            axisLabel: {
+                color: "#ccc"
+            },
+            axisTick: {
+                show: false
+            },
+            splitLine: {
+                show: false,
+            },
+            axisLine: {
+                lineStyle: {
+                    color: "#666",
+                    width: 1,
+                }
+            },
+        },
+        series: [
+            // { // For shadow
+            //     type: 'bar',
+            //     itemStyle: {
+            //         normal: {color: '#434343'}
+            //     },
+            //     barGap:'-100%',
+            //     barCategoryGap:'0%',
+            //     data: dataShadow,
+            //     animation: false
+            // },
             {
-                type : 'category',
-                data : xData,
-                axisTick:{
-                    show:false
-                },
-                axisLabel:{
-                    color:"#000"
-                },
-                splitLine:{
-                    show:false,
-                },
-                axisLine:{
-                    lineStyle:{
-                        color:"#333",
-                        width:1,
-                    }
-                },
-            }
-        ],
-        yAxis : [
+                name: '一级告警',
+                type: 'bar',
+                stack: 'all',
+                barWidth: '30%',
+                data: [400, 302, 301, 334, 390, 330, 400]
+            },
             {
-                type : 'value',
-                axisLabel:{
-                    color:"#000"
-                },
-                axisTick:{
-                    show:false
-                },
-                splitLine:{
-                    show:false,
-                },
-                axisLine:{
-                    lineStyle:{
-                        color:"#333",
-                        width:1,
-                    }
-                },
-            }
-        ],
-        series : [
+                name: '二级告警',
+                type: 'bar',
+                stack: 'all',
+                barWidth: '30%',
+                data: [120, 132, 101, 134, 90, 230, 400]
+            },
             {
-                type:'bar',
-                barWidth: '50%',
-                itemStyle:{
-                    normal:{
-                        color: function(params){
-                            var index_color = params.name;
-                            if(index_color=="客户"){
-                                return '#2f8fbe';
-                            }else if(index_color=="项目") {
-                                return '#0dff00';
-                            }else if(index_color=="模块"){
-                                return '#09c';
-                            }else if(index_color=="设备"){
-                                return '#fd0000';
-                            }else{
-                                return '#ccc'
-                            }
-                        } 
-                    }
-                },
-                data:yData
+                name: '三级告警',
+                type: 'bar',
+                stack: 'all',
+                barWidth: '30%',
+                data: [220, 182, 191, 234, 290, 330, 400]
+            },
+            {
+                name: '四级告警',
+                type: 'bar',
+                stack: 'all',
+                barWidth: '30%',
+                data: [150, 212, 201, 154, 190, 330, 400]
             }
         ]
     };
     myChart.setOption(option, true);
     return myChart; 
 }
-function LineChar(ID,xData,yData,color){
-    //color=["#DA632A","#f7bca0","#ffe9de"]
-    var myChart = echarts.init(document.getElementById(ID));
-    option = {
-        color:[color[0]],
-        tooltip : {
-            trigger: 'axis'
-        },
-        grid: {
-            left: '20px',
-            right: '20px',
-            top:'5px',
-            bottom: '10px',
-            containLabel: true
-        },
-        xAxis: {
-            type: 'category',
-            axisTick:{
-                show:false
-            }, 
-            axisLine:{
-                show:false,
-                lineStyle:{
-                    color:"#304a5d",
-                    width:1,
-                }
-            },
-            axisLabel:{
-                color:"#ccc"    
-            },     
-            data: xData
-        },
-        yAxis: {
-            axisTick:{
-                show:false,
-            },
-            splitLine:{
-                show:true,
-                lineStyle:{
-                    color:"#EAEEF1",
-                    width:1,
-                    type:"solid",
-                }
-            },
-            axisLine:{
-                show:false
-            },
-            axisLabel:{
-                color:"#ccc",
-                formatter: '{value}'
-            }
-        },
-        series: [{
-            data: yData,
-            type: 'line',
-            lineStyle:{
-                width:5,
-                color:'#DA632A'
-            },
-            smooth: true,
-            symbol:"line", //不要圆圈
-            symbolSize:0, //平滑的时候设置为0
-            areaStyle: {normal: {color:new echarts.graphic.LinearGradient(
-                0, 0, 0, 1,
-                [
-                    {offset: 0, color: color[1]},
-                    {offset: 0.99, color: color[2]}
-                ]
-            )}},
 
-        }]
-    };
-    myChart.setOption(option, true);
-    return myChart;
-}
-function piemoreChar(ID,xData,yData,allAlarm,color) {
+//首页当前告警统计
+function piemoreChar(ID, xData, yData, allAlarm, color) {
     var myChart = echarts.init(document.getElementById(ID));
-    var _color=["#e92f0d","#fbf320","#09c","#3ff504"];
-    if(color){
-        for(var i=0;i<color.length;i++){
-            if(color[i]!=""){
-                _color[i]=color[i];
+    var _color = ["#00DCB8", "#00E1FF", "#A3E8DE", "#579CFF"];
+    if (color) {
+        for (var i = 0; i < color.length; i++) {
+            if (color[i] != "") {
+                _color[i] = color[i];
             }
         }
     }
     var option = {
-        color:_color,
-        title:{
-            text:"告警总数："+allAlarm,  
+        color: _color,
+        title: {
+            text: "告警总数：" + allAlarm,
             top: 15,
-            left:15,
-            textStyle:{
-                color:_color[0],
+            left: 15,
+            textStyle: {
+                color: _color[0],
             },
         },
         tooltip: {
@@ -310,14 +195,14 @@ function piemoreChar(ID,xData,yData,allAlarm,color) {
             y: 'center',
             orient: 'vertical',
             x: '20px',
-            textStyle:{
-                color:'#000'
+            textStyle: {
+                color: '#000'
             },
-            data:xData
+            data: xData
         },
         series: [
             {
-                type:'pie',
+                type: 'pie',
                 radius: ['70%', '80%'],
                 avoidLabelOverlap: false,
                 label: {
@@ -338,207 +223,13 @@ function piemoreChar(ID,xData,yData,allAlarm,color) {
                         show: false
                     }
                 },
-                data:yData
+                data: yData
             }
         ]
     };
     myChart.setOption(option, true);
-    return myChart; 
+    return myChart;
 }
-
-function twoLineChar(ID,xData,yData1,yData2,color1,color2,name){
-    // var xData=['23','234','54'];
-    // var yData1=[123,124,323]
-    // var yData2=[173,324,323]
-    // var name=['大大','xia']
-    // color1=["#5085FF","#B5CAFE","#F4F8FF"];
-    var myChart = echarts.init(document.getElementById(ID));
-    var option = {
-        color:[color1[0],color2[0]],
-        tooltip : {
-            trigger: 'axis'
-        },
-        legend: {
-            bottom: 5,
-            textStyle:{
-                color:"#ccc"
-            },
-            data:name
-        },
-        grid: {
-            left: '20px',
-            right: '20px',
-            top:'5px',
-            bottom: '40px',
-            containLabel: true
-        },
-        xAxis : [
-            {
-                type : 'category',
-                boundaryGap : false,
-                axisLine:{
-                    show:false,
-                    lineStyle:{
-                        color:"#333",
-                        width:1,
-                    }
-                },
-                axisTick:{
-                    show:false
-                },                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
-                data :xData
-            }
-        ],
-        yAxis : [
-            {
-                type : 'value',
-                splitLine:{
-                    show:true,
-                },
-                axisLine:{
-                    show:false,
-                    lineStyle:{
-                        color:"#333",
-                        width:1,
-                    }
-                },
-                 splitLine:{
-                    show:true,
-                    lineStyle:{
-                        color:"#EAEEF1",
-                        width:1,
-                        type:"solid",
-                    }
-                },
-                axisTick:{
-                    show:false
-                },
-                axisLabel:{
-                    color:"#ccc",
-					formatter: '{value}'
-                }
-            }
-        ],
-        series : [
-         {
-            name:name[0],
-            type:'line',
-            smooth:"true", 
-            symbol:"line",
-            symbolSize:0,
-            areaStyle: {normal: {color:new echarts.graphic.LinearGradient(
-                0, 0, 0, 1,
-                [
-                    {offset: 0, color: color1[1]},
-                    {offset: 0.99, color: color1[2]}
-                ]
-            )}},
-            data:yData1
-        },
-        {
-            name:name[1],
-            type:'line',
-            smooth:"true", //平滑
-            symbol:"line", //不要圆圈
-            symbolSize:0, //平滑的时候设置为0
-            areaStyle: {normal: {color:new echarts.graphic.LinearGradient(
-                0, 0, 0, 1,
-                [
-                    {offset: 0, color: color2[1]},
-                    {offset: 0.99, color: color2[2]}
-                ]
-            )}},
-            data:yData2
-        },
-    ]
-    };
-    myChart.setOption(option, true);
-    return myChart; 
-}
-function gaugeChar(ID,title,value,max){
-    var myChart = echarts.init(document.getElementById(ID));
-   var option = {
-        
-        tooltip : {
-            formatter: "{a} : {c}"
-        },
-        series: [
-            {
-                name: 'PUE',
-                type: 'gauge',
-                radius:'95%',
-                min:0,
-                max:max,
-                splitNumber:0,
-                axisLine:{
-                    lineStyle:{
-                        color:[[value/max, new echarts.graphic.LinearGradient(
-                                    0, 0, 0, 1,
-                                    [
-                                        {offset: 0, color: '#F8666B'},
-                                        {offset: 0.99, color: '#5C72F7'}
-                                    ]
-                                )],[1, "#E2E2EA"]],
-                        width:'10',
-                    }
-                },
-                splitLine:{
-                    show:false
-                },
-                axisTick:{
-                    show:false
-                },
-                axisLabel:{
-                    show:false
-                },
-                pointer:{
-                    length:'75%',
-                    width:'4%'
-                },
-                itemStyle:{
-                    normal:{
-                        color:new echarts.graphic.LinearGradient(
-                                    0, 0, 0, 1,
-                                    [
-                                        {offset: 0, color: '#F8666B'},
-                                        {offset: 0.99, color: '#5C72F7'}
-                                    ]
-                                )
-                    }
-                },
-                title:{
-                    show:false
-                },
-                detail: {
-                        show: true,
-						textStyle: {
-							fontSize: 15,
-							color:'#5E73F6',
-						},
-                        formatter: title+':' + '{value}',
-                        offsetCenter: [0, '88%'],
-                        
-
-                    },
-                data: [{value: value}]
-            }
-        ]
-    };
-    myChart.setOption(option, true);
-    return myChart; 
-}
-
-//编辑时下拉框中判断编辑返回的信息在下拉信息中是否存在
-function checkHasId(id,list){
-    for(var i=0;i<list.length;i++){
-        if(id==list[i].id){
-            return list[i].id;
-        }
-    }
-    return '';
-}
-
-
 
 
 
