@@ -8,39 +8,45 @@ export default new Router({
   routes: [
     {
       path: '',
-      component: (resolve) => require(['@/page/index'], resolve),
+      component: (resolve) => require(['@/page/public'], resolve),
       redirect:'/index',
       children:[
-        {path:'/index',component:(resolve) => require(['@/page/indexContent'], resolve)},
+        {path:'/index',component:(resolve) => require(['@/page/index'], resolve)},
       ]
     },{
       path: '/',
-      component: (resolve) => require(['@/page/index'], resolve),
-      redirect:'/index',
+      component: (resolve) => require(['@/page/public'], resolve),redirect:'/index',
       children:[
-        {path:'/index',component:(resolve) => require(['@/page/indexContent'], resolve)},
+        {path:'/index',component:(resolve) => require(['@/page/index'], resolve)},
       ]
     },{
       path:'/login',
       component: (resolve) => require(['@/page/login'], resolve),
     },{
       path: '/control',  //实时监控
-      component: (resolve) => require(['@/page/control'], resolve),
-      redirect:'/control/gis',
+      component: (resolve) => require(['@/page/public'], resolve),redirect:'/control/gis',
       children:[
         {path:'/control/gis',component:(resolve) => require(['@/page/control/control_gis'], resolve)},
         {path:'/control/list',component:(resolve) => require(['@/page/control/control_list'], resolve)},
       ]
-    },{
+    },
+    {
+      path: '/alarm',  //告警管理
+      component: (resolve) => require(['@/page/public'], resolve),redirect:'/alarm/realtime',
+      children:[
+        {path:'/alarm/realtime',component:(resolve) => require(['@/page/alarm/alarm_realtime'], resolve)},
+        {path:'/alarm/history',component:(resolve) => require(['@/page/alarm/alarm_history'], resolve)},
+      ]
+    },
+    {
       path: '/record',  //档案管理
-      component: (resolve) => require(['@/page/record'], resolve),
-      redirect:'/record/pool',
+      component: (resolve) => require(['@/page/public'], resolve),redirect:'/record/pool',
       children:[
         {path:'/record/pool',component:(resolve) => require(['@/page/record/record_pool'], resolve)},
         {path:'/record/finger',component:(resolve) => require(['@/page/record/record_finger'], resolve)},
       ]
     },{//系统管理
-      path: '/system', component: (resolve) => require(['@/page/system'], resolve),redirect:'/system/limits',
+      path: '/system', component: (resolve) => require(['@/page/public'], resolve),redirect:'/system/limits',
       children:[
         {
           path:'/system/limits',component:(resolve) => require(['@/page/system/limits'], resolve),redirect:'/system/limits/depart',

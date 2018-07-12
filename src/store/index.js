@@ -10,6 +10,10 @@ const storeInfo=new Vuex.Store({
                 {url:'/control/gis',name:'GIS',fullName:'GIS',icon:'static/images/item.png',item:[]},
                 {url:'/control/list',name:'视图',fullName:'列表视图',icon:'static/images/item.png'},
             ]},
+            {url:'/alarm',name:'告警管理',icon:'static/images/home.svg',item:[
+                {url:'/alarm/realtime',name:'实时',fullName:'实时告警',icon:'static/images/item.png',item:[]},
+                {url:'/alarm/history',name:'历史',fullName:'历史告警',icon:'static/images/item.png'},
+            ]},
             {url:'/record',name:'档案管理',icon:'static/images/home.svg',item:[
                 {url:'/record/pool',name:'池塘',fullName:'池塘管理',icon:'static/images/item.png',item:[]},
                 {url:'/record/finger',name:'物种',fullName:'物种管理',icon:'static/images/item.png'},

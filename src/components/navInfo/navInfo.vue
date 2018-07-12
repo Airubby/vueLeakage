@@ -69,10 +69,8 @@ export default {
         //     this.Init();   
         // }
          this.navList=this.$store.state.navList;
-        
     },
     mounted() {
-        
         this.Init();   
     },
     computed:{
@@ -91,6 +89,7 @@ export default {
     },
     methods:{
         Init(){
+
             var path=this.$route.path;
             var hasPath=false;
             for(var i=0;i<this.navList.length;i++){
@@ -185,7 +184,7 @@ export default {
        },
        trans:function(){
            return false
-       }
+       },
     }, 
     watch:{
         getNavInfo: function(val) { 
@@ -196,7 +195,8 @@ export default {
               this.InitLeft();
           },
           deep: true
-        }
+        },
+        "$route": "Init"
     } 
 }
 </script>
