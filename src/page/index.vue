@@ -58,36 +58,36 @@
                                 <dd>
                                     <el-row>
                                     <el-col :span="8">1号池塘</el-col>
-                                    <el-col :span="8" class="one">10℃</el-col>
-                                    <el-col :span="8"><span class="one"><i class="fa fa-exclamation-triangle"></i>一级</span></el-col>
+                                    <el-col :span="8" class="alarm_one_color">10℃</el-col>
+                                    <el-col :span="8"><span class="alarm_one_color"><i class="fa fa-exclamation-triangle"></i>一级</span></el-col>
                                     </el-row>
                                 </dd>
                                 <dd>
                                     <el-row>
                                     <el-col :span="8">2号池塘</el-col>
-                                    <el-col :span="8" class="two">30℃</el-col>
-                                    <el-col :span="8"><span class="two"><i class="fa fa-exclamation-circle"></i>二级</span></el-col>
+                                    <el-col :span="8" class="alarm_two_color">30℃</el-col>
+                                    <el-col :span="8"><span class="alarm_two_color"><i class="fa fa-exclamation-circle"></i>二级</span></el-col>
                                     </el-row>
                                 </dd>
                                 <dd>
                                     <el-row>
                                     <el-col :span="8">3号池塘</el-col>
-                                    <el-col :span="8" class="three">20℃</el-col>
-                                    <el-col :span="8"><span class="three"><i class="fa fa-exclamation-circle"></i>三级</span></el-col>
+                                    <el-col :span="8" class="alarm_three_color">20℃</el-col>
+                                    <el-col :span="8"><span class="alarm_three_color"><i class="fa fa-exclamation-circle"></i>三级</span></el-col>
                                     </el-row>
                                 </dd>
                                 <dd>
                                     <el-row>
                                     <el-col :span="8">4号池塘</el-col>
-                                    <el-col :span="8" class="four">16℃</el-col>
-                                    <el-col :span="8"><span class="four"><i class="fa fa-exclamation-circle"></i>四级</span></el-col>
+                                    <el-col :span="8" class="alarm_four_color">16℃</el-col>
+                                    <el-col :span="8"><span class="alarm_four_color"><i class="fa fa-exclamation-circle"></i>四级</span></el-col>
                                     </el-row>
                                 </dd>
                                 <dd>
                                     <el-row>
                                     <el-col :span="8">5号池塘</el-col>
-                                    <el-col :span="8" class="normal">28℃</el-col>
-                                    <el-col :span="8"><span class="normal"><i class="fa fa-check"></i>正常</span></el-col>
+                                    <el-col :span="8" class="alarm_normal_color">28℃</el-col>
+                                    <el-col :span="8"><span class="alarm_normal_color"><i class="fa fa-check"></i>正常</span></el-col>
                                     </el-row>
                                 </dd>
                             </dl>
@@ -111,36 +111,36 @@
                                 <dd>
                                     <el-row>
                                     <el-col :span="8">1号池塘</el-col>
-                                    <el-col :span="8" class="one">3mg/L</el-col>
-                                    <el-col :span="8"><span class="one"><i class="fa fa-exclamation-triangle"></i>一级</span></el-col>
+                                    <el-col :span="8" class="alarm_one_color">3mg/L</el-col>
+                                    <el-col :span="8"><span class="alarm_one_color"><i class="fa fa-exclamation-triangle"></i>一级</span></el-col>
                                     </el-row>
                                 </dd>
                                 <dd>
                                     <el-row>
                                     <el-col :span="8">2号池塘</el-col>
-                                    <el-col :span="8" class="two">4mg/L</el-col>
-                                    <el-col :span="8"><span class="two"><i class="fa fa-exclamation-circle"></i>二级</span></el-col>
+                                    <el-col :span="8" class="alarm_two_color">4mg/L</el-col>
+                                    <el-col :span="8"><span class="alarm_two_color"><i class="fa fa-exclamation-circle"></i>二级</span></el-col>
                                     </el-row>
                                 </dd>
                                 <dd>
                                     <el-row>
                                     <el-col :span="8">3号池塘</el-col>
-                                    <el-col :span="8" class="three">5mg/L</el-col>
-                                    <el-col :span="8"><span class="three"><i class="fa fa-exclamation-circle"></i>三级</span></el-col>
+                                    <el-col :span="8" class="alarm_three_color">5mg/L</el-col>
+                                    <el-col :span="8"><span class="alarm_three_color"><i class="fa fa-exclamation-circle"></i>三级</span></el-col>
                                     </el-row>
                                 </dd>
                                 <dd>
                                     <el-row>
                                     <el-col :span="8">4号池塘</el-col>
-                                    <el-col :span="8" class="four">6mg/L</el-col>
-                                    <el-col :span="8"><span class="four"><i class="fa fa-exclamation-circle"></i>四级</span></el-col>
+                                    <el-col :span="8" class="alarm_four_color">6mg/L</el-col>
+                                    <el-col :span="8"><span class="alarm_four_color"><i class="fa fa-exclamation-circle"></i>四级</span></el-col>
                                     </el-row>
                                 </dd>
                                 <dd>
                                     <el-row>
                                     <el-col :span="8">5号池塘</el-col>
-                                    <el-col :span="8" class="normal">7mg/L</el-col>
-                                    <el-col :span="8"><span class="normal"><i class="fa fa-check"></i>正常</span></el-col>
+                                    <el-col :span="8" class="alarm_normal_color">7mg/L</el-col>
+                                    <el-col :span="8"><span class="alarm_normal_color"><i class="fa fa-check"></i>正常</span></el-col>
                                     </el-row>
                                 </dd>
                             </dl>
@@ -164,36 +164,36 @@
                                 <dd>
                                     <el-row>
                                     <el-col :span="8">1号池塘</el-col>
-                                    <el-col :span="8" class="one">PH<5 </el-col>
-                                    <el-col :span="8"><span class="one"><i class="fa fa-exclamation-triangle"></i>一级</span></el-col>
+                                    <el-col :span="8" class="alarm_one_color">PH<5 </el-col>
+                                    <el-col :span="8"><span class="alarm_one_color"><i class="fa fa-exclamation-triangle"></i>一级</span></el-col>
                                     </el-row>
                                 </dd>
                                 <dd>
                                     <el-row>
                                     <el-col :span="8">2号池塘</el-col>
-                                    <el-col :span="8" class="two">PH<6 </el-col>
-                                    <el-col :span="8"><span class="two"><i class="fa fa-exclamation-circle"></i>二级</span></el-col>
+                                    <el-col :span="8" class="alarm_two_color">PH<6 </el-col>
+                                    <el-col :span="8"><span class="alarm_two_color"><i class="fa fa-exclamation-circle"></i>二级</span></el-col>
                                     </el-row>
                                 </dd>
                                 <dd>
                                     <el-row>
                                     <el-col :span="8">3号池塘</el-col>
-                                    <el-col :span="8" class="three">PH<7 </el-col>
-                                    <el-col :span="8"><span class="three"><i class="fa fa-exclamation-circle"></i>三级</span></el-col>
+                                    <el-col :span="8" class="alarm_three_color">PH<7 </el-col>
+                                    <el-col :span="8"><span class="alarm_three_color"><i class="fa fa-exclamation-circle"></i>三级</span></el-col>
                                     </el-row>
                                 </dd>
                                 <dd>
                                     <el-row>
                                     <el-col :span="8">4号池塘</el-col>
-                                    <el-col :span="8" class="four">PH<8 </el-col>
-                                    <el-col :span="8"><span class="four"><i class="fa fa-exclamation-circle"></i>四级</span></el-col>
+                                    <el-col :span="8" class="alarm_four_color">PH<8 </el-col>
+                                    <el-col :span="8"><span class="alarm_four_color"><i class="fa fa-exclamation-circle"></i>四级</span></el-col>
                                     </el-row>
                                 </dd>
                                 <dd>
                                     <el-row>
                                     <el-col :span="8">5号池塘</el-col>
-                                    <el-col :span="8" class="normal">PH<9 </el-col>
-                                    <el-col :span="8"><span class="normal"><i class="fa fa-check"></i>正常</span></el-col>
+                                    <el-col :span="8" class="alarm_normal_color">PH<9 </el-col>
+                                    <el-col :span="8"><span class="alarm_normal_color"><i class="fa fa-check"></i>正常</span></el-col>
                                     </el-row>
                                 </dd>
                             </dl>
@@ -358,25 +358,7 @@
         height: 35px;
         line-height: 35px;
     }
-    .index_center_con dd .normal{
-        color: #00B15F;
-    }
-    .index_center_con dd .one{
-        color:#C5051B;
-    }
-    .index_center_con dd .two{
-        color:#FF1A07;
-    }
-    .index_center_con dd .three{
-        color:#FF7B00;
-    }
-    .index_center_con dd .four{
-        color:#FFA300;
-    }
-    .index_center_con dd .five{
-        color:#FFA300;
-    }
-    
+
     .index_center_con1 i{
         font-style: normal;
         width: 60px;

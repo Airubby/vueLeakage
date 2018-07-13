@@ -1,11 +1,35 @@
 <template>
     <div class="loncom_content">
-       listview
+       <div class="loncom_public_top">
+            <div class="loncom_fl">池塘管理</div>
+            <div class="loncom_fr">
+                <el-button type="primary" size="mini" @click="add"><i class="fa fa-plus-circle loncom_mr5"></i>新建</el-button>
+                <el-button type="primary" size="mini" @click="remove"><i class="fa fa-minus-circle loncom_mr5"></i>删除</el-button>
+            </div>
+        </div>
+        <div class="loncom_public_con loncom_scroll_con">
+            <el-search-table-pagination  type="local"
+                url=""
+                list-field="list" 
+                total-field="total"
+                method='post' 
+                :formOptions="table_forms"
+                border :data="table_data" :columns="table_columns" ref="thisRef">   
+                <el-table-column slot="prepend" type="selection"></el-table-column>   
+                <template slot-scope="scope" slot="preview-handle">
+                    <div>
+                        <a href="javascript:;" class="loncom_color" @click="edit (scope.row)">编辑</a> 
+                    </div>
+                </template>
+            </el-search-table-pagination>
+       </div>
+       <Add v-bind:dialogInfo="addInfo"></Add>
     </div>
 </template>
 
 
 <script>
+import Add from '@/components/record_finger_add.vue'
 export default {
     created () {
         
@@ -15,12 +39,44 @@ export default {
     },
     data() {
        return {
-          　
+          　table_data:[
+                {id:'1',level:'1',name:'小鱼',type:'鱼儿',remark:'323232'},
+                {id:'2',level:'2',name:'小鱼',type:'鱼儿',remark:'2423423432'},
+            ],
+            table_forms: {
+            inline: true,
+            size:'small',
+            initParams:{queryKey:""},
+            forms: []
+            },
+            table_columns:[
+              { prop: 'level', label: '物种编号',minWidth:10},
+              { prop: 'name', label: '物种名称',minWidth:10},
+              { prop: 'type', label: '种类',minWidth:10},
+              { prop: 'remark', label: '说明',minWidth:30},
+              { prop: 'handle', label: '操作',slotName:'preview-handle',width:100},
+            ],
+            addInfo:{
+                title:"新增物种信息",
+                width:'800px',
+                visible:false,
+            },
+
+
+
        }
    },
     methods:{
-       
+       add:function(){
+           this.addInfo.visible=true;
+       },
+       remove:function(){
+
+       },
+       eidt:function(){
+
+       }
     },
-    components:{}
+    components:{Add}
 }
 </script>

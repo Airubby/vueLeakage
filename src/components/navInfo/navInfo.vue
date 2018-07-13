@@ -20,7 +20,7 @@
             </ul>
         </div>
         <div class="loncom_con">
-            <div class="loncom_con_left" ref="loncom_con_left" v-if="leftShow">
+            <div class="loncom_con_left" ref="loncom_con_left">
                 <div class="loncom_left_navtop" @click="navClick" ref="loncom_left_navtop">
                     <i class="fa fa-bars" ref="bars"></i>
                 </div>
@@ -32,7 +32,7 @@
                                     <em><img :src="item.icon"></em>
                                     <span v-if="navbtn=='close'">{{item.name}}</span>
                                     <span v-if="navbtn=='open'">{{item.fullName}}</span>
-                                    <i v-if="item.item&&item.item.length>0"><img src="static/images/sanjiao.png"></i>
+                                    <i v-if="navbtn=='open'&&item.item&&item.item.length>0"><img src="static/images/sanjiao.png"></i>
                                 </div>
                                 <dl v-show="navbtn=='open'">
                                     <dd v-for="inItem in item.item">
@@ -84,12 +84,11 @@ export default {
         navList:[],
         leftNavList:[],
         isRouterAlive:true,  //默认view-router显示的，点击刷新用
-        leftShow:true,
+        leftShow:false,
       }
     },
     methods:{
         Init(){
-
             var path=this.$route.path;
             var hasPath=false;
             for(var i=0;i<this.navList.length;i++){
@@ -102,46 +101,55 @@ export default {
                 }
             }
             if(!hasPath){ //没有子菜单
+                this.leftNavList=[];
                 this.leftShow=false;
                 $(this.$refs.loncom_con_right).css({"padding-left":"0"});
             }else{
                 this.leftShow=true;
-                if(JSON.stringify(sessionStorage.navInfo) == undefined){
-                    sessionStorage.navInfo = JSON.stringify({navbtn:'close'});
-                }else{
-                    this.navbtn = JSON.parse(sessionStorage.navInfo).navbtn;
-                }
-                
+            }
+            if(JSON.stringify(sessionStorage.navInfo) == undefined){
+                sessionStorage.navInfo = JSON.stringify({navbtn:'close'});
+            }else{
+                this.navbtn = JSON.parse(sessionStorage.navInfo).navbtn;
             }
             
         },
         //初始化侧边菜单
         InitLeft:function(){
-            if(this.navbtn==='close'){
-                $(this.$refs.loncom_con_left).css("width","60px");
-                $(this.$refs.loncom_con_right).css({
-                    "padding-left":"60px",
-                });
-                $(this.$refs.bars).css({
-                    'transform':'rotate(0deg)'
-                })
-                $(".loncom_left_navcon").find("span").css({
-                    "display":"block",
-                    "text-align":'center'
-                });
+            if(this.leftShow){
+                if(this.navbtn==='close'){
+                    $(this.$refs.loncom_con_left).css("width","60px");
+                    $(this.$refs.loncom_con_right).css({
+                        "padding-left":"60px",
+                        
+                    });
+                    $(this.$refs.bars).css({
+                        'transform':'rotate(0deg)'
+                    })
+                    $(".loncom_left_navcon").find("span").css({
+                        "display":"block",
+                        "text-align":'center'
+                    });
+                }else{
+                    $(this.$refs.loncom_con_left).css({"width":"200px"});
+                    $(this.$refs.loncom_con_right).css({
+                        "padding-left":"200px",
+                    });
+                    $(this.$refs.bars).css({
+                        'transform':'rotate(90deg)'
+                    })
+                    $(".loncom_left_navcon").find("span").css({
+                        "display":"inline-block",
+                        "text-align":'left'
+                    });
+                }
             }else{
-                $(this.$refs.loncom_con_left).css({"width":"200px"});
+                $(this.$refs.loncom_con_left).css({"width":"0px"});
                 $(this.$refs.loncom_con_right).css({
-                    "padding-left":"200px",
-                });
-                $(this.$refs.bars).css({
-                    'transform':'rotate(90deg)'
-                })
-                $(".loncom_left_navcon").find("span").css({
-                    "display":"inline-block",
-                    "text-align":'left'
+                    "padding-left":"0px",
                 });
             }
+            
         },
         //切换宽窄侧边导航
         navClick:function(){
@@ -179,8 +187,6 @@ export default {
        },
        //点击是否显示三级导航
        moreNav:function(event){
-           console.log(event.currentTarget)
-           console.log($(event.currentTarget).siblings("dl"))
        },
        trans:function(){
            return false
@@ -196,7 +202,12 @@ export default {
           },
           deep: true
         },
-        "$route": "Init"
+        "$route": function(){
+            this.$nextTick(() => {
+                this.Init();
+            })
+            
+        }
     } 
 }
 </script>

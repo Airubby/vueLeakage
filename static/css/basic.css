@@ -231,6 +231,9 @@ em{
 .loncom_left_navcon li span{
   vertical-align: middle;
   transition: all 2s linear;
+  min-width: 60px;
+  text-align: center;
+  display: inline-block;
 }
 .loncom_left_navcon li .router-link-active .lon_nav{
   color: #1796b8;
@@ -270,7 +273,7 @@ em{
 .loncom_public_top {
   width: 100%;
   height: 40px;
-  line-height: 30px;
+  line-height: 28px;
   background: #f9f9f9;
   border-bottom: 1px solid #d2d2d2;
   padding: 5px 15px;
@@ -278,11 +281,12 @@ em{
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
   position: relative;
 }
-.loncom_public_right {
-    width: 100%;
-    height: calc(100% - 60px);
+.loncom_public_con {
+  width: 100%;
+  padding:15px;
+  height: calc(100% - 40px);
 }
-.loncom_tpadding{
+/* .loncom_tpadding{
   padding: 15px;
   width: 100%;
   height: 100%;
@@ -304,9 +308,91 @@ em{
     width: calc(100% - 250px);
     height: 100%;
     float: left;
+} */
+
+.alarm_normal_color{
+  color: #00B15F;
 }
-
-
+.alarm_one_color{
+  color: #C5051B;
+}
+.alarm_two_color{
+  color: #FF1A07;
+}
+.alarm_three_color{
+  color: #FF7B00;
+}
+.alarm_four_color{
+  color: #FFA300;
+}
+.alarm_normal_bg{
+  background: #00B15F;
+}
+.alarm_one_bg{
+  background: #C5051B;
+}
+.alarm_two_bg{
+  background: #FF1A07;
+}
+.alarm_three_bg{
+  background: #FF7B00;
+}
+.alarm_four_bg{
+  background: #FFA300;
+}
+.circle10{
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  border-radius: 50%;
+}
+.loncom_dialog_con{
+  padding: 20px;
+}
+/*重置element*/
+.el-dialog__body{
+  padding: 0 !important;
+}
+.el-dialog, .el-message-box {
+    margin-bottom: 0 !important;
+    border-radius: 10px !important;
+}
+.el-dialog__header, .el-message-box__header {
+    border-bottom: 1px solid #e0e0e0;
+    padding: 11px 20px 10px !important;
+    background: #f2f2f2;
+    border-radius: 10px 10px 0 0;
+}
+.el-dialog__title, .el-message-box__title {
+    font-size: 14px !important;
+    color: #666 !important;
+}
+.dialog-footer {
+    padding: 15px 20px !important;
+    text-align: right;
+}
+.dialog-footer, .el-message-box__btns {
+    border-top: 1px solid #e0e0e0;
+}
+.dialog-footer .el-button, .el-message-box__btns .el-button {
+    padding: 8px 20px;
+}
+.el-transfer-panel .el-transfer-panel__header .el-checkbox .el-checkbox__label{
+  font-size: 14px !important;
+}
+.el-message-box__content {
+    padding: 50px 15px !important;
+}
+.el-form-item__content{
+  display: block !important;
+  height: 40px;
+}
+.el-select{
+  width: 100%;
+}
+.el-transfer-panel{
+  width: calc(50% - 65px) !important;
+}
 
 
 

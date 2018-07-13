@@ -1,7 +1,7 @@
 <template>
     <div class="loncom_content">
        <controlTop></controlTop>
-       <div class="list loncom_scroll_con">
+       <div class="loncom_public_con loncom_scroll_con">
             <ul class="list_ul">
                 <li>
                     <div class="list_con">
@@ -53,12 +53,12 @@
     </div>
 </template>
 <style>
-    .list{
+    .loncom_public_con{
         width: 100%;
         padding:15px;
         height: calc(100% - 40px);
     }
-    .list li{
+    .loncom_public_con li{
         width: 25%;
         padding:15px;
         float: left;

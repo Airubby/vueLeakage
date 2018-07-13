@@ -64,9 +64,11 @@ export default new Router({
         },
         {
           path:'/system/log',component:(resolve) => require(['@/page/system/log'], resolve)
-        }
+        },
       ]
+    },
+    {
+      path:'/test',component:(resolve) => require(['@/page/test'], resolve)
     }
-    
   ]
 })
