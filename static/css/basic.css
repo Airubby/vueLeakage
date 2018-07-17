@@ -54,12 +54,6 @@ em{
 .loncom_color{
   color: #0064aa;
 }
-.loncom_color1ABC9C{
-  color: #1ABC9C;
-}
-.loncom_color108EE9{
-  color: #108EE9;
-}
 .loncom_color999{
   color: #999;
 }
@@ -286,29 +280,6 @@ em{
   padding:15px;
   height: calc(100% - 40px);
 }
-/* .loncom_tpadding{
-  padding: 15px;
-  width: 100%;
-  height: 100%;
-}
-.loncom_tree {
-    width: 250px;
-    height: 100%;
-    float: left;
-}
-.loncom_tree_title {
-    height: 40px;
-    line-height: 35px;
-    background: #fff;
-    text-align: center;
-    font-size: 16px;
-    color: #33c466;
-}
-.loncom_table {
-    width: calc(100% - 250px);
-    height: 100%;
-    float: left;
-} */
 
 .alarm_normal_color{
   color: #00B15F;
@@ -385,7 +356,7 @@ em{
 }
 .el-form-item__content{
   display: block !important;
-  height: 40px;
+  height: 38px !important;
 }
 .el-select{
   width: 100%;
@@ -393,10 +364,71 @@ em{
 .el-transfer-panel{
   width: calc(50% - 65px) !important;
 }
+.search .el-input-group__append, .el-input-group__prepend{
+  background:#fff;
+  padding: 0 10px;
+}
+.search .el-input__inner{
+  border-right: none;
+}
+.search .el-input__inner:focus,.el-input__inner:hover {
+  outline:none;
+  border-color:#DCDFE6;   
+  box-shadow:none;
+}
 
 
+.loncom_tree{
+  width: 250px;
+  height: 100%;
+  float: left;
+}
+.loncom_table {
+  width: calc(100% - 250px);
+  height: 100%;
+  background: #fff;
+  float: left;
+}
+.loncom_tree_title {
+  height: 40px;
+  line-height: 35px;
+  background: #fff;
+  text-align: center;
+  font-size: 16px;
+  color: #02657c;
+  border:1px solid #e0e0e0;
+  border-bottom: none;
+}
+.loncom_tree_con {
+  width: 100%;
+  height: calc(100% - 40px);
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  padding: 20px 10px 0 10px;
+}
 
-
+.search_sort{
+  border: 1px solid #e0e0e0;
+  height: 40px;
+  padding: 0 20px;
+  background: #fff;
+}
+.search_sort .title{
+  line-height: 38px;
+}
+.search_sort .btn{
+  line-height: 35px;
+  float: right;
+}
+.serach_list span{
+  cursor: pointer;
+  padding: 3px 5px;
+}
+.serach_list .active{
+  background: #4FC1E9;
+  color: #fff;
+  border-radius: 3px;
+}
 
 
 @media (min-width: 1000px) {

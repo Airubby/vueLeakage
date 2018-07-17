@@ -231,6 +231,24 @@ function piemoreChar(ID, xData, yData, allAlarm, color) {
     return myChart;
 }
 
+//权限管理
+function serachList(){
+    $(".serach_list").find("span").on("click",function(){
+        if($(this).hasClass("all")){
+            $(".serach_list").find("span").removeClass("active");
+            $(this).addClass("active");
+        }else{
+            if($(".serach_list .all").hasClass("active")){
+                $(".serach_list .all").removeClass("active");
+            }
+            if($(this).hasClass("active")){
+                $(this).removeClass("active");
+            }else{
+                $(this).addClass("active");
+            }
+        }
+    })
+}
 
 
 

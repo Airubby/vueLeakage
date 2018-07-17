@@ -19,18 +19,6 @@
     .search{
         width: 250px;
     }
-    .el-input-group__append, .el-input-group__prepend{
-        background:#fff;
-        padding: 0 10px;
-    }
-    .el-input__inner{
-        border-right: none;
-    }
-    .el-input__inner:focus,.el-input__inner:hover {
-        outline:none;
-        border-color:#DCDFE6;   
-        box-shadow:none;
-    }
     .sort ul{
         border: 1px solid #D5D4D1;
         border-radius: 4px;

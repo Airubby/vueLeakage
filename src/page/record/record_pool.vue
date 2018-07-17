@@ -58,7 +58,7 @@ export default {
             ],
             addInfo:{
                 title:"新增鱼塘信息",
-                width:'800px',
+                width:'850px',
                 visible:false,
             },
 

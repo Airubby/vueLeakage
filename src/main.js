@@ -10,6 +10,11 @@ import store from './store'
 import NavInfo from './components/navInfo'
 import 'babel-polyfill'  //兼容低版本浏览器
 
+// 引用API文件
+import api from './api/index.js'
+// 将API方法绑定到全局
+Vue.prototype.$api = api
+
 Vue.config.productionTip = false
 
 Vue.use(ElementUI)
