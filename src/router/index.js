@@ -52,8 +52,11 @@ export default new Router({
           path:'/system/limits',component:(resolve) => require(['@/page/system/limits'], resolve),redirect:'/system/limits/depart',
           children:[
             {path:'/system/limits/depart',component:(resolve) => require(['@/page/system/limits_depart'], resolve)},
+            {path:'/system/limits/depart/adduser',component:(resolve) => require(['@/page/system/limits_adduser'], resolve)},
             {path:'/system/limits/user',component:(resolve) => require(['@/page/system/limits_user'], resolve)},
-            {path:'/system/limits/role',component:(resolve) => require(['@/page/system/limits_role'], resolve)}
+            {path:'/system/limits/user/adduser',component:(resolve) => require(['@/page/system/limits_adduser'], resolve)},
+            {path:'/system/limits/role',component:(resolve) => require(['@/page/system/limits_role'], resolve)},
+            
           ]
         },{
           path:'/system/sconfig',component:(resolve) => require(['@/page/system/sconfig'], resolve),redirect:'/system/sconfig/record',

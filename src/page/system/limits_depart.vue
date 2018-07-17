@@ -89,7 +89,7 @@
                                 <span class="Z">Z</span>
                             </div>
                         </div>
-                        <span class="btn"><el-button type="primary" size="mini">添加用户</el-button></span>
+                        <span class="btn"><el-button type="primary" size="mini" @click="addUser">添加用户</el-button></span>
                     </div>
                     <div class="search_table numScroll1">
                         <el-search-table-pagination  type="local" class="numScrollCon1"
@@ -129,7 +129,7 @@
 import DepartGet from '@/components/limits_depart_get.vue'
 export default {
     created () {
-        //this.getTree();  
+        this.getTree();  
     },
     mounted() {
         numScroll(0);
@@ -291,6 +291,10 @@ export default {
             }else{
                 this.getInfo.id=this.form_info.parentid;
             }
+        },
+        //添加用户
+        addUser:function(){
+            this.$router.push({path:'/system/limits/depart/adduser'});
         },
     },
     components:{DepartGet}
