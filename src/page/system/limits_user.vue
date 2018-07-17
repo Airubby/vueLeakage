@@ -37,7 +37,7 @@
                         <span class="Z">Z</span>
                     </div>
                 </div>
-                <span class="btn"><el-button type="primary" size="mini">添加用户</el-button></span>
+                <span class="btn"><el-button type="primary" size="mini" @click="adduser">添加用户</el-button></span>
             </div>
             <div class="search_table numScroll1">
                 <el-search-table-pagination  type="local" class="numScrollCon1"
@@ -49,11 +49,11 @@
                     border :data="table_data" :columns="table_columns" ref="thisRef">   
                     <template slot-scope="scope" slot="preview-handle">
                         <div>
-                            <a href="javascript:;" class="loncom_color" @click="edit (scope.row)">详情</a>
+                            <a href="javascript:;" class="loncom_color" @click="detail (scope.row)">详情</a>
                             <em>|</em>
                             <a href="javascript:;" class="loncom_color" @click="edit (scope.row)">编辑</a> 
                             <em>|</em>
-                            <a href="javascript:;" class="loncom_color" @click="edit (scope.row)">删除</a>  
+                            <a href="javascript:;" class="loncom_color" @click="remove (scope.row)">删除</a>  
                         </div>
                     </template>
                 </el-search-table-pagination>
@@ -121,7 +121,19 @@ export default {
        }
    },
     methods:{
-       
+        adduser:function(){
+            this.$router.push({path:'/system/limits/user/adduser'});
+        },
+       detail:function(row){
+           console.log(row)
+           this.$router.push({path:'/system/limits/user/adduser',query:{id:row.id}});
+       },
+       edit:function(row){
+           this.$router.push({path:'/system/limits/user/adduser',query:{id:row.id,edit:true}});
+       },
+       remove:function(row){
+
+       },
     },
     components:{}
 }

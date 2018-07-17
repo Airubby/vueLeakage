@@ -129,7 +129,7 @@
 import DepartGet from '@/components/limits_depart_get.vue'
 export default {
     created () {
-        this.getTree();  
+        //this.getTree();  
     },
     mounted() {
         numScroll(0);
@@ -226,9 +226,9 @@ export default {
             //获取上级部门信息
             getInfo:{
                 title:"获取上级部门信息",
-                width:'850px',
                 visible:false,
                 id:'',
+                data:{},
             },
 
        }
@@ -250,9 +250,9 @@ export default {
             this.parent_id=node.data.id;
             this.parent_name=node.data.label;
             this.form_info.id=node.data.id;
-            this.form_info.parentid=node.parent.data.id;
+            this.form_info.parentid=node.parent.data.id?node.parent.data.id:"";
             this.form_info.name=node.data.label;
-            this.form_info.parentname=node.parent.data.label;
+            this.form_info.parentname=node.parent.data.label?node.parent.data.label:"NULL";
             this.form_info.remark=node.data.remark;
         },
         //添加部门
@@ -296,6 +296,16 @@ export default {
         addUser:function(){
             this.$router.push({path:'/system/limits/depart/adduser'});
         },
+    },
+    watch:{
+        'getInfo.data':{
+            handler:function(val,oldval){
+                console.log(val)
+                this.form_info.parentid=val.id;
+                this.form_info.parentname=val.label;
+            },
+            deep: true
+        }
     },
     components:{DepartGet}
 }

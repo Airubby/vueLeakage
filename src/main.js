@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
+import './assets/element-#0096BA/index.css'
 import ElSearchTablePagination from 'el-table-pagination'
 import router from './router'
 import store from './store'

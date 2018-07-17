@@ -2,6 +2,11 @@
     <el-dialog :title="dialogInfo.title" :visible.sync="dialogInfo.visible" width="600px" :append-to-body='true'>
         <div class="loncom_dialog_con" style="height:400px;overflow:auto;">
             <el-form :model="form_info" :rules="formRules" ref="formInfo" label-width="80px">
+                <div class="search loncom_mb10">
+                    <el-input placeholder="请输入角色名称" v-model="searchInfo" size="mini">
+                        <el-button slot="append" icon="el-icon-search" size="mini"></el-button>
+                    </el-input>
+                </div>
                 <el-tree
                     :data="tree_data"
                     node-key="id"
@@ -14,6 +19,7 @@
                     :setCheckedNodes="setCheckNodes"
                     @check-change="changeTree"
                     :expand-on-click-node="true"
+                    :filter-node-method="filterNode"
                     >
                 </el-tree>
                 <el-form-item prop="id">
@@ -40,7 +46,7 @@ export default {
     data() {
         var validatePass = (rule, value, callback) => {
             if (value === '') {
-                this.$message.warning("请选择一条信息");
+                this.$message.warning("请选择角色信息");
             } else {
                 callback();
             }
@@ -56,24 +62,16 @@ export default {
                     { validator: validatePass, trigger: 'change' }
                 ],
            },
-           tree_data: [{
-                label: '龙控',
+           searchInfo:'',
+          　tree_data: [{
+                label: '一楼管理员',
                 id:'1',
-                remark:'龙控智能',
-                children: [{
-                    label: '研发部',
-                    id:'11',
-                    remark:'牛逼的部门',
-                    children: [{
-                        label: '研发小组',
-                        id:'111',
-                        remark:'haoxiaozu ',
-                    }]
-                }, {
-                    label: '设计部',
-                    id:'12',
-                    remark:'设计部'
-                }]
+            },{
+                label: '二楼管理员',
+                id:'2',
+            },{
+                label: '三楼管理员',
+                id:'3',
             }],
            defaultProps: {
                 children: 'children',
@@ -87,8 +85,7 @@ export default {
         dialogSure:function(formName){
             this.$refs[formName].validate((valid) => {
                 if(valid){
-                    console.log(this.form_info.list[0])
-                    this.dialogInfo.data=this.form_info.list[0];
+                    this.dialogInfo.data=this.form_info.list;
                     this.dialogInfo.visible=false;
                 }
             })
@@ -103,22 +100,24 @@ export default {
         setCheckNodes:function(){
 
         },
+        filterNode(value, data) {
+            if (!value) return true;
+            return data.label.indexOf(value) !== -1;
+        }
        
     },
     watch:{
         //监听树形数据变化
         'form_info.list':function(val,oldval){
             if(val.length>0){
-                if(val.length>1){
-                    this.form_info.id='';
-                }else{
-                    this.form_info.id=val[0].id;
-                }
+                this.form_info.id=val[0].id;
             }else{
                 this.form_info.id='';
             }
-            
         },
+        searchInfo(val) {
+            this.$refs.tree.filter(val);
+        }
    },
     props:["dialogInfo"],
     components:{dialogBtnInfo}

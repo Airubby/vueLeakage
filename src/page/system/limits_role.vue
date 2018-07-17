@@ -11,7 +11,7 @@
                 <div class="loncom_tree_con numScroll0">
                     <div class="numScrollCon0">
                         <el-button type="primary" size="small" style="width: 100%;margin-bottom:10px;" @click="addRole ">添加角色</el-button>
-                        <div class="search">
+                        <div class="search loncom_mb10">
                             <el-input placeholder="请输入角色名称" v-model="searchInfo" size="mini">
                                 <el-button slot="append" icon="el-icon-search" size="mini"></el-button>
                             </el-input>
@@ -23,6 +23,7 @@
                         node-key="id"
                         default-expand-all
                         @node-click="nodeClick"
+                        :filter-node-method="filterNode"
                         >
                         </el-tree>
                     </div>
@@ -47,6 +48,7 @@ export default {
     },
     data() {
        return {
+           searchInfo:'',
           　tree_data: [{
                 label: '一楼管理员'
             },{
@@ -64,6 +66,19 @@ export default {
        nodeClick:function(){
 
        },
+       addRole:function(){
+
+       },
+       filterNode(value, data) {
+        if (!value) return true;
+        return data.label.indexOf(value) !== -1;
+      }
+
+    },
+    watch: {
+      searchInfo(val) {
+        this.$refs.tree.filter(val);
+      }
     },
     components:{}
 }

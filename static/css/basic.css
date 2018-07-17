@@ -52,7 +52,7 @@ em{
   font-family: "Microsoft Yahei";
 }
 .loncom_color{
-  color: #0064aa;
+  color: #0096ba;
 }
 .loncom_color999{
   color: #999;
@@ -358,6 +358,9 @@ em{
   display: block !important;
   height: 38px !important;
 }
+.el-form--inline .el-form-item__content{
+  display: inline-block !important;
+}
 .el-select{
   width: 100%;
 }
@@ -376,7 +379,9 @@ em{
   border-color:#DCDFE6;   
   box-shadow:none;
 }
-
+.search_form_table .el-form-item{
+  margin-bottom: 5px;
+}
 
 .loncom_tree{
   width: 250px;
@@ -430,6 +435,25 @@ em{
   border-radius: 3px;
 }
 
+.loncom_public_add{
+  width: 100%;
+  height: 100%;
+}
+.loncom_public_add .loncom_public_add_title{
+    width: 100%;
+    height: 45px;
+    line-height: 44px;
+    padding: 0 15px;
+    background: #F3F3F3;
+    border: 1px solid #e0e0e0;
+}
+.loncom_public_add .loncom_public_add_con{
+    width: 100%;
+    height: calc(100% - 46px);
+    border: 1px solid #e0e0e0;
+    background: #fff;
+    padding: 30px 20px 20px 20px;
+}
 
 @media (min-width: 1000px) {
   
