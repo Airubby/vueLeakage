@@ -3,7 +3,7 @@
         <div class="loncom_dialog_con" style="height:400px;overflow:auto;">
             <el-form :model="form_info" :rules="formRules" ref="formInfo" label-width="80px">
                 <div class="search loncom_mb10">
-                    <el-input placeholder="请输入角色名称" v-model="searchInfo" size="mini">
+                    <el-input placeholder="请输入用户名称" v-model="searchInfo" size="mini">
                         <el-button slot="append" icon="el-icon-search" size="mini"></el-button>
                     </el-input>
                 </div>
@@ -48,7 +48,7 @@ export default {
     data() {
         var validatePass = (rule, value, callback) => {
             if (value === '') {
-                this.$message.warning("请选择角色信息");
+                this.$message.warning("请选择用户信息");
             } else {
                 callback();
             }
@@ -66,13 +66,13 @@ export default {
            },
            searchInfo:'',
           　tree_data: [{
-                label: '一楼管理员',
+                label: '小张',
                 id:'1',
             },{
-                label: '二楼管理员',
+                label: '小李',
                 id:'2',
             },{
-                label: '三楼管理员',
+                label: '小王',
                 id:'3',
             }],
            defaultProps: {

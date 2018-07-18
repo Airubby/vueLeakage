@@ -1,7 +1,7 @@
 <template>
     <div class="loncom_content">
        <div class="loncom_public_top">
-            <div class="loncom_fl">池塘管理</div>
+            <div class="loncom_fl">鱼苗管理</div>
             <div class="loncom_fr">
                 <el-button type="primary" size="mini" @click="add"><i class="fa fa-plus-circle loncom_mr5"></i>新建</el-button>
                 <el-button type="primary" size="mini" @click="remove"><i class="fa fa-minus-circle loncom_mr5"></i>删除</el-button>

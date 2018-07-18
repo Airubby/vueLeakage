@@ -8,24 +8,26 @@
                 <div class="loncom_public_add_title">
                     <span>鱼苗种类配置</span>
                     <div class="loncom_fr">
-                        <el-button type="primary" size="mini" @click="save('formInfo')">保存</el-button>
+                        <el-button type="primary" size="mini" @click="addItem">新增种类</el-button>
                     </div>
                 </div>
                 <div class="loncom_public_add_con loncom_scroll_con">
-                    <div style="max-width:450px;">
-                        <el-form :model="itemList" :rules="formRules" ref="formInfo" label-width="80px">
-                            <el-row v-for="(item,index) in itemList">
-                                <el-col :span="18">
-                                    <el-form-item prop="name" :label="'种类'+(index+1)" size="small">
-                                        <el-input v-model="itemList[index].name"></el-input>
-                                    </el-form-item>
-                                </el-col>
-                                <el-col :span="6" style="padding-left:10px;">
-                                    <el-button-group>
-                                    <el-button type="primary" @click="addItem(index)" size="small">+</el-button>
-                                    <el-button type="primary" @click="minusItem(index)" size="small">-</el-button>
-                                    </el-button-group>
-                                </el-col>
+                    <div style="max-width:500px;">
+                        <el-form ref="formInfo" label-width="80px">
+                            <el-row>
+                                <div v-for="(item,index) in itemList">
+                                    <el-col :span="18">
+                                        <el-form-item prop="name" :label="'种类'+(index+1)" size="small">
+                                            <el-input v-model="itemList[index].name" placeholder="种类名称"></el-input>
+                                        </el-form-item>
+                                    </el-col>
+                                    <el-col :span="6" style="padding-left:10px;">
+                                        <el-button-group>
+                                        <el-button type="primary" @click="saveItem(index)" size="small">保存</el-button>
+                                        <el-button type="primary" @click="removeItem(index)" size="small">删除</el-button>
+                                        </el-button-group>
+                                    </el-col>
+                                </div>
                             </el-row>
                         </el-form>
                     </div>
@@ -46,27 +48,31 @@ export default {
     },
     data() {
        return {
-            formRules:{
-                name:[
-                    { required: true, message: '请输入种类名称', trigger: 'blur' },
-                ]
-            },
-            itemList:[{name:''}],
+            itemList:[{name:'',id:''}]
        }
    },
     methods:{
-       save:function(formName){
-           this.$refs[formName].validate((valid) => {
-                if(valid){
-                   console.log(22)
-                }
-            })
+       saveItem:function(index){
+           if(this.itemList[index].name==""){
+               this.$message.warning("请输入种类名称");
+           }else{
+               if(this.itemList[index].id==""){ //新增
+
+               }else{ //修改
+
+               }
+           }
        },
-       addItem:function(index){
-            this.itemList.splice(index+1,0,{name:''});
+       addItem:function(){
+            this.itemList.splice(this.itemList.length,0,{name:'',id:''});
         },
-        minusItem:function(index){
-            this.itemList.splice(index,1);
+        removeItem:function(index){
+            if(this.itemList[index].id==""){
+                this.itemList.splice(index,1);
+            }else{ //删除已有的
+                
+            }
+            
         },
         
     },

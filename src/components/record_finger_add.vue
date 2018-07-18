@@ -30,6 +30,9 @@
                              <el-upload
                                 class="upload-demo"
                                 ref="upload"
+                                name="imgurl"
+                                :headers="config"
+                                :data="form_info"
                                 action="https://jsonplaceholder.typicode.com/posts/"
                                 :file-list="fileList"
                                 :auto-upload="false">
@@ -93,6 +96,13 @@ export default {
            },
            type_data:[{id:'1',name:"物种一"}],
            fileList:[],
+           config:{
+                headers:{
+                    'Content-Type': 'multipart/form-data'
+                }
+            },
+
+
         }
     },
     methods:{
@@ -102,6 +112,7 @@ export default {
             this.$refs[formName].validate((valid) => {
                 if(valid){
                    console.log(22)
+                   this.$refs.upload.submit();
                 }
             })
         },

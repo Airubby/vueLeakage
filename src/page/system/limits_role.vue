@@ -30,8 +30,8 @@
                 </div>
             </div>
             <div class="loncom_table">
-                <div class="role">
-                    <div class="role_btn">
+                <div class="loncom_tab">
+                    <div class="loncom_tab_btn">
                         <el-button type="primary" size="mini" @click="save('formInfo')">保存</el-button>
                         <el-button type="primary" size="mini" @click="remove">删除</el-button>
                     </div>
@@ -39,8 +39,8 @@
                         <el-tab-pane label="基本信息" name="first">
                             <div class="loncom_tabbox numScroll1">
                                 <div class="loncom_tabbox_con numScrollCon1">
-                                    <div style="width:400px;padding-top:30px;">
-                                        <el-form :model="form_info" :rules="formRules" ref="formInfo" label-width="80px">
+                                    <div style="width:450px;padding-top:30px;">
+                                        <el-form :model="form_info" :rules="formRules" ref="formInfo" label-width="120px">
                                             <el-form-item prop="name" label="名称" size="small">
                                                 <el-input v-model="form_info.name"></el-input>
                                             </el-form-item>
@@ -53,7 +53,7 @@
                                                 <el-radio v-model="form_info.state" label="2">禁用</el-radio>
                                             </el-form-item>
                                             <el-form-item prop="user" label="用户" size="small">
-                                                <el-input v-model="form_info.user" readonly></el-input>
+                                                <el-input v-model="form_info.user" readonly @focus="getUser"></el-input>
                                             </el-form-item>
                                             <el-form-item prop="remark" label="备注" size="small">
                                                 <el-input v-model="form_info.remark" type="textarea"></el-input>
@@ -65,8 +65,33 @@
                         </el-tab-pane>
                         <el-tab-pane label="权限" name="second">
                             <div class="loncom_tabbox numScroll2">
-                                <div class="loncom_tabbox_con numScrollCon2">
-                                    
+                                <div class="loncom_tabbox_con numScrollCon2 tabtree">
+                                    <el-row>
+                                        <el-col :span="10" :offset="2">
+                                            <h2>管理域</h2>
+                                            <el-tree
+                                            ref="tree1"
+                                            show-checkbox
+                                            :props="defaultProps"
+                                            :data="tree_data1"
+                                            node-key="id"
+                                            default-expand-all
+                                            >
+                                            </el-tree>
+                                        </el-col>
+                                        <el-col :span="10">
+                                            <h2>操作菜单</h2>
+                                            <el-tree
+                                            ref="tree2"
+                                            show-checkbox
+                                            :props="defaultProps"
+                                            :data="tree_data2"
+                                            node-key="id"
+                                            default-expand-all
+                                            >
+                                            </el-tree>
+                                        </el-col>
+                                    </el-row>
                                 </div>
                             </div>
                         </el-tab-pane>
@@ -77,12 +102,8 @@
     </div>
 </template>
 <style>
-    .role{
-        position:relative;
-        height:100%;
-    }
-    .role_btn{position:absolute;right:20px;top:5px;z-index:9999;}
-    .el-tabs__header,.loncom_tabbox {padding:0 20px;}
+    .tabtree{padding-top:30px;}
+    .tabtree h2{height:40px;line-height:40px;color:#0096BA}
 </style>
 
 <script>
@@ -110,7 +131,12 @@ export default {
                 label: 'label'
             },
             activeName: 'first',
-
+            getInfo:{
+                title:"获取用户信息",
+                visible:false,
+                id:'',
+                data:[],
+            },
             form_info:{
                 name:'',
                 role:'',
@@ -130,10 +156,54 @@ export default {
                 ],
             },
 
+            tree_data1: [{
+                label: '海南养殖基地',
+                id:'1',
+                children:[
+                    {
+                        label: '动力楼',
+                        id:'',
+                        children:[
+                            {
+                                label:'动力一号',
+                                id:'',
+                            }
+                        ]
+                    },{
+                        label: '数据楼',
+                        id:''
+                    }
+                ]
+            }],
+            tree_data2: [{
+                label: '实时监控',
+                id:'1',
+                children:[
+                    {
+                        label: 'gis',
+                        id:'',
+                        children:[
+                            {
+                                label:'gis详情',
+                                id:'',
+                            }
+                        ]
+                    },{
+                        label: 'gis列表',
+                        id:''
+                    }
+                ]
+            }],
+
 
        }
    },
     methods:{
+        //获取用户
+        getUser:function(){
+            this.getInfo.visible=true;
+            
+        },
        nodeClick:function(){
 
        },

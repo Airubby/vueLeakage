@@ -464,6 +464,20 @@ em{
     background: #fff;
     padding: 30px 20px 20px 20px;
 }
+.loncom_tab{
+  height: 100%;
+  position: relative;
+}
+.loncom_tab_btn{
+  position:absolute;
+  right:20px;
+  top:5px;
+  z-index:9999;
+}
+.loncom_tab .el-tabs__header,
+.loncom_tab .loncom_tabbox {
+  padding:0 20px;
+}
 
 @media (min-width: 1000px) {
   

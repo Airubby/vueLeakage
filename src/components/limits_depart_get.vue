@@ -9,11 +9,10 @@
                     show-checkbox
                     check-strictly
                     :props="defaultProps"
-                    accordion
                     :getCheckedNodes="getCheckedNodes"
-                    :setCheckedNodes="setCheckNodes"
                     @check-change="changeTree"
                     :expand-on-click-node="true"
+                    default-expand-all
                     >
                 </el-tree>
                 <el-form-item prop="id">
@@ -31,11 +30,14 @@
 import dialogBtnInfo from './dialogBtnInfo.vue'
 export default {
     created () {
-       
-
+        this.form_info.id=this.dialogInfo.id;
+        
     },
     mounted() {
-        
+        var _this=this;
+        setTimeout(function(){
+            _this.setChecked(_this.dialogInfo.id)
+        },500)
     },
     data() {
         var validatePass = (rule, value, callback) => {
@@ -102,6 +104,9 @@ export default {
         },
         setCheckNodes:function(){
 
+        },
+        setChecked:function(keys){
+            this.$refs.tree.setCheckedKeys([keys]);
         },
        
     },

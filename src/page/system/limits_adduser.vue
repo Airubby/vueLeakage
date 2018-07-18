@@ -101,8 +101,6 @@ import RoleGet from '@/components/limits_role_get.vue'
 export default {
     created () {
         var obj = this.$route.query;
-        console.log(obj.edit)
-        console.log(JSON.stringify(obj) == "{}")
         if(JSON.stringify(obj) == "{}"){ //新增
             this.addState=true;
         }else{ //编辑，详情
@@ -201,20 +199,12 @@ export default {
         //获取部门
         getDepart:function(){
             this.getInfo.visible=true;
-            if(this.addState){
-                this.getInfo.id='';
-            }else{
-                this.getInfo.id=this.form_info.departid;
-            }
+            this.getInfo.id=this.form_info.departid;
         },
         //获取角色
         getRole:function(){
             this.roleInfo.visible=true;
-            if(this.addState){
-                this.roleInfo.id='';
-            }else{
-                this.roleInfo.id=this.form_info.roleid;
-            }
+            this.roleInfo.id=this.form_info.roleid;
         },
 
     },

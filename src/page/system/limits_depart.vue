@@ -284,12 +284,9 @@ export default {
         },
         //获取上级部门
         getDepart:function(){
+            console.log(this.form_info.parentid)
             this.getInfo.visible=true;
-            if(this.add_depart){
-                this.getInfo.id='';
-            }else{
-                this.getInfo.id=this.form_info.parentid;
-            }
+            this.getInfo.id=this.form_info.parentid;
         },
         //添加用户
         addUser:function(){
