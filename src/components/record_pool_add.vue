@@ -32,10 +32,10 @@
                     </el-col>
                     <el-col :span="24">
                         <el-form-item label="养殖物种" size="small">
-                            <div class="itembox">
+                            <div class="itembox" v-for="(item,index) in itemList">
                                 <el-col :span="10" style="padding-right:0;">
                                     <el-form-item label="物种名称" size="small">
-                                        <el-select v-model="form_info.type" placeholder="请选择物种">
+                                        <el-select v-model="item.name" placeholder="请选择物种">
                                             <el-option
                                                 v-for="item in type_data"
                                                 :key="item.id"
@@ -47,38 +47,13 @@
                                 </el-col>
                                 <el-col :span="10" style="padding:0;">
                                     <el-form-item label="数量" size="small">
-                                        <el-input v-model="form_info.mianji"></el-input>
+                                        <el-input v-model="item.num"></el-input>
                                     </el-form-item>
                                 </el-col>
                                 <el-col :span="4" style="padding-right:0;">
                                     <el-button-group>
-                                    <el-button type="primary">+</el-button>
-                                    <el-button type="primary">-</el-button>
-                                    </el-button-group>
-                                </el-col>
-                            </div>
-                            <div class="itembox">
-                                <el-col :span="10" style="padding-right:0;">
-                                    <el-form-item label="物种名称" size="small">
-                                        <el-select v-model="form_info.type" placeholder="请选择物种">
-                                            <el-option
-                                                v-for="item in type_data"
-                                                :key="item.id"
-                                                :label="item.name"
-                                                :value="item.id">
-                                                </el-option>
-                                        </el-select>
-                                    </el-form-item>
-                                </el-col>
-                                <el-col :span="10" style="padding:0;">
-                                    <el-form-item label="数量" size="small">
-                                        <el-input v-model="form_info.mianji"></el-input>
-                                    </el-form-item>
-                                </el-col>
-                                <el-col :span="4" style="padding-right:0;">
-                                    <el-button-group>
-                                    <el-button type="primary">+</el-button>
-                                    <el-button type="primary">-</el-button>
+                                    <el-button type="primary" @click="addItem(index)">+</el-button>
+                                    <el-button type="primary" @click="minusItem(index)">-</el-button>
                                     </el-button-group>
                                 </el-col>
                             </div>
@@ -144,6 +119,7 @@ export default {
                 mianji:'',
                 remark:'',
            },
+           itemList:[{name:'',num:''}],
            formRules:{
                 code:[
                     { required: true, message: '请输入编号', trigger: 'blur' },
@@ -166,7 +142,14 @@ export default {
                 }
             })
         },
-
+        addItem:function(index){
+            console.log(index)
+            this.itemList.splice(index+1,0,{name:'',num:''});
+        },
+        minusItem:function(index){
+            this.itemList.splice(index,1);
+            console.log(this.itemList)
+        },
        
     },
     props:["dialogInfo"],

@@ -1,7 +1,7 @@
 <template>
     <div class="loncom_content">
        <div class="loncom_public_top">
-            <div class="loncom_fl">权限配置</div>
+            <div class="loncom_fl">角色管理</div>
         </div>
         <div class="loncom_public_con">
             <div class="loncom_tree">
@@ -30,12 +30,60 @@
                 </div>
             </div>
             <div class="loncom_table">
-
+                <div class="role">
+                    <div class="role_btn">
+                        <el-button type="primary" size="mini" @click="save('formInfo')">保存</el-button>
+                        <el-button type="primary" size="mini" @click="remove">删除</el-button>
+                    </div>
+                    <el-tabs v-model="activeName" @tab-click="handleClick">
+                        <el-tab-pane label="基本信息" name="first">
+                            <div class="loncom_tabbox numScroll1">
+                                <div class="loncom_tabbox_con numScrollCon1">
+                                    <div style="width:400px;padding-top:30px;">
+                                        <el-form :model="form_info" :rules="formRules" ref="formInfo" label-width="80px">
+                                            <el-form-item prop="name" label="名称" size="small">
+                                                <el-input v-model="form_info.name"></el-input>
+                                            </el-form-item>
+                                            <el-form-item prop="role" label="角色级别" size="small">
+                                                <el-radio v-model="form_info.role" label="1">管理员</el-radio>
+                                                <el-radio v-model="form_info.role" label="2">普通</el-radio>
+                                            </el-form-item>
+                                            <el-form-item prop="state" label="是否启用" size="small">
+                                                <el-radio v-model="form_info.state" label="1">启用</el-radio>
+                                                <el-radio v-model="form_info.state" label="2">禁用</el-radio>
+                                            </el-form-item>
+                                            <el-form-item prop="user" label="用户" size="small">
+                                                <el-input v-model="form_info.user" readonly></el-input>
+                                            </el-form-item>
+                                            <el-form-item prop="remark" label="备注" size="small">
+                                                <el-input v-model="form_info.remark" type="textarea"></el-input>
+                                            </el-form-item>
+                                        </el-form>
+                                    </div>
+                                </div>
+                            </div>
+                        </el-tab-pane>
+                        <el-tab-pane label="权限" name="second">
+                            <div class="loncom_tabbox numScroll2">
+                                <div class="loncom_tabbox_con numScrollCon2">
+                                    
+                                </div>
+                            </div>
+                        </el-tab-pane>
+                    </el-tabs>
+                </div>
             </div>
         </div>
     </div>
 </template>
-
+<style>
+    .role{
+        position:relative;
+        height:100%;
+    }
+    .role_btn{position:absolute;right:20px;top:5px;z-index:9999;}
+    .el-tabs__header,.loncom_tabbox {padding:0 20px;}
+</style>
 
 <script>
 export default {
@@ -45,6 +93,7 @@ export default {
     mounted() {
         numScroll(0);
         numScroll(1);
+        numScroll(2);
     },
     data() {
        return {
@@ -60,6 +109,28 @@ export default {
                 children: 'children',
                 label: 'label'
             },
+            activeName: 'first',
+
+            form_info:{
+                name:'',
+                role:'',
+                state:'',
+                user:'',
+                remark:'',
+            },
+            formRules:{
+                name:[
+                    { required: true, message: '请输入名称', trigger: 'blur' },
+                ],
+                role:[
+                    { required: true, message: '请选择级别', trigger: 'change' },
+                ],
+                state:[
+                    { required: true, message: '请选择是否启用', trigger: 'change' },
+                ],
+            },
+
+
        }
    },
     methods:{
@@ -72,7 +143,20 @@ export default {
        filterNode(value, data) {
         if (!value) return true;
         return data.label.indexOf(value) !== -1;
-      }
+      },
+      handleClick(tab, event) {
+        console.log(tab, event);
+      },
+      remove:function(){
+
+      },
+      save:function(formName){
+          this.$refs[formName].validate((valid) => {
+            if(valid){
+                console.log(22)
+            }
+        })
+      },
 
     },
     watch: {

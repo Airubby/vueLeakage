@@ -382,6 +382,14 @@ em{
 .search_form_table .el-form-item{
   margin-bottom: 5px;
 }
+.el-tabs,.el-tab-pane,.loncom_tabbox{
+  width: 100%;
+  height: 100%;
+}
+.el-tabs__content{
+  width: 100%;
+  height: calc(100% - 55px);
+}
 
 .loncom_tree{
   width: 250px;
@@ -393,6 +401,8 @@ em{
   height: 100%;
   background: #fff;
   float: left;
+  border:1px solid #e0e0e0;
+  border-left:none;
 }
 .loncom_tree_title {
   height: 40px;
@@ -409,7 +419,7 @@ em{
   height: calc(100% - 40px);
   background: #fff;
   border: 1px solid #e0e0e0;
-  padding: 20px 10px 0 10px;
+  padding: 20px 15px 0 15px;
 }
 
 .search_sort{

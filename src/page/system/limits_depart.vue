@@ -118,7 +118,6 @@
 </template>
 
 <style>
-    .loncom_table{border:1px solid #e0e0e0;border-left:none;}
     .depart_box1{width:100%;height:auto;border-bottom:1px solid #e0e0e0;}
     .depart_box1_title{width:100%;height:40px;line-height:40px;padding:0 20px;}
     .depart_box1_con{padding:15px 20px 5px 20px;}
