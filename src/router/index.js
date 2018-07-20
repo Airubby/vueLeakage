@@ -39,6 +39,13 @@ export default new Router({
       ]
     },
     {
+      path: '/video',  //视频管理
+      component: (resolve) => require(['@/page/public'], resolve),redirect:'/video/vms',
+      children:[
+        {path:'/video/vms',component:(resolve) => require(['@/page/video/video_vms'], resolve)},
+      ]
+    },
+    {
       path: '/record',  //档案管理
       component: (resolve) => require(['@/page/public'], resolve),redirect:'/record/pool',
       children:[

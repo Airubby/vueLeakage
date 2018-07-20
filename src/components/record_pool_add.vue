@@ -14,15 +14,8 @@
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
-                        <el-form-item label="所属车间" size="small">
-                            <el-select v-model="form_info.type" placeholder="请选择车间">
-                                 <el-option
-                                v-for="item in type_data"
-                                :key="item.id"
-                                :label="item.name"
-                                :value="item.id">
-                                </el-option>
-                            </el-select>
+                        <el-form-item prop="type" label="关联站点" size="small">
+                            <el-input v-model="form_info.type" readonly placeholder="输选择关联站点" @focus="getScsi"></el-input>
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
@@ -80,6 +73,7 @@
             </el-form>
         </div>
         <dialogBtnInfo v-bind:dialogInfobtn="dialogInfo" v-on:dialogSure="dialogSure('formInfo')"></dialogBtnInfo>
+        <GetInfo v-bind:dialogInfo="getInfo" v-if="getInfo.visible"></GetInfo>
     </el-dialog>
 </template>
 <style>
@@ -101,6 +95,7 @@
 </style>
 <script>
 import dialogBtnInfo from './dialogBtnInfo.vue'
+import GetInfo from '@/components/sconfig_scsi_get.vue'
 export default {
     created () {
        
@@ -130,9 +125,23 @@ export default {
            },
            type_data:[{id:'1',name:"物种一"}],
            fileList:[],
+           //关联站点
+            getInfo:{
+                title:"管理站点信息",
+                visible:false,
+                id:'',
+                type:'',
+                data:{},
+            },
+
         }
     },
     methods:{
+        //获取站点信息
+        getScsi:function(){
+            this.getInfo.visible=true;
+            this.getInfo.id=this.form_info.fworkshop;
+        },
         //保存的操作
         dialogSure:function(formName){
             console.log(12312)
@@ -152,8 +161,16 @@ export default {
         },
        
     },
+    watch:{
+        'getInfo.data':{
+            handler:function(val,oldval){
+                this.form_info.type=val.label;
+            },
+            deep: true
+        }
+    },
     props:["dialogInfo"],
-    components:{dialogBtnInfo}
+    components:{dialogBtnInfo,GetInfo}
 
 }
 </script>
