@@ -1,3 +1,4 @@
+var rootUrl="/iSmacSite/ismacsite";
 //超出滚动
 function scrollCon(){
 	$('.loncom_scroll_con').niceScroll({

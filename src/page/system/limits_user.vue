@@ -59,6 +59,7 @@
                 </el-search-table-pagination>
             </div>
         </div>
+        <Add v-bind:dialogInfo="addInfo" v-if="addInfo.visible"></Add>
     </div>
 </template>
 <style>
@@ -66,6 +67,7 @@
 </style>
 
 <script>
+import Add from '@/components/limits_user_add.vue'
 export default {
     created () {
         
@@ -118,23 +120,30 @@ export default {
               { prop: 'js', label: '角色',minWidth:20},
               { prop: 'handle', label: '操作',slotName:'preview-handle',width:140},
             ],
+            addInfo:{
+                title:"新增用户",
+                visible:false,
+                id:'',
+            },
+
        }
    },
     methods:{
         adduser:function(){
-            this.$router.push({path:'/system/limits/user/adduser'});
+            this.addInfo.visible=true;
+            //this.$router.push({path:'/system/limits/user/adduser'});
         },
        detail:function(row){
            console.log(row)
-           this.$router.push({path:'/system/limits/user/adduser',query:{id:row.id}});
+           //this.$router.push({path:'/system/limits/user/adduser',query:{id:row.id}});
        },
        edit:function(row){
-           this.$router.push({path:'/system/limits/user/adduser',query:{id:row.id,edit:true}});
+           //this.$router.push({path:'/system/limits/user/adduser',query:{id:row.id,edit:true}});
        },
        remove:function(row){
 
        },
     },
-    components:{}
+    components:{Add}
 }
 </script>

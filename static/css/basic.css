@@ -356,10 +356,13 @@ em{
 }
 .el-form-item__content{
   display: block !important;
-  height: 38px !important;
+  min-height: 38px !important;
 }
 .el-form--inline .el-form-item__content{
   display: inline-block !important;
+}
+.el-scrollbar__wrap{
+  overflow-x: hidden !important;
 }
 .el-select{
   width: 100%;
@@ -472,7 +475,7 @@ em{
   position:absolute;
   right:20px;
   top:5px;
-  z-index:9999;
+  z-index:1000;
 }
 .loncom_tab .el-tabs__header,
 .loncom_tab .loncom_tabbox {

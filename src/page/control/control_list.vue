@@ -4,7 +4,7 @@
        <div class="loncom_public_con loncom_scroll_con">
             <ul class="list_ul">
                 <li>
-                    <div class="list_con">
+                    <div class="list_con" @click="detail">
                         <div class="list_con_title">#池塘一</div>
                         <div class="list_content">
                             <div class="list_content_left">
@@ -19,7 +19,7 @@
                     </div>
                 </li>
                 <li>
-                    <div class="list_con list_con_lost">
+                    <div class="list_con list_con_lost" @click="detail">
                         <div class="list_con_title">#池塘二</div>
                         <div class="list_content">
                             <div class="list_content_left">
@@ -34,7 +34,7 @@
                     </div>
                 </li>
                 <li>
-                    <div class="list_con list_con_warning">
+                    <div class="list_con list_con_warning" @click="detail">
                         <div class="list_con_title">#池塘三</div>
                         <div class="list_content">
                             <div class="list_content_left">
@@ -132,7 +132,9 @@ export default {
        }
    },
     methods:{
-       
+       detail:function(){
+           
+       },
     },
     components:{controlTop}
 }

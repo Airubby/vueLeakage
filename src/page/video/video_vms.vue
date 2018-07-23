@@ -18,6 +18,8 @@
                 <el-table-column slot="prepend" type="selection"></el-table-column>   
                 <template slot-scope="scope" slot="preview-handle">
                     <div>
+                        <a href="javascript:;" class="loncom_color" @click="show (scope.row)">预览</a> 
+                        <em>|</em>
                         <a href="javascript:;" class="loncom_color" @click="edit (scope.row)">编辑</a> 
                         <em>|</em>
                         <a href="javascript:;" class="loncom_color" @click="remove (scope.row)">删除</a> 
@@ -26,12 +28,14 @@
             </el-search-table-pagination>
        </div>
        <Add v-bind:dialogInfo="addInfo"></Add>
+       <Show v-bind:dialogInfo="showInfo"></Show>
     </div>
 </template>
 
 
 <script>
 import Add from '@/components/video_vms_add.vue'
+import Show from '@/components/video_show.vue'
 export default {
     created () {
         
@@ -54,11 +58,14 @@ export default {
               { prop: 'level', label: '视频编码',minWidth:10},
               { prop: 'name', label: '视频名称',minWidth:10},
               { prop: 'remark', label: '说明',minWidth:30},
-              { prop: 'handle', label: '操作',slotName:'preview-handle',width:100},
+              { prop: 'handle', label: '操作',slotName:'preview-handle',width:140},
             ],
             addInfo:{
                 title:"新增视频信息",
-                width:'1000px',
+                visible:false,
+            },
+            showInfo:{
+                title:"视频预览",
                 visible:false,
             },
 
@@ -73,10 +80,14 @@ export default {
        remove:function(row){
 
        },
-       eidt:function(row){
+       edit:function(row){
 
-       }
+       },
+       show:function(row){
+           this.showInfo.visible=true;
+       },
+
     },
-    components:{Add}
+    components:{Add,Show}
 }
 </script>
