@@ -60,6 +60,9 @@ em{
 .loncom_font_size12{
   font-size: 12px;
 }
+.loncom_p15{
+  padding: 15px;
+}
 .loncom_ml5{
   margin-left: 5px !important;
 }
@@ -157,13 +160,39 @@ em{
   display: block;
   padding-top: 5px;
 }
-.loncom_topnav li a.router-link-active{
+.loncom_topnav li a.router-link-active,
+.loncom_topnav li a:hover{
   background: url(../images/nav_hover_bg.png) no-repeat center;
   color: #0096BA;
 }
-.loncom_topnav li a.router-link-active em img{
+.loncom_topnav li a.router-link-active em img,
+.loncom_topnav li a:hover em img{
   margin-top: -26px;
 }
+.loncom_topnav_span span{
+  width: 80px;
+  display: block;
+  text-align: center;
+  float: left;
+  font-size: 20px;
+  color: #fff;
+}
+.loncom_topnav_span .el-badge{
+  margin-top:22px;
+}
+
+.loncom_topnav_span .el-badge .el-badge__content{
+  background-color:#FF0000;
+  border:none;
+}
+.loncom_topnav_span .el-dropdown-link{
+  margin-top: 22px;
+}
+.loncom_topnav_span .el-dropdown-link .fa-caret-down{
+  margin-left: 10px;
+  font-size: 16px;
+}
+
 .loncom_con{
   width:100%;
   height: -webkit-calc(100% - 66px);
@@ -280,6 +309,10 @@ em{
   padding:15px;
   height: calc(100% - 40px);
 }
+.content{
+  width: 100%;
+  height: calc(100% - 40px);
+}
 
 .alarm_normal_color{
   color: #00B15F;
@@ -361,7 +394,8 @@ em{
 .el-form--inline .el-form-item__content{
   display: inline-block !important;
 }
-.el-scrollbar__wrap{
+.loncom_scrollbar .el-scrollbar__wrap,
+.loncom_content .el-scrollbar__wrap{
   overflow-x: hidden !important;
 }
 .el-select{
@@ -481,6 +515,65 @@ em{
 .loncom_tab .loncom_tabbox {
   padding:0 20px;
 }
+
+/* gis */
+.search{
+  width: 250px;
+}
+.gis_sort ul{
+  border: 1px solid #D5D4D1;
+  border-radius: 4px;
+  background: #fff;
+  overflow:hidden;
+}
+.gis_sort li{
+  width:80px;
+  height: 28px;
+  float: left;
+  text-align: center;
+  line-height: 28px;
+  font-size:12px;
+  border-right: 1px solid #D5D4D1;
+  cursor: pointer;
+}
+.gis_sort li:nth-last-of-type(1){
+  border: none;
+}
+.gis_sort li.active{
+  color: #fff;
+  background:#13AE67;
+}
+.gis_sort li em{
+  width: 14px;
+  height: 20px;
+  display: inline-block;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+.gis_sort li.warning em{
+  background: url(../images/sli_warning.svg) no-repeat;
+}
+.gis_sort li.lost em{
+  background: url(../images/sli_lost.svg) no-repeat;
+}
+.gis_sort li.normal em{
+  background: url(../images/sli_normal.svg) no-repeat;
+}
+
+.gis_alarm_list{
+  width: 100%;
+  height: 400px;
+  position: absolute;
+  left: 0;
+  bottom: -400px;
+  transition: all .2s linear;
+  background: #f9f9f9;
+  border-bottom: 1px solid #d2d2d2;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+
+
 
 @media (min-width: 1000px) {
   

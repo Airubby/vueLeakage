@@ -411,9 +411,12 @@
     }
 </style>
 <script>
+var axios = require('axios')
 export default {
     created () {
-        
+        axios.get('static/config.json').then(r=>{
+            console.log(r)
+        });
     },
     mounted() {
          var myDate = new Date();

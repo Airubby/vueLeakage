@@ -1,0 +1,14 @@
+{
+    "topOne":{
+        "title":"温度状态(Top 5)",
+        "pointid":"WD"
+    },
+    "topTwo":{
+        "title":"溶解氧状态(Top 5)",
+        "pointid":"RJY"
+    },
+    "topThree":{
+        "title":"PH值状态(Top 5)",
+        "pointid":"PH"
+    }
+}

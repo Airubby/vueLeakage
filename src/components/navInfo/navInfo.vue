@@ -6,7 +6,7 @@
                     <img src="static/images/logo.png">
                 </router-link>
             </div>
-            <ul>
+            <ul class="loncom_fl" ref="nav_list">
                 <li v-for="(item,index) in navList">
                     <router-link :to="item.url" exact v-if="index==0">
                         <em><img :src="item.icon"></em>
@@ -18,13 +18,31 @@
                     </router-link>
                 </li>
             </ul>
+            <div class="loncom_fr loncom_topnav_span">
+                <span>
+                    <el-badge :value="200" :max="99" class="item">
+                        <i class="fa fa-bell-o"></i>
+                    </el-badge>
+                </span>
+                <span>
+                    <el-dropdown>
+                        <span class="el-dropdown-link">
+                            <i class="fa fa-user-circle-o"></i><i class="fa fa-caret-down"></i>
+                        </span>
+                        <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item>admin</el-dropdown-item>
+                            <el-dropdown-item><i class="fa fa-power-off loncom_mr5"></i>退出</el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>
+                </span>
+            </div>
         </div>
         <div class="loncom_con">
             <div class="loncom_con_left" ref="loncom_con_left">
                 <div class="loncom_left_navtop" @click="navClick" ref="loncom_left_navtop">
                     <i class="fa fa-bars" ref="bars"></i>
                 </div>
-                <div class="loncom_left_navcon">
+                <div class="loncom_left_navcon" ref="sidebar_list">
                     <ul>
                         <li v-for="item in leftNavList">
                             <router-link :to="item.url" ref="lon_link">
@@ -32,7 +50,7 @@
                                     <em><img :src="item.icon"></em>
                                     <span v-if="navbtn=='close'">{{item.name}}</span>
                                     <span v-if="navbtn=='open'">{{item.fullName}}</span>
-                                    <i v-if="navbtn=='open'&&item.item&&item.item.length>0"><img src="static/images/sanjiao.png"></i>
+                                    <!--<i v-if="navbtn=='open'&&item.item&&item.item.length>0"><img src="static/images/sanjiao.png"></i>-->
                                 </div>
                                 <dl v-show="navbtn=='open'">
                                     <dd v-for="inItem in item.item">
@@ -48,7 +66,7 @@
                 </div>
             </div>
             <div class="loncom_con_right" ref="loncom_con_right">
-                <router-view></router-view>
+                <router-view v-if="isRouterAlive"></router-view>
             </div>
         </div>
     </div>
@@ -191,6 +209,14 @@ export default {
        trans:function(){
            return false
        },
+       //点击刷新
+        reload:function() {
+            this.isRouterAlive = false
+            this.$nextTick(() => {
+                this.isRouterAlive = true
+            })
+        },   
+
     }, 
     watch:{
         getNavInfo: function(val) { 
@@ -202,7 +228,19 @@ export default {
           },
           deep: true
         },
-        "$route": function(){
+        navList:function(val,oldval){
+            var _this=this;
+            this.$nextTick(function(){
+                $(this.$refs.sidebar_list).find("a").on("click",function(){
+                    _this.reload()
+                })
+                $(this.$refs.nav_list).find("a").on("click",function(){
+                    _this.reload()
+                })
+            })
+        },
+        "$route": function(val){
+            var _this=this;
             this.$nextTick(() => {
                 this.Init();
             })

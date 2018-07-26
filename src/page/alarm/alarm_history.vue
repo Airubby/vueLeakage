@@ -1,6 +1,6 @@
 <template>
     <div class="loncom_content">
-       <alarmTop></alarmTop>
+       <alarmTop v-bind:Info="Info"></alarmTop>
        <div class="loncom_public_con loncom_scroll_con">
             <el-search-table-pagination  type="local"
                 url=""
@@ -39,6 +39,10 @@ export default {
     },
     data() {
        return {
+           Info:{
+               title:'历史告警',
+               export:true,
+           },
           　table_data:[
                 {id:'1',level:'1',name:'温度过低',remark:'#鱼塘水温，温度=16.2',alarmTime:'2018-02-01 11:20:29',relieveTime:'2108-02-01 11:20:29'},
                 {id:'2',level:'2',name:'34',remark:'#鱼塘水温，温度=16.2',alarmTime:'2018-02-01 11:20:29',relieveTime:'2108-02-01 11:20:29'},

@@ -1,6 +1,6 @@
 <template>
     <el-dialog :title="dialogInfo.title" :visible.sync="dialogInfo.visible" width="1000px" :append-to-body='true'>
-        <el-scrollbar style="height:400px;">
+        <el-scrollbar style="height:400px;" class="loncom_scrollbar">
             <div class="loncom_dialog_con">
                 <el-form :model="form_info" :rules="formRules" ref="formInfo" label-width="80px">
                     <el-row :gutter="40">

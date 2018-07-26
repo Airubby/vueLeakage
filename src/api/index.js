@@ -19,6 +19,7 @@ var root2='/iSmacSite/ismacsite'   //生产环境
 //用basic的root2  生产环境
 // 引用axios
 var axios = require('axios')
+import Qs from 'qs'
 // 自定义判断元素类型JS
 function toType (obj) {
   return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase()
@@ -32,9 +33,11 @@ function filterNull (o) {
     if (toType(o[key]) === 'string') {
       o[key] = o[key].trim()
     } else if (toType(o[key]) === 'object') {
-      o[key] = filterNull(o[key])
+      //o[key] = filterNull(o[key])
+      o[key]=JSON.stringify(o[key]);
     } else if (toType(o[key]) === 'array') {
-      o[key] = filterNull(o[key])
+      //o[key] = filterNull(o[key])
+      o[key]=JSON.stringify(o[key]);
     }
   }
   return o
@@ -50,17 +53,19 @@ function filterNull (o) {
 */
 
 function apiAxios (method, url, params, success, failure) {
-  console.log(url);
+  console.log(params);
   if (params) {
     params = filterNull(params)
   }
   axios({
     method: method,
     url: url,
-    data: method === 'POST' ||method === 'GET' ? params : null,
-    params: method === 'POST' ||method === 'GET' ? params : null,
-    //headers: method === 'POST'? {'Content-Type': 'application/x-www-form-urlencoded'}: null,
-    baseURL: root2,
+    data: method === 'GET' ? params : null,
+    params: method === 'GET' ? params : null,
+    params: method === 'POST' ? null : params,
+    data:method==='POST'? Qs.stringify(params):null,
+    headers: method === 'POST'? {'Content-Type':'application/x-www-form-urlencoded'}: null,
+    baseURL: rootUrl,
     withCredentials: true
   })
   .then(function (res) {

@@ -1,12 +1,48 @@
 <template>
     <div class="loncom_content">
-       <controlTop></controlTop>
+        <div class="loncom_public_top">
+            <div class="search loncom_fl">
+                <el-input placeholder="请输入名称" v-model="searchInfo" size="mini">
+                    <el-button slot="append" icon="el-icon-search" id="search_btn"></el-button>
+                </el-input>
+            </div>
+            <div class="gis_sort loncom_fr">
+                <ul ref="gis_sort">
+                    <li class="active" data-name="all">全部</li>
+                    <li class="warning" data-name="warning"><em></em>危险</li>
+                    <li class="lost" data-name="lost"><em></em>废弃</li>
+                    <li class="normal" data-name="normal"><em></em>健康</li>
+                </ul>
+            </div>
+        </div>
        <div class="gis">
             <div id="container" class="loncom_content"></div>
-            <div class="gis_bottom" ref="bottom_alarm">
-
+            <div class="gis_alarm_list" ref="gis_alarm_list">
+                <alarmTop v-bind:Info="Info"></alarmTop>
+                <el-scrollbar style="height:360px;">
+                    <el-search-table-pagination  type="local"
+                        url=""
+                        list-field="list" 
+                        total-field="total"
+                        method='post' 
+                        :formOptions="table_forms"
+                        border :data="table_data" :columns="table_columns" ref="thisRef">   
+                        <el-table-column slot="prepend" type="selection"></el-table-column>                                     
+                        <template slot-scope="scope" slot="preview-level">
+                            <div class="alarm">
+                                <span v-if="scope.row.level=='1'"><i class="alarm_one_bg circle10 loncom_mr5"></i>一级</span>
+                            </div>
+                        </template>
+                        <template slot-scope="scope" slot="preview-handle">
+                            <div>
+                                <a href="javascript:;" class="loncom_color" @click="sure(scope.row)">确认</a> 
+                            </div>
+                        </template>
+                    </el-search-table-pagination>
+                </el-scrollbar>
             </div>
        </div>
+       <Show v-bind:dialogInfo="showInfo"></Show>
     </div>
 </template>
 
@@ -66,6 +102,8 @@
         width: 80px;
         height:80px;
         float:left;
+        text-align:center;
+        background:#fff;
     }
     .loncom_map_boxinfo .video img{
         max-width: 80px;
@@ -104,38 +142,78 @@
         background:#FFA300;
     }
 
-    .gis_bottom{
-        width: 100%;
-        height: 350px;
-        position: absolute;
-        background:#fff;
-        bottom:-350px;
-        transition: all .2s linear;
-    }
-
 </style>
 <script>
-import controlTop from '@/components/control_top.vue'
+import alarmTop from '@/components/alarm_top.vue'
+import Show from '@/components/video_show.vue'
 export default {
-    beforeCreate(){
-    },
+    
     created () {
-    },
-    beforeMount(){
-        function show(){
-
-        }
     },
     mounted() {
         var _this=this;
         // 百度地图API功能
-            var map = new BMap.Map("container");
-            //map.centerAndZoom(new BMap.Point(119.045403, 31.69525), 13); //初始化地图,设置中心点坐标和地图级别3-19
-            map.centerAndZoom("海南",9); 
-            map.enableScrollWheelZoom();
+        this.map = new BMap.Map("container");
+        //this.map.centerAndZoom(new BMap.Point(119.045403, 31.69525), 13); //初始化地图,设置中心点坐标和地图级别3-19
+        this.map.centerAndZoom("海南",9); 
+        this.map.enableScrollWheelZoom();
             
+    },
+    data() {
+       return {
+           searchInfo:'',
+          　map:'',
+            Info:{
+               title:'实时事件',
+               export:false,
+            },
+            table_data:[
+                {id:'1',level:'1',name:'温度过低',remark:'#鱼塘水温，温度=16.2',alarmTime:'2018-02-01 11:20:29',relieveTime:'2108-02-01 11:20:29'},
+                {id:'2',level:'2',name:'34',remark:''},
+                {id:'1',level:'1',name:'温度过低',remark:'#鱼塘水温，温度=16.2',alarmTime:'2018-02-01 11:20:29',relieveTime:'2108-02-01 11:20:29'},
+                {id:'2',level:'2',name:'34',remark:''},
+                {id:'1',level:'1',name:'温度过低',remark:'#鱼塘水温，温度=16.2',alarmTime:'2018-02-01 11:20:29',relieveTime:'2108-02-01 11:20:29'},
+                {id:'2',level:'2',name:'34',remark:''},
+                {id:'1',level:'1',name:'温度过低',remark:'#鱼塘水温，温度=16.2',alarmTime:'2018-02-01 11:20:29',relieveTime:'2108-02-01 11:20:29'},
+                {id:'2',level:'2',name:'34',remark:''},
+            ],
+            table_forms: {
+                inline: true,
+                size:'small',
+                initParams:{queryKey:""},
+                forms: []
+            },
+            table_columns:[
+              { prop: 'level', label: '告警等级',minWidth:10,slotName:'preview-level'},
+              { prop: 'name', label: '事件名称',minWidth:10},
+              { prop: 'remark', label: '事件定位',minWidth:30},
+              { prop: 'alarmTime', label: '告警时间',minWidth:10},
+              { prop: 'relieveTime', label: '解除时间',minWidth:10},
+              { prop: 'handle', label: '告警处理',slotName:'preview-handle',width:100},
+            ],
+            showInfo:{
+                title:"视频预览",
+                visible:false,
+            },
+
+       }
+   },
+    methods:{
+        getMap:function(){
+            var _this=this;
+            //筛选代码
+            BMap.Icon.prototype.name = "";
+            BMap.Icon.prototype.setName = function(name){
+                this.name = name;
+            }
+            BMap.Icon.prototype.searchName="";
+            BMap.Icon.prototype.setSearchName = function(searchName){
+                this.searchName = searchName;
+            }
+            
+            this.map.clearOverlays();
             //去掉地铁线
-            map.setMapStyle({
+            this.map.setMapStyle({
                 styleJson: [
                     {
                         "featureType": "subway",
@@ -159,165 +237,137 @@ export default {
             var searchType = "";
             var initRows=[];//赛选初始化用
             var controllerRows = [];
-          
-            init()
-            function init() {
-                var info = [{
-                    id: '123',
-                    name: '海南养殖基地',
-                    State: "3",
-                    lng: '110.68789',
-                    lat: '19.94395',
-                }]
-                for (var i = 0; i < info.length; i++) {
-                    var iconurl = "";
-                    if (info[i].State == "1") { //故障
-                        iconurl = new BMap.Icon("/static/images/jz_warning.svg", new BMap.Size(38, 40));
-                    } else if (info[i].State == "2") { //失联
-                        iconurl = new BMap.Icon("/static/images/jz_lost.svg", new BMap.Size(38, 40));
-                    } else if (info[i].State == "3") { //正常
-                        iconurl = new BMap.Icon("/static/images/jz_normal.svg", new BMap.Size(38, 40));
-                    }
 
-                    var point = new BMap.Point(info[i].lng, info[i].lat);
-                    var marker = new BMap.Marker(point, { icon: iconurl });
-                    map.addOverlay(marker);
-                    addClickHandler(marker, info[i].State,info[i].id)
-                    iconurl.setSearchName(info[i].name); //名称
-                }
-
-                var allmap = map.getOverlays();
-        
-
-            }
-            function addClickHandler(jzMarker, State,ID) {
-                var info = {
-                    id: '123',
-                    name: '池塘一',
-                    State: "3",
-                    lng: '110.68789',
-                    lat: '19.94395',
-                    yuanqu: { mianji: '100㎡', img: '/static/images/login_bg.jpg',chitang:'20个' }
-                }
+            var info = [{
+                id: '123',
+                name: '海南养殖基地',
+                State: "3",
+                lng: '110.68789',
+                lat: '19.94395',
+                yuanqu: { mianji: '100㎡', img: '/static/images/login_bg.jpg',chitang:'20个' }
+            },{
+                id: '1231',
+                name: '海口养殖基地',
+                State: "1",
+                lng: '110.08789',
+                lat: '19.94395',
+                yuanqu: { mianji: '100㎡', img: '/static/images/login_bg.jpg',chitang:'20个' }
+            }]
+            for (var i = 0; i < info.length; i++) {
+                var iconurl = "";
+                var point = new BMap.Point(info[i].lng, info[i].lat);
                 var content = '';
-                console.log(_this.showAlarm)
                 var incontent = '<div class="loncom_map_boxtop">' +
-                                '<i style="margin:0 5px 0 10px;" class="fa fa-wifi"></i><span>' + info.name + '<em onclick="enterGZ(\'' + info.id + '\')">告警详情</em></span>' +
+                                '<i style="margin:0 5px 0 10px;" class="fa fa-wifi"></i><span>' + info[i].name +'<em class="showAlarm" >告警详情</em></span>' +
                             '</div>' +
                             '<div class="loncom_map_boxinfo">' +
-                                '<div class="img"><img src="'+info.yuanqu.img+'"></div>'+
+                                '<div class="img"><img src="'+info[i].yuanqu.img+'"></div>'+
                                 '<div class="info">'+
-                                    '<p>基地面积：<span>'+info.yuanqu.mianji+'</span></p>'+
-                                    '<p>池塘数：<span>'+info.yuanqu.chitang+'</span></p>'+
+                                    '<p>基地面积：<span>'+info[i].yuanqu.mianji+'</span></p>'+
+                                    '<p>池塘数：<span>'+info[i].yuanqu.chitang+'</span></p>'+
                                 '</div>'+
                                 '<div class="video">'+
                                     '<img src="/static/images/shiping.png">'+
                                 '</div>'+
                             '</div>'+
-                            '<div class="loncom_map_coninfo" onclick="show()">'+
+                            '<div class="loncom_map_coninfo">'+
                                 '<p class="one">一级告警：<span>10条</span></p>'+
                                 '<p class="two">二级告警：<span>10条</span></p>'+
                                 '<p class="three">三级告警：<span>10条</span></p>'+
                                 '<p class="four">四级告警：<span>10条</span></p>'+
                             '</div>';
-                if (State == "1") { //故障
+                if (info[i].State == "1") { //故障
+                    iconurl = new BMap.Icon("/static/images/jz_warning.svg", new BMap.Size(38, 40));
                     content = '<div class="loncom_map_box loncom_map_box_warning">' + incontent + '</div>';
-                } else if (State == "2") { //失联
+                    iconurl.setName("warning");
+                } else if (info[i].State == "2") { //失联
+                    iconurl = new BMap.Icon("/static/images/jz_lost.svg", new BMap.Size(38, 40));
                     content = '<div class="loncom_map_box loncom_map_box_lost">' + incontent + '</div>';
-                } else if (State == "3") { //正常
+                    iconurl.setName("lost");
+                } else if (info[i].State == "3") { //正常
+                    iconurl = new BMap.Icon("/static/images/jz_normal.svg", new BMap.Size(38, 40));
                     content = '<div class="loncom_map_box">' + incontent + '</div>';
+                    iconurl.setName("normal");
                 }
-                var infoBox = new BMapLib.InfoBox(map, content);
+                iconurl.setSearchName(info[i].name); //名称
 
-                jzMarker.addEventListener("click", function () {
+                var marker = new BMap.Marker(point, { icon: iconurl });
+                this.map.addOverlay(marker);
+                var infoBox = new BMapLib.InfoBox(this.map, content);
+                addClickHandler(marker, infoBox,info[i].id)
+                
+
+            }
+            function addClickHandler(marker,infoBox,id) {
+                marker.addEventListener("mouseover", function () {
                     infoBox.open(this)
+                    $(infoBox.V).find(".showAlarm").on("click",function(){
+                        console.log(_this);
+                        _this.showAlarm(id);
+                    })
+                    $(infoBox.V).find(".video").on("click",function(){
+                        _this.showVideo(id);
+                    })
+                    
                 })
-                $(".loncom_map_coninfo").on("click",function(){
-                    console.log(12312312231231231223123123123213)
-                })
-
-                
             }
 
+            var allmap = this.map.getOverlays();
+            //头部切换
+            $(".gis_sort").find("li").on("click", function () {
+                $(this).siblings("li").removeClass("active");
+                $(this).addClass("active");
+                var _name=$(this).data("name");
+                if(_name=="all"){
+                    for(var i=0;i<allmap.length;i++){
+                        if(allmap[i].toString() == "[object Marker]"){  //要是marker的才可以
+                            allmap[i].show()
+                        }
+                    }
+                }else{
+                    for(var i=0;i<allmap.length;i++){
+                        if(allmap[i].toString() == "[object Marker]"){  //要是marker的才可以
+                            if(allmap[i].z.uj.name == _name){
+                                allmap[i].show();
+                            }else{
+                                allmap[i].hide();
+                            }
+                        }
+                    }
+                }
+                
+            })
+            //搜索
+            $("#search_btn").on("click",function(){
+                for(var i=0;i<allmap.length;i++){
+                    if(allmap[i].toString() == "[object Marker]"){
+                        if(allmap[i].z.uj.searchName==_this.searchInfo){
+                            _this.map.centerAndZoom(new BMap.Point(allmap[i].point.lng,allmap[i].point.lat),19); 
+                        }
+                    }
+                }
+            })
             
-
-            function showAlarm1(){
-                console.log(2)
-            }
-
-            function enterDetail(id) {
-                
-                top.layer.open({
-                    type: 2,
-                    title: "详情",
-                    maxmin: false,
-                    shadeClose: true, //点击遮罩关闭层
-                    area: ['1000px', '700px'],
-                    iconUrl: "/static/images/kong.png",
-                    content: "../../view/video.hisvideo?id="+id,
-                    yes: function (index, layer) {
-                    },
-
-                    cancel: function (index) {
-
-                    },
-                    end: function (layer, index) {
-
-                    }
-                });
-            }
-            function enterGZ(id) {
-                top.layer.open({
-                    type: 2,
-                    title: "告警记录",
-                    maxmin: false,
-                    shadeClose: true, //点击遮罩关闭层
-                    area: ['1000px', '400px'],
-                    iconUrl: "/static/images/kong.png",
-                    content: "../../view/video.linkage?id="+id,
-                    yes: function (index, layer) {
-                    },
-
-                    cancel: function (index) {
-
-                    },
-                    end: function (layer, index) {
-
-                    }
-                });
-            }
-
-            function enterVideo(id) {
-                var id = "201803300949102548123";
-                top.layer.open({
-                    type: 2,
-                    title: "视频监控",
-                    maxmin: false,
-                    shadeClose: true, //点击遮罩关闭层
-                    area: ['1000px', '600px'],
-                    iconUrl: "/static/images/kong.png",
-                    content: "../../view/video.hwvideo?id=" + id,
-                    yes: function (index, layer) {
-
-                    },
-                });
-            }
+            
+        },
+        showAlarm:function(id){
+            console.log(id)
+            $(this.$refs.gis_alarm_list).css({"bottom":"0px"});
+        },
+        closeAlarm:function(){
+           $(this.$refs.gis_alarm_list).css({"bottom":"-400px"});
+        },
+        showVideo:function(id){
+            this.showInfo.visible=true;
+        },
 
     },
-    data() {
-       return {
-          　
-       }
-   },
-    methods:{
-        showAlarm:function(){
-            console.log(123)
-             $(this.$refs.bottom_alarm).css({
-                "bottom":"0px",
-                "transition":"all 0.4s ease-in"
-            });
-        }   
+    watch:{
+        map:function(val,oldval){
+            this.getMap();
+        },
+        
     },
-    components:{controlTop}
+    components:{alarmTop,Show}
 }
 </script>

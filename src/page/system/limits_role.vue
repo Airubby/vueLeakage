@@ -11,8 +11,8 @@
                 <div class="loncom_tree_con numScroll0">
                     <div class="numScrollCon0">
                         <el-button type="primary" size="small" style="width: 100%;margin-bottom:10px;" @click="addRole ">添加角色</el-button>
-                        <div class="search loncom_mb10">
-                            <el-input placeholder="请输入角色名称" v-model="searchInfo" size="mini">
+                        <div class="search loncom_mb10"style="width:100%;">
+                            <el-input placeholder="请输入角色名称" v-model="searchInfo" size="mini" >
                                 <el-button slot="append" icon="el-icon-search" size="mini"></el-button>
                             </el-input>
                         </div>
@@ -87,6 +87,7 @@
                                             :props="defaultProps"
                                             :data="tree_data2"
                                             node-key="id"
+                                            @check-change="changeNav"
                                             default-expand-all
                                             >
                                             </el-tree>
@@ -99,6 +100,7 @@
                 </div>
             </div>
         </div>
+        <UserGet v-bind:dialogInfo="getInfo" v-if="getInfo.visible"></UserGet>
     </div>
 </template>
 <style>
@@ -107,6 +109,7 @@
 </style>
 
 <script>
+import UserGet from '@/components/limits_user_get.vue'
 export default {
     created () {
         
@@ -162,16 +165,16 @@ export default {
                 children:[
                     {
                         label: '动力楼',
-                        id:'',
+                        id:'2',
                         children:[
                             {
                                 label:'动力一号',
-                                id:'',
+                                id:'3',
                             }
                         ]
                     },{
                         label: '数据楼',
-                        id:''
+                        id:'4'
                     }
                 ]
             }],
@@ -181,16 +184,17 @@ export default {
                 children:[
                     {
                         label: 'gis',
-                        id:'',
+                        id:'2',
+                        checked:true,
                         children:[
                             {
                                 label:'gis详情',
-                                id:'',
+                                id:'3',
                             }
                         ]
                     },{
                         label: 'gis列表',
-                        id:''
+                        id:'4'
                     }
                 ]
             }],
@@ -227,13 +231,31 @@ export default {
             }
         })
       },
+      changeNav:function(){
+            this.navchecked=this.$refs.tree2.getCheckedNodes();
+            this.navhalfchecked=this.$refs.tree2.getHalfCheckedNodes();
+            console.log(this.navchecked);
+            for(var i=0;i<this.navchecked.length;i++){
+                if(this.navchecked[i].children.length==0){
+                    console.log(this.$refs.tree2.getNode(this.navchecked[i].id))
+                }
+            }
+            console.log(this.$refs.tree2.getNode())
+        },
 
     },
     watch: {
       searchInfo(val) {
         this.$refs.tree.filter(val);
-      }
+      },
+      'getInfo.data':{
+            handler:function(val,oldval){
+                this.form_info.departid=val.id;
+                this.form_info.depart=val.label;
+            },
+            deep: true
+        },
     },
-    components:{}
+    components:{UserGet}
 }
 </script>

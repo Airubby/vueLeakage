@@ -1,7 +1,21 @@
 <template>
     <div class="loncom_content">
-       <controlTop></controlTop>
-       <div class="loncom_public_con loncom_scroll_con">
+       <div class="loncom_public_top">
+            <div class="search loncom_fl">
+                <el-input placeholder="请输入池塘名称" v-model="searchInfo" size="mini">
+                    <el-button slot="append" icon="el-icon-search"></el-button>
+                </el-input>
+            </div>
+            <div class="gis_sort loncom_fr">
+                <ul>
+                    <li class="active" data-name="all">全部</li>
+                    <li class="warning" data-name="warning"><em></em>危险池塘</li>
+                    <li class="lost" data-name="lost"><em></em>废弃池塘</li>
+                    <li class="normal" data-name="normal"><em></em>健康池塘</li>
+                </ul>
+            </div>
+        </div>
+        <div class="loncom_public_con loncom_scroll_con">
             <ul class="list_ul">
                 <li>
                     <div class="list_con" @click="detail">
@@ -69,6 +83,7 @@
         overflow:hidden;
         border-radius:5px;
         box-shadow: 0px 1px 7px #ccc;
+        cursor:pointer;
     }
     .list_con_title{
         width: 100%;
@@ -132,8 +147,9 @@ export default {
        }
    },
     methods:{
-       detail:function(){
-           
+       detail:function(item){
+           var item={id:1}
+           this.$router.push({path:'/control/list/detail',query:{id:item.id}});
        },
     },
     components:{controlTop}

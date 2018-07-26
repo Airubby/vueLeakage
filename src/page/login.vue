@@ -50,7 +50,7 @@
     width: 60px;
     height: 60px;
     margin: 0 auto;
-    background: url(/static/images/logo_small.png) no-repeat center center;
+    background: url(/static/images/small_logo.png) no-repeat center center;
     background-size: contain;
     }
 

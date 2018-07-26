@@ -13,6 +13,7 @@ const storeInfo=new Vuex.Store({
             {url:'/alarm',name:'告警管理',icon:'static/images/home.svg',item:[
                 {url:'/alarm/realtime',name:'实时',fullName:'实时告警',icon:'static/images/item.png',item:[]},
                 {url:'/alarm/history',name:'历史',fullName:'历史告警',icon:'static/images/item.png'},
+                {url:'/alarm/inform',name:'通知',fullName:'通知管理',icon:'static/images/item.png'},
             ]},
             {url:'/video',name:'视频管理',icon:'static/images/home.svg',item:[
                 {url:'/video/vms',name:'视频',fullName:'视频管理',icon:'static/images/item.png',item:[]},

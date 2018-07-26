@@ -1,6 +1,6 @@
 <template>
     <div class="loncom_public_top">
-        <div class="loncom_fl">实时告警</div>
+        <div class="loncom_fl">{{Info.title}}</div>
         <div class="loncom_fl sort">
             <el-checkbox v-model="allAlarm" label="全部" border size="mini"></el-checkbox>
             <el-checkbox v-model="oneAlarm" label="一级" border size="mini">
@@ -19,8 +19,11 @@
                 <i class="alarm_normal_bg circle10"></i><span class="title">已恢复</span><em>(30)</em>
             </el-checkbox>
         </div>
-        <div class="loncom_fr">
+        <div class="loncom_fr" v-if="Info.export">
             <el-button type="primary" size="mini"><i class="fa fa-upload loncom_mr5"></i>导出</el-button>
+        </div>
+        <div class="loncom_fr" v-if="!Info.export">
+            <i class="el-icon-circle-close" style="font-size:20px;color:#0096ba;cursor:pointer;" @click="closeAlarm"></i>
         </div>
     </div>
 </template>
@@ -52,9 +55,11 @@ export default {
        }
    },
     methods:{
-       
+       closeAlarm:function(){
+           this.$parent.closeAlarm();
+       }
     },
-    props:["alarmTop"],
+    props:["Info"],
     components:{}
 }
 </script>

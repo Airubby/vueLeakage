@@ -28,6 +28,7 @@ export default new Router({
       children:[
         {path:'/control/gis',component:(resolve) => require(['@/page/control/control_gis'], resolve)},
         {path:'/control/list',component:(resolve) => require(['@/page/control/control_list'], resolve)},
+        {path:'/control/list/detail',component:(resolve) => require(['@/page/control/control_list_detail'], resolve)},
       ]
     },
     {
@@ -36,6 +37,7 @@ export default new Router({
       children:[
         {path:'/alarm/realtime',component:(resolve) => require(['@/page/alarm/alarm_realtime'], resolve)},
         {path:'/alarm/history',component:(resolve) => require(['@/page/alarm/alarm_history'], resolve)},
+        {path:'/alarm/inform',component:(resolve) => require(['@/page/alarm/alarm_inform'], resolve)},
       ]
     },
     {
@@ -77,6 +79,7 @@ export default new Router({
         },
       ]
     },
+    { path: '*', component: (resolve) => require(['@/page/notPage'], resolve)  },
     {
       path:'/test',component:(resolve) => require(['@/page/test'], resolve)
     }
