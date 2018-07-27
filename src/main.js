@@ -24,11 +24,6 @@ Vue.use(NavInfo)
 
 
 
-Vue.prototype.Init=function(){
-  
-}
-
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

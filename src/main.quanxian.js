@@ -1,21 +1,25 @@
+// The Vue build version to load with the `import` command
+// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
-import Router from 'vue-router'
+import App from './App'
+import ElementUI from 'element-ui'
+import './assets/element-#0096BA/index.css'
+import ElSearchTablePagination from 'el-table-pagination'
+import router from './router'
+import store from './store'
+import NavInfo from './components/navInfo'
+import 'babel-polyfill'  //兼容低版本浏览器
+
+// 引用API文件
+import api from './api/index.js'
+// 将API方法绑定到全局
+Vue.prototype.$api = api
 
 
-Vue.use(Router)
+Vue.prototype.getComponent = function (id){
 
-export default new Router({
-  routes: [
+  var componentList=[   
     {
-      path: '/',
-      component: (resolve) => require(['@/page/public'], resolve),redirect:'/index',
-      children:[
-        {path:'/index',component:(resolve) => require(['@/page/index'], resolve)},
-      ]
-    },{
-      path:'/login',
-      component: (resolve) => require(['@/page/login'], resolve),
-    },{
       path: '/control',  //实时监控
       component: (resolve) => require(['@/page/public'], resolve),redirect:'/control/gis',
       children:[
@@ -71,10 +75,96 @@ export default new Router({
           path:'/system/log',component:(resolve) => require(['@/page/system/log'], resolve)
         },
       ]
-    },
-    { path: '*', component: (resolve) => require(['@/page/notPage'], resolve)  },
-    {
-      path:'/test',component:(resolve) => require(['@/page/test'], resolve)
     }
-  ]
+ 
+  ];
+  var routerList=[];
+  return new Promise(function(resolve, reject){
+      Vue.prototype.$api.post('/role/rolequery', {roleid:id}, r => {
+        console.log(r)
+        if(r.err_code=="0"){
+            var menu=r.data;
+            store.commit('resetModel',{})
+            store.commit('resetNavList',menu)
+            getFunc(menu)
+            setCom(routerList,menu,componentList);
+            routerList.push({ path: '*', component: (resolve) => require(['@/page/notPage'], resolve)  })
+            for(var i=0;i<routerList.length;i++){
+              router.options.routes.push(routerList[i]);
+            }
+            router.addRoutes(routerList);
+            resolve(true);
+        }else{
+          if(sessionStorage.loginInfo){
+              ElementUI.Message.warning("菜单获取异常");
+          }
+        }
+        
+    }); 
+    function getFunc(menu){
+      for(var i=0;i<menu.length;i++){
+        if(menu[i].item.length>0){
+          getFunc(menu[i].item)
+        }else{
+          var keyarr=(menu[i].url).split("/");
+          var valuearr=(menu[i].roperid).split(",");
+          for(var j=0;j<valuearr.length;j++){
+            if(keyarr.length>1){
+              var key=keyarr.length-1;
+              store.commit('setModel',[keyarr[key],valuearr[j]])
+            }
+            
+          }
+        }
+      }
+    }
+    function setCom(list,menu,clist){
+      for(var i=0;i<menu.length;i++){
+        for(var j=0;j<clist.length;j++){
+          if(menu[i].url=="/index"){
+            routerList.push(componentList[0]);
+          }else{
+            if(menu[i].url==clist[j].path){
+              var obj={};
+              obj.children=[];
+              obj.path=clist[j].path;
+              obj.component=clist[j].component;
+              if(menu[i].item.length>0){
+                obj.redirect=menu[i].item[0].url;
+                setCom(obj.children,menu[i].item,clist[j].children)
+              }
+              list.push(obj);
+            }
+          }
+          
+        }
+      }
+
+    }
+    
+  })
+  
+
+
+}
+
+
+
+Vue.config.productionTip = false
+
+Vue.use(ElementUI)
+Vue.use(ElSearchTablePagination)
+//头部导航
+Vue.use(NavInfo)
+
+
+
+
+/* eslint-disable no-new */
+new Vue({
+  el: '#app',
+  router,
+  store,
+  components: { App },
+  template: '<App/>'
 })

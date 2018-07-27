@@ -205,6 +205,7 @@ function piemoreChar(ID, xData, yData, allAlarm, color) {
             {
                 type: 'pie',
                 radius: ['70%', '80%'],
+                center:['60%','50%'],
                 avoidLabelOverlap: false,
                 label: {
                     normal: {

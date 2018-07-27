@@ -122,6 +122,7 @@ export default {
  data(){
   
   	return {
+          loginFlag:false,
         user:{
             userid:"",
             psword:""
@@ -143,34 +144,59 @@ export default {
 		}
 	  },
       loginIn:function(formName){
-        this.$refs[formName].validate((valid) => {
+            var _this=this;
+            this.$refs[formName].validate((valid) => {
             if (valid) {
-                this.$api.post('/login/getSalt', {}, r => {
-                    if(r.success){
-                        var md5pwd= b64_md5(b64_md5(this.user.userid+ r.salt1 + b64_md5(this.user.psword)) + r.salt2);
-                        this.$api.post('/login/login', {user:this.user.userid,pagePwd:md5pwd}, re => {
-                            if(re.success){
-                                this.$message.success('登录成功！');
-                                //存登录信息
-                                var loginInfo={};
-                                if(sessionStorage.loginInfo){
-                                    loginInfo=JSON.parse(sessionStorage.loginInfo);
-                                }
-                                loginInfo.username=this.user.userid;
-                                loginInfo.id=re.data.id;
-                                sessionStorage.loginInfo = JSON.stringify(loginInfo);
-                                this.getComponent(re.data.id);
-                                this.$router.push({path:'/'});
-                            }else{
-                                this.$message.warning(re.msg);
-                            }
-                        });
-                    }
-                });
+                this.$message.success('登录成功！');
+                //存登录信息
+                var loginInfo={};
+                if(sessionStorage.loginInfo){
+                    loginInfo=JSON.parse(sessionStorage.loginInfo);
+                }
+                loginInfo.username=this.user.userid;
+                loginInfo.psword=this.user.psword;
+                sessionStorage.loginInfo = JSON.stringify(loginInfo);
+                this.$router.push({path:'/'});
+                // this.$api.post('/login/getSalt', {}, r => {
+                //     if(r.success){
+                //         var md5pwd= b64_md5(b64_md5(this.user.userid+ r.salt1 + b64_md5(this.user.psword)) + r.salt2);
+                //         this.$api.post('/login/login', {user:this.user.userid,pagePwd:md5pwd}, re => {
+                //             if(re.success){
+                //                 this.$message.success('登录成功！');
+                //                 //存登录信息
+                //                 var loginInfo={};
+                //                 if(sessionStorage.loginInfo){
+                //                     loginInfo=JSON.parse(sessionStorage.loginInfo);
+                //                 }
+                //                 loginInfo.username=this.user.userid;
+                //                 loginInfo.id=re.data.id;
+                //                 sessionStorage.loginInfo = JSON.stringify(loginInfo);
+                //                 //this.getComponent(re.data.id);
+                //                 this.getComponent(r.data.roleid).then(function(data){
+                //                     _this.loginFlag=data;
+                //                 });
+                //             }else{
+                //                 this.$message.warning(re.msg);
+                //             }
+                //         });
+                //     }
+                // });
             } 
         });
           
       }
-  }
+    },
+    watch:{
+        loginFlag: {
+            handler: function(val) {
+                if(this.$store.state.navList.length>0){
+                    this.$router.push({path:this.$store.state.navList[0].url});
+                }else{
+                    this.$message.warning("你没有一个菜单权限！");
+                }
+            },
+            deep: true
+        },
+    },
 }
 </script>

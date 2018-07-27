@@ -27,8 +27,8 @@
                 </template>
             </el-search-table-pagination>
        </div>
-       <Add v-bind:dialogInfo="addInfo"></Add>
-       <Show v-bind:dialogInfo="showInfo"></Show>
+       <Add v-bind:dialogInfo="addInfo" v-if="addInfo.visible"></Add>
+       <Show v-bind:dialogInfo="showInfo" v-if="showInfo.visible"></Show>
     </div>
 </template>
 

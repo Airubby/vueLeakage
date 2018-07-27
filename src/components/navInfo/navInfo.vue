@@ -8,7 +8,7 @@
             </div>
             <ul class="loncom_fl" ref="nav_list">
                 <li v-for="(item,index) in navList">
-                    <router-link :to="item.url" exact v-if="index==0">
+                    <router-link :to="item.url" exact v-if="item.url=='/'">
                         <em><img :src="item.icon"></em>
                         <p>{{item.name}}</p>
                     </router-link>
@@ -31,7 +31,7 @@
                         </span>
                         <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item>admin</el-dropdown-item>
-                            <el-dropdown-item><i class="fa fa-power-off loncom_mr5"></i>退出</el-dropdown-item>
+                            <el-dropdown-item style="text-align:center"><i class="fa fa-power-off loncom_mr5"></i>退出</el-dropdown-item>
                         </el-dropdown-menu>
                     </el-dropdown>
                 </span>
@@ -39,7 +39,7 @@
         </div>
         <div class="loncom_con">
             <div class="loncom_con_left" ref="loncom_con_left">
-                <div class="loncom_left_navtop" @click="navClick" ref="loncom_left_navtop">
+                <div class="loncom_left_navtop" @click="navClick" ref="loncom_left_navtop" v-if="leftShow">
                     <i class="fa fa-bars" ref="bars"></i>
                 </div>
                 <div class="loncom_left_navcon" ref="sidebar_list">
@@ -77,19 +77,17 @@
 import { mapGetters } from 'vuex'
 export default {
     created () {
-        // this.loginInfo=sessionStorage.loginInfo?JSON.parse(sessionStorage.loginInfo):{};
-        // if(JSON.stringify(this.loginInfo) == "{}"){
-        //     this.$message.warning("请登录系统");
-        //     this.$router.push({path:'/login'});
-        //     return;
-        // }else{
-        //     this.navList=this.$store.state.navList;
-        //     this.Init();   
-        // }
          this.navList=this.$store.state.navList;
     },
     mounted() {
-        this.Init();   
+        this.loginInfo=sessionStorage.loginInfo?JSON.parse(sessionStorage.loginInfo):{};
+        if(JSON.stringify(this.loginInfo) == "{}"){
+            this.$message.warning("请登录系统");
+            this.$router.push({path:'/login'});
+            return;
+        }else{
+            this.Init();   
+        }   
     },
     computed:{
       ...mapGetters([
@@ -102,7 +100,7 @@ export default {
         navList:[],
         leftNavList:[],
         isRouterAlive:true,  //默认view-router显示的，点击刷新用
-        leftShow:false,
+        leftShow:false, //默认要显示
       }
     },
     methods:{
