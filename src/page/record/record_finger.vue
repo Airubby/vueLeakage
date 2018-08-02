@@ -18,7 +18,9 @@
                 <el-table-column slot="prepend" type="selection"></el-table-column>   
                 <template slot-scope="scope" slot="preview-handle">
                     <div>
-                        <a href="javascript:;" class="loncom_color" @click="edit (scope.row)">编辑</a> 
+                        <a href="javascript:;" class="loncom_color" @click="edit (scope.row)">编辑</a>
+                        <em>|</em>
+                        <a href="javascript:;" class="loncom_color" @click="remove (scope.row)">删除</a> 
                     </div>
                 </template>
             </el-search-table-pagination>
@@ -73,7 +75,7 @@ export default {
        remove:function(){
 
        },
-       eidt:function(){
+       edit:function(){
 
        }
     },

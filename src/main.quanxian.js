@@ -83,20 +83,26 @@ Vue.prototype.getComponent = function (id){
       Vue.prototype.$api.post('/role/rolequery', {roleid:id}, r => {
         console.log(r)
         if(r.err_code=="0"){
-            var menu=r.data;
-            store.commit('resetModel',{})
-            store.commit('resetNavList',menu)
-            getFunc(menu)
-            setCom(routerList,menu,componentList);
-            routerList.push({ path: '*', component: (resolve) => require(['@/page/notPage'], resolve)  })
-            for(var i=0;i<routerList.length;i++){
-              router.options.routes.push(routerList[i]);
+            if(r.data.length==0){
+              ElementUI.Message.warning("你没有一个菜单权限");
+            }else{
+              var menu=r.data;
+              store.commit('resetModel',{})
+              store.commit('resetNavList',menu)
+              getFunc(menu)
+              setCom(routerList,menu,componentList);
+              routerList.push({ path: '*', component: (resolve) => require(['@/page/notPage'], resolve)  })
+              for(var i=0;i<routerList.length;i++){
+                router.options.routes.push(routerList[i]);
+              }
+              router.addRoutes(routerList);
+              resolve(true);
             }
-            router.addRoutes(routerList);
-            resolve(true);
+            
         }else{
           if(sessionStorage.loginInfo){
-              ElementUI.Message.warning("菜单获取异常");
+            ElementUI.Message.warning("菜单获取异常");
+            router.push({path:'/login'});
           }
         }
         
@@ -104,13 +110,13 @@ Vue.prototype.getComponent = function (id){
     function getFunc(menu){
       for(var i=0;i<menu.length;i++){
         if(menu[i].item.length>0){
-          getFunc(menu[i].item)
+          getFunc(menu[i])
         }else{
           var keyarr=(menu[i].url).split("/");
           var valuearr=(menu[i].roperid).split(",");
-          for(var j=0;j<valuearr.length;j++){
-            if(keyarr.length>1){
-              var key=keyarr.length-1;
+          if(keyarr.length>1){
+            var key=keyarr.length-1;
+            for(var j=0;j<valuearr.length;j++){
               store.commit('setModel',[keyarr[key],valuearr[j]])
             }
             

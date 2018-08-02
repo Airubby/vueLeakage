@@ -64,7 +64,9 @@ export default {
        }
    },
     methods:{
-       
+       sure:function(){
+           
+       },
     },
     components:{alarmTop}
 }

@@ -5,7 +5,7 @@
         </div>
         <el-scrollbar class="content">
             <div class="loncom_p15">
-                <div class="loncom_pr20 loncom_mb20">
+                <div class="loncom_mb20">
                     <div class="loncom_system_inform_top">
                         <div class="loncom_sysinfo_box_left"><h2>事件通知</h2></div>
                         <div class="loncom_sysinfo_box loncom_system_inform_top_right">
@@ -82,7 +82,7 @@
                     </div>
                 </div>
                 <!--通知装置-->
-                <div class="loncom_system_inform_top loncom_pr20">
+                <div class="loncom_system_inform_top">
                     <div class="loncom_sysinfo_box_left"><h2>通知装置</h2></div>
                     <div class="loncom_sysinfo_box loncom_system_inform_top_right">
                          提示：设置事件通知前请配置告警装置，告警装置工作异常将会影响告警通知正常发送。
@@ -232,6 +232,12 @@
     .loncom_dialog_system_informtop{
         width: 100%;
         margin-bottom: 20px;
+    }
+    .loncom_system_inform_card{
+        width: 100%;
+    }
+    .loncom_system_inform_card ul{
+        width: calc(100% + 20px);
     }
     .loncom_system_inform_card li{
         width: 50%;

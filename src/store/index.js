@@ -49,6 +49,9 @@ const storeInfo=new Vuex.Store({
             state.control=obj;
         },
         setModel(state,arr){
+            if(state[arr[0]]==undefined){
+                state[arr[0]]={};
+            }
             state[arr[0]][arr[1]]=true;
         }
    },

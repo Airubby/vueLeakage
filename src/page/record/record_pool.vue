@@ -19,6 +19,8 @@
                 <template slot-scope="scope" slot="preview-handle">
                     <div>
                         <a href="javascript:;" class="loncom_color" @click="edit (scope.row)">编辑</a> 
+                        <em>|</em>
+                        <a href="javascript:;" class="loncom_color" @click="remove (scope.row)">删除</a> 
                     </div>
                 </template>
             </el-search-table-pagination>
@@ -54,7 +56,7 @@ export default {
               { prop: 'name', label: '池塘名称',minWidth:10},
               { prop: 'type', label: '种类',minWidth:10},
               { prop: 'remark', label: '说明',minWidth:30},
-              { prop: 'handle', label: '告警处理',slotName:'preview-handle',width:100},
+              { prop: 'handle', label: '操作',slotName:'preview-handle',width:100},
             ],
             addInfo:{
                 title:"新增鱼塘信息",
@@ -73,7 +75,7 @@ export default {
        remove:function(){
 
        },
-       eidt:function(){
+       edit:function(){
 
        }
     },

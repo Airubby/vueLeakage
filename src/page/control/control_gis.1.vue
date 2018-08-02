@@ -243,81 +243,61 @@ export default {
             for (var i = 0; i < info.length; i++) {
                 var iconurl = "";
                 var point = new BMap.Point(info[i].lng, info[i].lat);
+                var content = '';
+                var incontent = '<div class="loncom_map_boxtop">' +
+                                '<i style="margin:0 5px 0 10px;" class="fa fa-wifi"></i><span>' + info[i].name +'<em class="showAlarm" >告警详情</em></span>' +
+                            '</div>' +
+                            '<div class="loncom_map_boxinfo">' +
+                                '<div class="img"><img src="'+info[i].yuanqu.img+'"></div>'+
+                                '<div class="info">'+
+                                    '<p>基地面积：<span>'+info[i].yuanqu.mianji+'</span></p>'+
+                                    '<p>池塘数：<span>'+info[i].yuanqu.chitang+'</span></p>'+
+                                '</div>'+
+                                '<div class="video">'+
+                                    '<img src="/static/images/shiping.png">'+
+                                '</div>'+
+                            '</div>'+
+                            '<div class="loncom_map_coninfo">'+
+                                '<p class="one">一级告警：<span>10条</span></p>'+
+                                '<p class="two">二级告警：<span>10条</span></p>'+
+                                '<p class="three">三级告警：<span>10条</span></p>'+
+                                '<p class="four">四级告警：<span>10条</span></p>'+
+                            '</div>';
                 if (info[i].State == "1") { //故障
                     iconurl = new BMap.Icon("/static/images/jz_warning.svg", new BMap.Size(38, 40));
+                    content = '<div class="loncom_map_box loncom_map_box_warning">' + incontent + '</div>';
                     iconurl.setName("warning");
                 } else if (info[i].State == "2") { //失联
                     iconurl = new BMap.Icon("/static/images/jz_lost.svg", new BMap.Size(38, 40));
+                    content = '<div class="loncom_map_box loncom_map_box_lost">' + incontent + '</div>';
                     iconurl.setName("lost");
                 } else if (info[i].State == "3") { //正常
                     iconurl = new BMap.Icon("/static/images/jz_normal.svg", new BMap.Size(38, 40));
+                    content = '<div class="loncom_map_box">' + incontent + '</div>';
                     iconurl.setName("normal");
                 }
                 iconurl.setSearchName(info[i].name); //名称
 
                 var marker = new BMap.Marker(point, { icon: iconurl });
-                marker.id=info[i].id;
                 this.map.addOverlay(marker);
-                this.addClickHandler(marker, info[i])
-            }
-            // for (var i = 0; i < info.length; i++) {
-            //     var iconurl = "";
-            //     var point = new BMap.Point(info[i].lng, info[i].lat);
-            //     var content = '';
-            //     var incontent = '<div class="loncom_map_boxtop">' +
-            //                     '<i style="margin:0 5px 0 10px;" class="fa fa-wifi"></i><span>' + info[i].name +'<em class="showAlarm" >告警详情</em></span>' +
-            //                 '</div>' +
-            //                 '<div class="loncom_map_boxinfo">' +
-            //                     '<div class="img"><img src="'+info[i].yuanqu.img+'"></div>'+
-            //                     '<div class="info">'+
-            //                         '<p>基地面积：<span>'+info[i].yuanqu.mianji+'</span></p>'+
-            //                         '<p>池塘数：<span>'+info[i].yuanqu.chitang+'</span></p>'+
-            //                     '</div>'+
-            //                     '<div class="video">'+
-            //                         '<img src="/static/images/shiping.png">'+
-            //                     '</div>'+
-            //                 '</div>'+
-            //                 '<div class="loncom_map_coninfo">'+
-            //                     '<p class="one">一级告警：<span>10条</span></p>'+
-            //                     '<p class="two">二级告警：<span>10条</span></p>'+
-            //                     '<p class="three">三级告警：<span>10条</span></p>'+
-            //                     '<p class="four">四级告警：<span>10条</span></p>'+
-            //                 '</div>';
-            //     if (info[i].State == "1") { //故障
-            //         iconurl = new BMap.Icon("/static/images/jz_warning.svg", new BMap.Size(38, 40));
-            //         content = '<div class="loncom_map_box loncom_map_box_warning">' + incontent + '</div>';
-            //         iconurl.setName("warning");
-            //     } else if (info[i].State == "2") { //失联
-            //         iconurl = new BMap.Icon("/static/images/jz_lost.svg", new BMap.Size(38, 40));
-            //         content = '<div class="loncom_map_box loncom_map_box_lost">' + incontent + '</div>';
-            //         iconurl.setName("lost");
-            //     } else if (info[i].State == "3") { //正常
-            //         iconurl = new BMap.Icon("/static/images/jz_normal.svg", new BMap.Size(38, 40));
-            //         content = '<div class="loncom_map_box">' + incontent + '</div>';
-            //         iconurl.setName("normal");
-            //     }
-            //     iconurl.setSearchName(info[i].name); //名称
-
-            //     var marker = new BMap.Marker(point, { icon: iconurl });
-            //     this.map.addOverlay(marker);
-            //     var infoBox = new BMapLib.InfoBox(this.map, content);
-            //     addClickHandler(marker, infoBox,info[i].id)
+                var infoBox = new BMapLib.InfoBox(this.map, content);
+                addClickHandler(marker, infoBox,info[i].id)
                 
 
-            // }
-            // function addClickHandler(marker,infoBox,id) {
-            //     marker.addEventListener("mouseover", function () {
-            //         infoBox.open(this)
-            //         $(infoBox.V).find(".showAlarm").on("click",function(){
-            //             console.log(_this);
-            //             _this.showAlarm(id);
-            //         })
-            //         $(infoBox.V).find(".video").on("click",function(){
-            //             _this.showVideo(id);
-            //         })
+            }
+            function addClickHandler(marker,infoBox,id) {
+                marker.addEventListener("mouseover", function () {
+                    infoBox.open(this)
+                    $(infoBox.V).find(".showAlarm").on("click",function(){
+                        console.log(_this);
+                        _this.showAlarm(id);
+                    })
+                    $(infoBox.V).find(".video").on("click",function(){
+                        _this.showVideo(id);
+                    })
                     
-            //     })
-            // }
+                })
+            }
 
             var allmap = this.map.getOverlays();
             this.allmap=allmap;
@@ -358,57 +338,6 @@ export default {
             
             
         },
-        addClickHandler:function(marker,info){
-            var _this=this;
-            marker.addEventListener("click", function () {
-                var info = {
-                    id: '123',
-                    name: '海南养殖基地',
-                    State: "3",
-                    lng: '110.68789',
-                    lat: '19.94395',
-                    yuanqu: { mianji: '100㎡', img: '/static/images/login_bg.jpg',chitang:'20个' }
-                }
-                var content = '';
-                var incontent = '<div class="loncom_map_boxtop">' +
-                                '<i style="margin:0 5px 0 10px;" class="fa fa-wifi"></i><span>' + info.name +'<em class="showAlarm" >告警详情</em></span>' +
-                            '</div>' +
-                            '<div class="loncom_map_boxinfo">' +
-                                '<div class="img"><img src="'+info.yuanqu.img+'"></div>'+
-                                '<div class="info">'+
-                                    '<p>基地面积：<span>'+info.yuanqu.mianji+'</span></p>'+
-                                    '<p>池塘数：<span>'+info.yuanqu.chitang+'</span></p>'+
-                                '</div>'+
-                                '<div class="video">'+
-                                    '<img src="/static/images/shiping.png">'+
-                                '</div>'+
-                            '</div>'+
-                            '<div class="loncom_map_coninfo">'+
-                                '<p class="one">一级告警：<span>10条</span></p>'+
-                                '<p class="two">二级告警：<span>10条</span></p>'+
-                                '<p class="three">三级告警：<span>10条</span></p>'+
-                                '<p class="four">四级告警：<span>10条</span></p>'+
-                            '</div>';
-                if (info.State == "1") { //故障
-                    content = '<div class="loncom_map_box loncom_map_box_warning">' + incontent + '</div>';
-                } else if (info.State == "2") { //失联
-                    content = '<div class="loncom_map_box loncom_map_box_lost">' + incontent + '</div>';
-                } else if (info.State == "3") { //正常
-                    content = '<div class="loncom_map_box">' + incontent + '</div>';
-                }
-                var infoBox = new BMapLib.InfoBox(_this.map, content);
-                infoBox.open(this)
-                $(infoBox.V).find(".showAlarm").on("click",function(){
-                    console.log(_this);
-                    _this.showAlarm(info.id);
-                })
-                $(infoBox.V).find(".video").on("click",function(){
-                    _this.showVideo(info.id);
-                })
-            })
-            
-
-        },
         showAlarm:function(id){
             console.log(id)
             $(this.$refs.gis_alarm_list).css({"bottom":"0px"});
@@ -420,20 +349,6 @@ export default {
             this.showInfo.visible=true;
         },
         //动态改变gis坐标状态
-        changeState:function(){
-            console.log(this.gis_info)
-            
-            BMap.Icon.prototype.setName = function (name) {
-                this.name = name;
-            }
-            BMap.Icon.prototype.setSearchName = function(searchName){
-                this.searchName = searchName;
-            }
-            var iconurl = new BMap.Icon("/static/images/jz_lost.svg", new BMap.Size(38, 40));
-            iconurl.setSearchName(this.allmap[0].z.uj.searchName); 
-            iconurl.setName('lost');
-            this.allmap[0].setIcon(iconurl);
-        },
 
     },
     watch:{

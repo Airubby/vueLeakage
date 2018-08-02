@@ -17,7 +17,7 @@
         </div>
         <div class="loncom_public_con loncom_scroll_con">
             <ul class="list_ul">
-                <li>
+                <li v-if="show=='all'||show=='normal'">
                     <div class="list_con" @click="detail">
                         <div class="list_con_title">#池塘一</div>
                         <div class="list_content">
@@ -32,7 +32,7 @@
                         </div>
                     </div>
                 </li>
-                <li>
+                <li v-if="show=='all'||show=='lost'">
                     <div class="list_con list_con_lost" @click="detail">
                         <div class="list_con_title">#池塘二</div>
                         <div class="list_content">
@@ -47,7 +47,7 @@
                         </div>
                     </div>
                 </li>
-                <li>
+                <li v-if="show=='all'||show=='warning'">
                     <div class="list_con list_con_warning" @click="detail">
                         <div class="list_con_title">#池塘三</div>
                         <div class="list_content">
@@ -140,10 +140,18 @@ export default {
     },
     mounted() {
         scrollCon();
+        //头部切换
+        var _this=this;
+        $(".gis_sort").find("li").on("click", function () {
+            $(this).siblings("li").removeClass("active");
+            $(this).addClass("active");
+            _this.show=$(this).data("name");
+        })
     },
     data() {
        return {
           　searchInfo:'',
+          show:'all',
        }
    },
     methods:{
