@@ -155,7 +155,7 @@ export default {
         // 百度地图API功能
         this.map = new BMap.Map("container");
         //this.map.centerAndZoom(new BMap.Point(119.045403, 31.69525), 13); //初始化地图,设置中心点坐标和地图级别3-19
-        this.map.centerAndZoom("海南",9); 
+        this.map.centerAndZoom(new BMap.Point(110.68789, 19.94395),8); 
         this.map.enableScrollWheelZoom();
             
     },
@@ -231,26 +231,26 @@ export default {
                 State: "3",
                 lng: '110.68789',
                 lat: '19.94395',
-                yuanqu: { mianji: '100㎡', img: '/static/images/login_bg.jpg',chitang:'20个' }
+                yuanqu: { mianji: '100㎡', img: 'static/images/login_bg.jpg',chitang:'20个' }
             },{
                 id: '1231',
                 name: '海口养殖基地',
                 State: "1",
                 lng: '110.08789',
                 lat: '19.94395',
-                yuanqu: { mianji: '100㎡', img: '/static/images/login_bg.jpg',chitang:'20个' }
+                yuanqu: { mianji: '100㎡', img: 'static/images/login_bg.jpg',chitang:'20个' }
             }]
             for (var i = 0; i < info.length; i++) {
                 var iconurl = "";
                 var point = new BMap.Point(info[i].lng, info[i].lat);
                 if (info[i].State == "1") { //故障
-                    iconurl = new BMap.Icon("/static/images/jz_warning.svg", new BMap.Size(38, 40));
+                    iconurl = new BMap.Icon("static/images/jz_warning.svg", new BMap.Size(38, 40));
                     iconurl.setName("warning");
                 } else if (info[i].State == "2") { //失联
-                    iconurl = new BMap.Icon("/static/images/jz_lost.svg", new BMap.Size(38, 40));
+                    iconurl = new BMap.Icon("static/images/jz_lost.svg", new BMap.Size(38, 40));
                     iconurl.setName("lost");
                 } else if (info[i].State == "3") { //正常
-                    iconurl = new BMap.Icon("/static/images/jz_normal.svg", new BMap.Size(38, 40));
+                    iconurl = new BMap.Icon("static/images/jz_normal.svg", new BMap.Size(38, 40));
                     iconurl.setName("normal");
                 }
                 iconurl.setSearchName(info[i].name); //名称
@@ -274,7 +274,7 @@ export default {
             //                         '<p>池塘数：<span>'+info[i].yuanqu.chitang+'</span></p>'+
             //                     '</div>'+
             //                     '<div class="video">'+
-            //                         '<img src="/static/images/shiping.png">'+
+            //                         '<img src="static/images/shiping.png">'+
             //                     '</div>'+
             //                 '</div>'+
             //                 '<div class="loncom_map_coninfo">'+
@@ -284,15 +284,15 @@ export default {
             //                     '<p class="four">四级告警：<span>10条</span></p>'+
             //                 '</div>';
             //     if (info[i].State == "1") { //故障
-            //         iconurl = new BMap.Icon("/static/images/jz_warning.svg", new BMap.Size(38, 40));
+            //         iconurl = new BMap.Icon("static/images/jz_warning.svg", new BMap.Size(38, 40));
             //         content = '<div class="loncom_map_box loncom_map_box_warning">' + incontent + '</div>';
             //         iconurl.setName("warning");
             //     } else if (info[i].State == "2") { //失联
-            //         iconurl = new BMap.Icon("/static/images/jz_lost.svg", new BMap.Size(38, 40));
+            //         iconurl = new BMap.Icon("static/images/jz_lost.svg", new BMap.Size(38, 40));
             //         content = '<div class="loncom_map_box loncom_map_box_lost">' + incontent + '</div>';
             //         iconurl.setName("lost");
             //     } else if (info[i].State == "3") { //正常
-            //         iconurl = new BMap.Icon("/static/images/jz_normal.svg", new BMap.Size(38, 40));
+            //         iconurl = new BMap.Icon("static/images/jz_normal.svg", new BMap.Size(38, 40));
             //         content = '<div class="loncom_map_box">' + incontent + '</div>';
             //         iconurl.setName("normal");
             //     }
@@ -367,7 +367,7 @@ export default {
                     State: "3",
                     lng: '110.68789',
                     lat: '19.94395',
-                    yuanqu: { mianji: '100㎡', img: '/static/images/login_bg.jpg',chitang:'20个' }
+                    yuanqu: { mianji: '100㎡', img: 'static/images/login_bg.jpg',chitang:'20个' }
                 }
                 var content = '';
                 var incontent = '<div class="loncom_map_boxtop">' +
@@ -380,7 +380,7 @@ export default {
                                     '<p>池塘数：<span>'+info.yuanqu.chitang+'</span></p>'+
                                 '</div>'+
                                 '<div class="video">'+
-                                    '<img src="/static/images/shiping.png">'+
+                                    '<img src="static/images/shiping.png">'+
                                 '</div>'+
                             '</div>'+
                             '<div class="loncom_map_coninfo">'+
@@ -429,7 +429,7 @@ export default {
             BMap.Icon.prototype.setSearchName = function(searchName){
                 this.searchName = searchName;
             }
-            var iconurl = new BMap.Icon("/static/images/jz_lost.svg", new BMap.Size(38, 40));
+            var iconurl = new BMap.Icon("static/images/jz_lost.svg", new BMap.Size(38, 40));
             iconurl.setSearchName(this.allmap[0].z.uj.searchName); 
             iconurl.setName('lost');
             this.allmap[0].setIcon(iconurl);

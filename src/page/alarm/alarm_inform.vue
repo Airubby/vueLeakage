@@ -273,16 +273,16 @@
         background: #ccc;
     }
     .loncom_system_inform_dxmimg{
-        background: url(/static/images/icon-duanxinmao.png) no-repeat center;
+        background: url(../../../static/images/icon-duanxinmao.png) no-repeat center;
     }
     .loncom_system_inform_sgimg{
-        background: url(/static/images/icon-shengguang.png) no-repeat center;
+        background: url(../../../static/images/icon-shengguang.png) no-repeat center;
     }
     .loncom_system_inform_yjimg{
-        background: url(/static/images/icon-email.png) no-repeat center;
+        background: url(../../../static/images/icon-email.png) no-repeat center;
     }
     .loncom_system_inform_dhimg{
-        background: url(/static/images/icon-tel.png) no-repeat center;
+        background: url(../../../static/images/icon-tel.png) no-repeat center;
     }
     .loncom_system_inform_cardboxtoptext{
         width: -webkit-calc(100% - 80px);
@@ -324,13 +324,13 @@
         float: left;
     }
     .loncom_system_inform_test em{
-        background: url(/static/images/icon-test.png) no-repeat 0 0;
+        background: url(../../../static/images/icon-test.png) no-repeat 0 0;
     }
     .loncom_system_inform_set{
         float: right;
     }
     .loncom_system_inform_set em{
-        background: url(/static/images/icon-set.png) no-repeat 0 0;
+        background: url(../../../static/images/icon-set.png) no-repeat 0 0;
     }
     .loncom_system_inform_cardboxbottom a:hover{
         color: #0096ba

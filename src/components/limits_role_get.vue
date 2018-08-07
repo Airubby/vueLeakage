@@ -30,9 +30,7 @@
         <dialogBtnInfo v-bind:dialogInfobtn="dialogInfo" v-on:dialogSure="dialogSure('formInfo')"></dialogBtnInfo>
     </el-dialog>
 </template>
-<style>
-    .el-form-item__content{height:0}
-</style>
+
 <script>
 import dialogBtnInfo from './dialogBtnInfo.vue'
 export default {

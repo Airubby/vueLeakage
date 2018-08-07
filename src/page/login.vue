@@ -27,7 +27,7 @@
     .loncom_login {
     width: 100%;
     height: 220px;
-    background: #199ED8 url(/static/images/login_bg.png) no-repeat right bottom;
+    background: #199ED8 url(../../static/images/login_bg.png) no-repeat right bottom;
     position: relative;
     top: 50%;
     margin-top: -110px;
@@ -50,7 +50,7 @@
     width: 60px;
     height: 60px;
     margin: 0 auto;
-    background: url(/static/images/small_logo.png) no-repeat center center;
+    background: url(../../static/images/small_logo.png) no-repeat center center;
     background-size: contain;
     }
 
@@ -87,7 +87,7 @@
         width: 40px;
         height: 40px;
         top: 0;
-        background: url(/static/images/login_user.png) no-repeat 10px center !important;
+        background: url(../../static/images/login_user.png) no-repeat 10px center !important;
     }
     .loncom_login_input .loncom_pass:after{
     content: "";
@@ -95,7 +95,7 @@
     width: 40px;
     height: 40px;
     top: 0;
-    background: url(/static/images/login_pass.png) no-repeat 10px center !important;
+    background: url(../../static/images/login_pass.png) no-repeat 10px center !important;
     }
 
     .loncom_login_input {

@@ -50,13 +50,13 @@
         vertical-align: middle;
     }
     .sort li.warning em{
-        background: url(/static/images/sli_warning.svg) no-repeat;
+        background: url(../../static/images/sli_warning.svg) no-repeat;
     }
     .sort li.lost em{
-        background: url(/static/images/sli_lost.svg) no-repeat;
+        background: url(../../static/images/sli_lost.svg) no-repeat;
     }
     .sort li.normal em{
-        background: url(/static/images/sli_normal.svg) no-repeat;
+        background: url(../../static/images/sli_normal.svg) no-repeat;
     }
 </style>
 

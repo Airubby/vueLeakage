@@ -31,6 +31,7 @@ export default new Router({
         {path:'/alarm/realtime',component:(resolve) => require(['@/page/alarm/alarm_realtime'], resolve)},
         {path:'/alarm/history',component:(resolve) => require(['@/page/alarm/alarm_history'], resolve)},
         {path:'/alarm/inform',component:(resolve) => require(['@/page/alarm/alarm_inform'], resolve)},
+        {path:'/alarm/config',component:(resolve) => require(['@/page/alarm/alarm_config'], resolve)},
       ]
     },
     {

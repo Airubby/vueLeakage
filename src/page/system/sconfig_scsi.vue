@@ -77,7 +77,7 @@
                                                 <el-input v-model="address" placeholder="输入地址搜索获取经纬坐标" size="small" class="input-with-select">
                                                     <el-button slot="append" icon="el-icon-search" id="search"></el-button>
                                                 </el-input>
-                                                <div id="container" style="width:100%;height:300px;border:1px solid #ccc;"></div>
+                                                <div id="container" style="width:100%;height:500px;border:1px solid #ccc;"></div>
                                             </div>
                                         </el-form>
                                     </div>
@@ -126,15 +126,15 @@ export default {
         numScroll(0);
         numScroll(1);
         //地图信息
+        // 百度地图API功能
         var _this=this;
         var map = new BMap.Map("container");
         var myGeo = new BMap.Geocoder();  
-        //map.centerAndZoom("北京",13); 
         if(this.form_info.longitude!=""&&this.form_info.latitude!=""){
-            map.centerAndZoom(new BMap.Point(this.form_info.longitude, this.form_info.latitude), 13); 
+            map.centerAndZoom(new BMap.Point(this.form_info.longitude, this.form_info.latitude), 8); 
             moveOverlay({lng:this.form_info.longitude, lat:this.form_info.latitude})
         }else{
-            map.centerAndZoom("北京",13);   
+            map.centerAndZoom(new BMap.Point(110.68789, 19.94395),8);   
         }
         map.enableScrollWheelZoom();
         map.addEventListener("click",function(e){
@@ -145,7 +145,7 @@ export default {
             var searchTxt = _this.address;  
             myGeo.getPoint(searchTxt, function (point) {  
                 console.log(point)
-                map.centerAndZoom(point, 13); 
+                map.centerAndZoom(point, 8); 
                 setPoint(point);  
             }, "全国");  
         }); 
