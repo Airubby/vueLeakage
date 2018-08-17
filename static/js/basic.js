@@ -62,7 +62,7 @@ function hbarChar(ID){
             axisPointer: {            // 坐标轴指示器，坐标轴触发有效
                 type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
             },
-            formatter: '{b}：{c}'
+            //formatter: '{b}：{c}'
         },
         grid: {
             top: '20px',
@@ -138,28 +138,28 @@ function hbarChar(ID){
                 type: 'bar',
                 stack: 'all',
                 barWidth: '30%',
-                data: [400, 302, 301, 334, 390, 330, 400]
+                data: [1, 0, 0, 0, 1, 0, 0]
             },
             {
                 name: '二级告警',
                 type: 'bar',
                 stack: 'all',
                 barWidth: '30%',
-                data: [120, 132, 101, 134, 90, 230, 400]
+                data: [0, 1, 0, 0, 0, 0, 0]
             },
             {
                 name: '三级告警',
                 type: 'bar',
                 stack: 'all',
                 barWidth: '30%',
-                data: [220, 182, 191, 234, 290, 330, 400]
+                data: [0, 0, 0, 0, 0, 0, 0]
             },
             {
                 name: '四级告警',
                 type: 'bar',
                 stack: 'all',
                 barWidth: '30%',
-                data: [150, 212, 201, 154, 190, 330, 400]
+                data: [0, 0, 0, 0, 0, 0, 0]
             }
         ]
     };

@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>百度离线版2.0DEMO</title>
+<script type="text/javascript" src="js/apiv2.0.min.js"></script>
+<script type="text/javascript" src="js/InfoBox_min.js"></script>
+<script type="text/javascript" src="js/CurveLine.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/bmap.css"/>
+</head>
+<body>
+<div style="width:900px;height:540px;border:1px solid gray" id="container"></div>
+</body>
+</html>
+<script type="text/javascript">
+// var map = new BMap.Map("container",{mapType: BMAP_NORMAL_MAP});      //设置卫星图为底图
+// var point = new BMap.Point(109.733755, 19.180501);    // 创建点坐标
+// map.centerAndZoom(point,9);                     // 初始化地图,设置中心点坐标和地图级别。
+
+var map = new BMap.Map("container");
+        //this.map.centerAndZoom(new BMap.Point(119.045403, 31.69525), 13); //初始化地图,设置中心点坐标和地图级别3-19
+        var point=new BMap.Point(109.733755, 19.180501);
+        map.centerAndZoom(point,9); 
+        map.enableScrollWheelZoom();
+
+//map.addControl(new BMap.MapTypeControl());
+// map.addControl(new BMap.NavigationControl());
+// map.enableScrollWheelZoom();                  // 启用滚轮放大缩小。
+// map.enableKeyboard();                         // 启用键盘操作。  
+//map.setCurrentCity("北京");          // 设置地图显示的城市 此项是必须设置的
+
+var marker = new BMap.Marker(point);
+map.addOverlay(marker); 
+
+
+
+
+map.clearOverlays();
+
+var iconurl = "";
+iconurl = new BMap.Icon("static/images/jz_warning.svg", new BMap.Size(38, 40));
+var marker = new BMap.Marker(point, { icon: iconurl });
+map.addOverlay(marker);
+addClickHandler(marker)
+function addClickHandler(marker){
+  marker.addEventListener("click", function () {
+    var content="<div style='width:100px;height:100px;background:#f00;'>123</div>"
+    var infoBox = new BMapLib.InfoBox(map, content);
+    infoBox.open(this)
+  })
+}
+
+
+
+</script>
