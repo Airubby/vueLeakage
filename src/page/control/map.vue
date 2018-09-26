@@ -26,6 +26,9 @@ export default {
 		map.centerAndZoom(new BMap.Point(106.215136,26.04151),17); //初始化地图,设置中心点坐标和地图级别3-19
 		//map.centerAndZoom("成都",15); 
 		map.enableScrollWheelZoom();
+    //map.addEventListener("zoomend", function(evt){
+      //  this.accuracy = map.getZoom();  //获取滚动后的地图层级
+    //})
         //筛选代码
         BMap.Icon.prototype.name = "";
         BMap.Icon.prototype.setName = function(name){
