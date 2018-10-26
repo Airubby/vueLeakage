@@ -27,7 +27,22 @@
 <script>
 export default {
     created () {
-        
+        this.$api.get('/getData', {}, r => {
+            console.log(r)
+            if(r.err_code=="0"){
+                
+            }else{
+                this.$message.warning(r.err_msg);
+            }
+        }); 
+        this.$api.post('/postData', {"name":'admin'}, r => {
+            console.log(r)
+            if(r.err_code=="0"){
+                
+            }else{
+                this.$message.warning(r.err_msg);
+            }
+        }); 
     },
     mounted() {
         

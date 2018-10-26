@@ -1,7 +1,7 @@
 
 // 配置API接口地址
 //var root = '/api'  //开发环境
-var root2='/iSmacSite/ismacsite'   //生产环境
+var rootUrl=' https://www.easy-mock.com/mock/5bd2d48f3e503e20f0011196/testUrl'   //生产环境
 // var root1=(function(){
 //     //获取当前网址，如： http://localhost:8083/uimcardprj/share/meun.jsp  
 //     var curWwwPath=window.document.location.href;  
